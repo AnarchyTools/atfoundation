@@ -1,0 +1,66 @@
+;; Copyright (c) 2016 Anarchy Tools Contributors.
+;;
+;; Licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+;;
+;;   http:;;www.apache.org/licenses/LICENSE-2.0
+;;
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
+
+
+(package
+  :name "atfoundation"
+
+  :tasks {
+    :atfoundation {
+      :tool "atllbuild"
+      :sources ["src/**.swift"]
+      :name "atfoundation"
+      :output-type "static-library"
+      :publish-product true
+      :compile-options ["-enable-testing" "-g"]
+
+      :overlays {
+        :bootstrap-osx {
+          :bootstrap-only true
+          :llbuildyaml "bootstrap/bootstrap-macosx-atfoundation.swift-build"
+        }
+        :bootstrap-linux {
+          :bootstrap-only true
+          :swiftc-path "/usr/local/bin/swiftc"
+          :link-sdk false
+          :llbuildyaml "bootstrap/bootstrap-linux-atfoundation.swift-build"
+        }
+      }
+    }
+
+    :atfoundation-tests {
+      :tool "atllbuild"
+      :dependencies ["atfoundation"]
+      :sources ["tests/**.swift"]
+      :name "atfoundationtests"
+      :output-type "executable"
+      :compile-options ["-g"]
+
+      :link-with ["atfoundation.a"]
+      :xctestify true
+      :xctest-strict true
+    }
+
+    :run-atfoundation-tests {
+      :tool "xctestrun"
+      :dependencies ["atfoundation-tests"]
+      :test-executable ".atllbuild/products/atfoundationtests"
+    }
+
+    :check {
+      :dependencies ["run-atfoundation-tests"]
+      :tool "nop"
+    }
+  }
+)
