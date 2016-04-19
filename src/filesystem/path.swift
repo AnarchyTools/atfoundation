@@ -117,6 +117,20 @@ public struct Path {
         return Path(components:newComponents, absolute: false)
     }
 
+    /// Return the dirname of a path
+    ///
+    /// - Returns: new path instance with only the dir name
+    public func dirname() -> Path {
+        return self.removingLastComponent()
+    }
+
+    /// Return the file name of a path
+    ///
+    /// - Returns: file name string
+    public func basename() -> String {
+        return self.components.last!
+    }
+
     /// Return absolute path to the user's home directory
     ///
     /// - Returns: absolute path to user's homee directory or `nil` if
