@@ -36,10 +36,19 @@ public class FS {
         return false
     }
 
+    public class func touchItem(path: Path) throws {
+        if !FS.fileExists(path: path) {
+            let _ = try File(path: path, mode: .WriteOnly)
+        } else {
+            if utimes(path.description, nil) < 0 {
+                throw errnoToError(errno: errno)
+            }
+        }
+    }
+
 // - moveItem(from:to:) throws
 // - copyItem(from:to:recursive:) throws
 // - removeItem(path:) throws
-// - touchItem(path:) throws
 // - symlinkItem(from:to:) throws
 // - createDirectory(path:intermediate:) throws
 // - createTempFile(prefix:suffix:) -> File
