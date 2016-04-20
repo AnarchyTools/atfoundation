@@ -307,6 +307,16 @@ public class File {
     /// - Parameter path: the path to copy the file to
     public func copyTo(path: Path) throws {
         let output = try File(path: path, mode: .WriteOnly, binary: true)
+        try self.copyTo(file: output)
+    }
+
+    /// Copy this file to another file
+    ///
+    /// - Parameter file: the file to copy the file content to
+    public func copyTo(file: File) throws {
+        try file.truncate(size: 0)
+        file.position = 0
+
         var oldPosition = self.position
         self.position = 0
         defer {
@@ -315,10 +325,11 @@ public class File {
         while true {
             do {
                 let buffer:[UInt8] = try self.read(size: 4096)
-                try output.write(data: buffer)
+                try file.write(data: buffer)
             } catch SysError.EndOfFile {
                 return
             }
         }
     }
+
 }
