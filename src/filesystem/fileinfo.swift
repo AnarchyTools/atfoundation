@@ -77,34 +77,34 @@ public enum FileType: UInt16 {
 public struct FileInfo {
 
     /// path to the file
-    let path: Path
+    public let path: Path
 
     /// owner
-    let owner: UInt32
+    public let owner: UInt32
 
     /// group
-    let group: UInt32
+    public let group: UInt32
 
     /// mode
-    let mode: FileMode
+    public let mode: FileMode
 
     /// file size
-    let size: UInt64
+    public let size: UInt64
 
     /// file type
-    let type: FileType
+    public let type: FileType
 
     /// path to original if this is a symlink
-    let linkTarget: Path?
+    public let linkTarget: Path?
 
     /// modification timestamp
-    let mTime: Int
+    public let mTime: Int
 
     /// creation timestamp
-    let cTime: Int
+    public let cTime: Int
 
     /// last access timestamp
-    let aTime: Int
+    public let aTime: Int
 
     internal init(path: Path, statBuf: stat) {
         self.path = path
