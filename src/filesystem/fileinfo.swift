@@ -6,7 +6,7 @@ import Darwin
 
 /// UNIX File mode
 public struct FileMode: OptionSet {
-    public let rawValue: Int
+    public let rawValue: UInt16
 
     public static let Inaccessible = FileMode(rawValue: 0)
 
@@ -33,12 +33,8 @@ public struct FileMode: OptionSet {
     public static let SetGID       = FileMode(rawValue: 1 << 10)
     public static let SetUID       = FileMode(rawValue: 1 << 11)
 
-    public init(rawValue: Int) {
+    public init(rawValue: UInt16) {
         self.rawValue = rawValue & ((1 << 12) - 1)
-    }
-
-    private init(_ mode: FileMode) {
-        self.rawValue = mode.rawValue
     }
 }
 
@@ -61,6 +57,22 @@ extension FileMode: CustomStringConvertible {
     }
 }
 
+public enum FileType: UInt16 {
+    case Invalid = 0
+    case FIFO = 1
+    case CharacterDevice = 2
+    case Directory = 4
+    case BlockDevice = 6
+    case File = 8
+    case Symlink = 10
+    case Socket = 12
+    case Whiteout = 14
+
+    private init?(statMode: UInt16) {
+        self.init(rawValue: (statMode & 0xf000) >> 12)
+    }
+}
+
 /// File information
 public struct FileInfo {
 
@@ -79,11 +91,8 @@ public struct FileInfo {
     /// file size
     let size: UInt64
 
-    /// is this a directory
-    let isDir: Bool
-
-    /// is this a symlink
-    let isLink: Bool
+    /// file type
+    let type: FileType
 
     /// path to original if this is a symlink
     let linkTarget: Path?
@@ -101,11 +110,10 @@ public struct FileInfo {
         self.path = path
         self.owner = statBuf.st_uid
         self.group = statBuf.st_gid
-        self.mode = FileMode(rawValue: Int(statBuf.st_mode))
+        self.mode = FileMode(rawValue: statBuf.st_mode)
         self.size = UInt64(statBuf.st_size)
-        self.isDir = (statBuf.st_mode & S_IFDIR != 0)
-        self.isLink = (statBuf.st_mode & S_IFLNK != 0)
-        if self.isLink {
+        self.type = FileType(statMode: statBuf.st_mode)!
+        if self.type == .Symlink {
             var link = [Int8](repeating: 0, count: 1024)
             readlink(path.description, &link, 1024)
             if let target = String(validatingUTF8: link) {
