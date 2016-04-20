@@ -36,6 +36,9 @@ public class FS {
         return false
     }
 
+    /// Update modification time for existing item or create empty file
+    ///
+    /// - Parameter path: path to update/create
     public class func touchItem(path: Path) throws {
         if !FS.fileExists(path: path) {
             let _ = try File(path: path, mode: .WriteOnly)
@@ -46,20 +49,246 @@ public class FS {
         }
     }
 
-// - moveItem(from:to:) throws
-// - copyItem(from:to:recursive:) throws
-// - removeItem(path:) throws
-// - symlinkItem(from:to:) throws
-// - createDirectory(path:intermediate:) throws
-// - createTempFile(prefix:suffix:) -> File
-// - getOwner(path:) throws -> Int
-// - getGroup(path:) throws -> Int
-// - getSize(path:) throws -> UInt64
-// - getInfo(path:) throws -> FileInfo
-// - getCurrentDirectory() -> Path
-// - changeCurrentDirectory(path:) throws
-//
-// - iterate(path:recursive:includeHidden:) throws -> AnyGenerator<FileInfo>
+    /// Remove item from file system
+    ///
+    /// If `path` is a non-empty directory and `recursive` is false
+    /// an error will be thrown!
+    ///
+    /// - Parameter path: path to remove
+    /// - Parameter recursive: optional, set to true to recursively remove directories
+    public class func removeItem(path: Path, recursive: Bool = false) throws {
+        if !FS.fileExists(path: path) {
+            throw SysError.NoSuchEntity
+        }
+        if FS.isDirectory(path: path) {
+            if recursive {
+                try FS._rmdir_recursive(path: path)
+            } else {
+                if rmdir(path.description) != 0 {
+                    throw errnoToError(errno: errno)
+                }
+            }
+        } else {
+            if unlink(path.description) != 0 {
+                throw errnoToError(errno: errno)
+            }
+        }
+    }
 
+    /// Create a directory
+    ///
+    /// - Parameter path: directory to create
+    /// - Parameter intermediate: optional set to true if you want the complete path to
+    ///                           be created with intermediate directories included
+    public class func createDirectory(path: Path, intermediate: Bool = false) throws {
+        if !intermediate {
+            if mkdir(path.description, 511) != 0 {
+                throw errnoToError(errno: errno)
+            }
+        } else {
+            for idx in 0..<path.components.count {
+                let subPath = Path(components: Array(path.components[0...idx]), absolute: path.isAbsolute)
+                if !FS.fileExists(path: subPath) {
+                    if mkdir(subPath.description, 511) != 0 {
+                        throw errnoToError(errno: errno)
+                    }
+                } else {
+                    if !FS.isDirectory(path: subPath) {
+                        throw SysError.NotADirectory
+                    }
+                }
+            }
+        }
+    }
 
+    /// Get file information for a path
+    ///
+    /// - Parameter path: path to query
+    /// - Returns: FileInfo struct
+    public class func getInfo(path: Path) throws -> FileInfo {
+        var sbuf = stat()
+        let result = stat(path.description, &sbuf)
+        if result < 0 {
+            throw errnoToError(errno: errno)
+        }
+        return FileInfo(path: path, statBuf: sbuf)
+    }
+
+    /// Get file/directory owner
+    ///
+    /// - Parameter path: path to query
+    /// - Returns: User id of owner
+    public class func getOwner(path: Path) throws -> UInt32 {
+        return try FS.getInfo(path: path).owner
+    }
+
+    /// Get file/directory group
+    ///
+    /// - Parameter path: path to query
+    /// - Returns: Group id of owner
+    public class func getGroup(path: Path) throws -> UInt32 {
+        return try FS.getInfo(path: path).group
+    }
+
+    /// Get file/directory size
+    ///
+    /// - Parameter path: path to query
+    /// - Returns: File size
+    public class func getSize(path: Path) throws -> UInt64 {
+        return try FS.getInfo(path: path).size
+    }
+
+    /// Get file/directory mode
+    ///
+    /// - Parameter path: path to query
+    /// - Returns: File mode
+    public class func getMode(path: Path) throws -> FileMode {
+        return try FS.getInfo(path: path).mode
+    }
+
+    /// Get working directory
+    ///
+    /// - Returns: absolute path to current directory
+    public class func getWorkingDirectory() throws -> Path {
+        var buffer = [Int8](repeating: 0, count: 1024)
+        if getcwd(&buffer, 1024) == nil {
+            throw errnoToError(errno: errno)
+        }
+        if let dir = String(validatingUTF8: buffer) {
+            return Path(string: dir)
+        } else {
+            throw SysError.InvalidArgument
+        }
+    }
+
+    /// Change working directory
+    ///
+    /// - Parameter path: path to change current directory to
+    public class func changeWorkingDirectory(path: Path) throws {
+        if chdir(path.description) != 0 {
+            throw errnoToError(errno: errno)
+        }
+    }
+
+    /// Create a symlink from one path to another
+    ///
+    /// - Parameter from: source path
+    /// - Parameter to: destination path
+    public class func symlinkItem(from: Path, to: Path) throws {
+        if symlink(from.description, to.description) != 0 {
+            throw errnoToError(errno: errno)
+        }
+    }
+
+    /// Iterate over all entries in a directory
+    ///
+    /// - Parameter path: the path to iterate over
+    /// - Parameter recursive: optional, recurse into sub directories, defaults to false
+    /// - Parameter includeHidden: optional, include hidden files, defaults to false
+    public class func iterateFiles(path: Path, recursive: Bool = false, includeHidden: Bool = false) throws -> AnyIterator<FileInfo> {
+        guard let d = opendir(path.description) else {
+            throw errnoToError(errno: errno)
+        }
+        var deStack = [(UnsafeMutablePointer<DIR>, dirent, Path)]()
+        deStack.append((d, dirent(), path))
+
+        return AnyIterator {
+            repeat {
+                guard let stackFrame = deStack.last else {
+                    return nil
+                }
+
+                let d = stackFrame.0
+                var de = stackFrame.1
+                let path = stackFrame.2
+
+                var result:UnsafeMutablePointer<dirent>? = nil
+                guard readdir_r(d, &de, &result) == 0 else {
+                    closedir(d)
+                    deStack.removeLast()
+                    continue
+                }
+                if result == nil {
+                    closedir(d)
+                    deStack.removeLast()
+                    continue
+                }
+
+                deStack.removeLast()
+                deStack.append((d, de, path))
+
+                var buffer:[Int8] = fixedCArrayToArray(data: &de.d_name)
+                buffer.append(0)
+
+                if let filename = String(validatingUTF8: buffer) {
+                    if filename == "." || filename == ".." {
+                        continue
+                    }
+
+                    if filename.hasPrefix(".") && !includeHidden {
+                        continue
+                    }
+
+                    let subPath = path.appending(filename)
+                    if Int32(de.d_type) == DT_DIR && recursive {
+                        if let subD = opendir(subPath.description) {
+                            deStack.append((subD, dirent(), subPath))
+                        }
+                    }
+
+                    var sbuf = stat()
+                    if stat(subPath.description, &sbuf) == 0 {
+                        return FileInfo(path: subPath, statBuf: sbuf)
+                    }
+                }
+            } while true
+        }
+    }
+
+// TODO: moveItem(from:to:) throws
+// TODO: copyItem(from:to:recursive:) throws
+
+    /// Recursive remove directory and all its content
+    ///
+    /// - Parameter path: path to remove
+    private class func _rmdir_recursive(path: Path) throws {
+        guard let d = opendir(path.description) else {
+            throw errnoToError(errno: errno)
+        }
+        defer {
+            closedir(d)
+        }
+
+        var de = dirent()
+        var result:UnsafeMutablePointer<dirent>? = nil
+        repeat {
+            guard readdir_r(d, &de, &result) == 0 else {
+                throw errnoToError(errno: errno)
+            }
+            if result == nil {
+                break
+            }
+
+            var buffer:[Int8] = fixedCArrayToArray(data: &de.d_name)
+            buffer.append(0)
+
+            if let filename = String(validatingUTF8: buffer) {
+                if filename == "." || filename == ".." {
+                    continue
+                }
+
+                let subPath = path.appending(filename)
+                if Int32(de.d_type) == DT_DIR {
+                    try FS._rmdir_recursive(path: subPath)
+                } else {
+                    if unlink(subPath.description) != 0 {
+                        throw errnoToError(errno: errno)
+                    }
+                }
+            }
+        } while true
+        if rmdir(path.description) != 0 {
+            throw errnoToError(errno: errno)
+        }
+    }
 }
