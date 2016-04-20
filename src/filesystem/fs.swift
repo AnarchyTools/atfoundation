@@ -185,7 +185,7 @@ public class FS {
     /// - Parameter path: the path to iterate over
     /// - Parameter recursive: optional, recurse into sub directories, defaults to false
     /// - Parameter includeHidden: optional, include hidden files, defaults to false
-    public class func iterateFiles(path: Path, recursive: Bool = false, includeHidden: Bool = false) throws -> AnyIterator<FileInfo> {
+    public class func iterateItems(path: Path, recursive: Bool = false, includeHidden: Bool = false) throws -> AnyIterator<FileInfo> {
         guard let d = opendir(path.description) else {
             throw errnoToError(errno: errno)
         }
@@ -292,7 +292,7 @@ public class FS {
     /// - Parameter from: source
     /// - Parameter to: destination
     private class func _copy_recursive(from: Path, to: Path) throws {
-        let iterator = try FS.iterateFiles(path: from, recursive: true, includeHidden: true)
+        let iterator = try FS.iterateItems(path: from, recursive: true, includeHidden: true)
         for file in iterator {
             guard let relpath = file.path.relativeTo(path: from) else {
                 throw SysError.InvalidArgument
