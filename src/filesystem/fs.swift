@@ -245,8 +245,87 @@ public class FS {
         }
     }
 
-// TODO: moveItem(from:to:) throws
-// TODO: copyItem(from:to:recursive:) throws
+    /// Move a filesystem item from one place to another
+    ///
+    /// - Parameter from: item to move
+    /// - Parameter to: destination
+    /// - Parameter atomic: optional, if true bail out if the destination
+    ///                     is on another file system than the source.
+    ///                     If set to false we copy then remove the source
+    ///                     in that case. Defaults to true.
+    public class func moveItem(from: Path, to: Path, atomic: Bool = true) throws {
+        // TODO: Test
+        let result = rename(from.description, to.description)
+        if result < 0 {
+            let error = errnoToError(errno: errno)
+            if error == .CrossDeviceLink && !atomic {
+                try FS.copyItem(from: from, to: to, recursive: true)
+                try FS.removeItem(path: from, recursive: true)
+            } else {
+                throw error
+            }
+        }
+    }
+
+    /// Copy a filesystem item from one place to another
+    ///
+    /// - Parameter from: item to move
+    /// - Parameter to: destination
+    /// - Parameter recursive: optional, if `from` is a directory copy recursively,
+    ///                        defaults to false
+    public class func copyItem(from: Path, to: Path, recursive: Bool = false) throws {
+        // TODO: Test
+        let isDir = FS.isDirectory(path: from)
+        if !recursive && isDir {
+            throw SysError.IsDirectory
+        }
+        if isDir {
+            try FS._copy_recursive(from: from, to: to)
+        } else {
+            try FS._copy_file(from: from, to: to)
+        }
+    }
+
+
+    /// Recursively copy a directory
+    ///
+    /// - Parameter from: source
+    /// - Parameter to: destination
+    private class func _copy_recursive(from: Path, to: Path) throws {
+        let iterator = try FS.iterateFiles(path: from, recursive: true, includeHidden: true)
+        for file in iterator {
+            guard let relpath = file.path.relativeTo(path: from) else {
+                throw SysError.InvalidArgument
+            }
+            let destinationPath = to.join(path: relpath)
+            switch file.type {
+                case .FIFO:
+                    if mkfifo(destinationPath.description, file.mode.rawValue) < 0 {
+                        throw errnoToError(errno: errno)
+                    }
+                case .Directory:
+                    try FS.createDirectory(path: destinationPath)
+                case .File:
+                    try FS._copy_file(from: file.path, to: destinationPath)
+                case .Symlink:
+                    if let target = file.linkTarget {
+                        try FS.symlinkItem(from: target, to: destinationPath)
+                    }
+                default:
+                    // skip?
+                    continue
+            }
+        }
+    }
+
+    /// Copy a file
+    ///
+    /// - Parameter from: source
+    /// - Parameter to: destination, will be truncated before copying
+    private class func _copy_file(from: Path, to: Path) throws {
+        let source = try File(path: from, mode: .ReadOnly, binary: true)
+        try source.copyTo(path: to)
+    }
 
     /// Recursive remove directory and all its content
     ///
