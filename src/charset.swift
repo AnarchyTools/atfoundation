@@ -1,13 +1,3 @@
-// # TODO List:
-//
-// ## Charset class:
-//
-// - isLetter(character:) -> Bool
-// - isUnicodeLetter(character:) -> Bool
-// - isNumberDigit(character:) -> Bool
-// - isAlphaNumeric(character:) -> Bool
-// - isUnicodeAlphaNumeric(character:) -> Bool
-
 public class Charset {
 
     public class func isWhitespace(character: Character) -> Bool {
@@ -32,4 +22,30 @@ public class Charset {
         }
     }
 
+    public class func isLetter(character: Character) -> Bool {
+        switch character {
+            case Character("a")...Character("z"):
+                return true
+            case Character("A")...Character("Z"):
+                return true
+            default:
+                return false
+        }
+    }
+
+    public class func isNumberDigit(character: Character) -> Bool {
+        switch character {
+            case Character("0")...Character("9"):
+                return true
+            default:
+                return false
+        }
+    }
+
+    public class func isAlphaNumeric(character: Character) -> Bool {
+        return Charset.isLetter(character: character) || Charset.isNumberDigit(character: character)
+    }
+
+    // - isUnicodeLetter(character:) -> Bool
+    // - isUnicodeAlphaNumeric(character:) -> Bool
 }
