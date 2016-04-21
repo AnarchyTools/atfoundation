@@ -275,6 +275,7 @@ public extension String {
                 break
             }
         }
+        result.append(0)
         return String(validatingUTF8: result)
     }
 }
