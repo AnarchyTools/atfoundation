@@ -92,7 +92,7 @@ class FSTests: XCTestCase {
 
     func testIterate() {
         do {
-            let iterator = try FS.iterateFiles(path: try FS.getWorkingDirectory())
+            let iterator = try FS.iterateItems(path: try FS.getWorkingDirectory())
             var found = false
             for file in iterator {
                 if file.path.basename() == "build.atpkg" {
@@ -107,7 +107,7 @@ class FSTests: XCTestCase {
 
     func testIterateRecursive() {
         do {
-            let iterator = try FS.iterateFiles(path: try FS.getWorkingDirectory(), recursive: true)
+            let iterator = try FS.iterateItems(path: try FS.getWorkingDirectory(), recursive: true)
             var count = 0
             for file in iterator {
                 if file.path.basename() == "fs.swift" {
