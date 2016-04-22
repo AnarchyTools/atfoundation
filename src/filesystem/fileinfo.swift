@@ -114,7 +114,7 @@ public struct FileInfo {
         self.size = UInt64(statBuf.st_size)
         self.type = FileType(statMode: statBuf.st_mode)!
         if self.type == .Symlink {
-            var link = [Int8](repeating: 0, count: 1024)
+            var link = [Int8](repeating: 0, count: 1025)
             readlink(path.description, &link, 1024)
             if let target = String(validatingUTF8: link) {
                 self.linkTarget = Path(string: target)

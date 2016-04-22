@@ -176,7 +176,8 @@ public class File {
     ///
     /// - Returns: String read from file if valid UTF-8 or nil
     public func readAll() throws -> String? {
-        let buffer:[UInt8] = try self.readAll()
+        var buffer:[UInt8] = try self.readAll()
+        buffer.append(0)
         return String(validatingUTF8: UnsafePointer<CChar>(buffer))
     }
 
@@ -199,7 +200,7 @@ public class File {
     ///
     /// - Returns: String read from file (newline included) if valid UTF-8 or nil
     public func readLine() throws -> String? {
-        let buffer = [UInt8](repeating: 0, count: 64 * 1024)
+        let buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
         let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
         if read == nil {
             if feof(self.fp) == 0 {

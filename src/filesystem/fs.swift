@@ -150,7 +150,7 @@ public class FS {
     ///
     /// - Returns: absolute path to current directory
     public class func getWorkingDirectory() throws -> Path {
-        var buffer = [Int8](repeating: 0, count: 1024)
+        var buffer = [Int8](repeating: 0, count: 1025)
         if getcwd(&buffer, 1024) == nil {
             throw errnoToError(errno: errno)
         }
