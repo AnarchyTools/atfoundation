@@ -30,7 +30,11 @@ public extension String {
             return self
         }
         let comps = self.split(string: searchTerm)
-        return String.join(parts: comps, delimiter: replacement)
+        var replaced = String.join(parts: comps, delimiter: replacement)
+        if self.hasSuffix(searchTerm) {
+            replaced = replaced.subString(toIndex: replaced.endIndex.advanced(by: -searchTerm.characters.count)) + replacement
+        }
+        return replaced
     }
 
     /// Replace `range` in string with substitute, modifies self
