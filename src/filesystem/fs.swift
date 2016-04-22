@@ -122,12 +122,48 @@ public class FS {
         return try FS.getInfo(path: path).owner
     }
 
+    /// Set file/directory owner
+    ///
+    /// - Parameter path: path to item
+    /// - Parameter newOwner: User ID of new owner
+    public class func setOwner(path: Path, newOwner: UInt32) throws {
+        // TODO: Test
+        let info = try self.getInfo(path: path)
+        if chown(path.description, newOwner, info.group) < 0 {
+            throw errnoToError(errno: errno)
+        }
+    }
+
     /// Get file/directory group
     ///
     /// - Parameter path: path to query
     /// - Returns: Group id of owner
     public class func getGroup(path: Path) throws -> UInt32 {
         return try FS.getInfo(path: path).group
+    }
+
+    /// Set file/directory group
+    ///
+    /// - Parameter path: path to item
+    /// - Parameter newGroup: Group ID of new owner
+    public class func setGroup(path: Path, newGroup: UInt32) throws {
+        // TODO: Test
+        let info = try self.getInfo(path: path)
+        if chown(path.description, info.owner, newGroup) < 0 {
+            throw errnoToError(errno: errno)
+        }
+    }
+
+    /// Set file/directory owner
+    ///
+    /// - Parameter path: path to item
+    /// - Parameter owner: User ID of new owner
+    /// - Parameter group: Group ID of new owner
+    public class func setOwnerAndGroup(path: Path, owner: UInt32, group: UInt32) throws {
+        // TODO: Test
+        if chown(path.description, owner, group) < 0 {
+            throw errnoToError(errno: errno)
+        }
     }
 
     /// Get file/directory size
@@ -142,8 +178,19 @@ public class FS {
     ///
     /// - Parameter path: path to query
     /// - Returns: File mode
-    public class func getMode(path: Path) throws -> FileMode {
+    public class func getAttributes(path: Path) throws -> FileMode {
         return try FS.getInfo(path: path).mode
+    }
+
+    /// Change attributes of a filesystem object
+    ///
+    /// - Parameter path: path to item to change
+    /// - Parameter mode: attributes to set
+    public class func setAttributes(path: Path, mode: FileMode) throws {
+        // TODO: Test
+        if chmod(path.description, mode.rawValue) < 0 {
+            throw errnoToError(errno: errno)
+        }
     }
 
     /// Get working directory
@@ -284,6 +331,8 @@ public class FS {
         } else {
             try FS._copy_file(from: from, to: to)
         }
+        let mode = try FS.getAttributes(path: from)
+        try FS.setAttributes(path: to, mode: mode)
     }
 
     /// Create and return a unique temporary directory
@@ -291,6 +340,7 @@ public class FS {
     /// - Parameter prefix: prefix name of the directory
     /// - Returns: path to the already created directory
     public class func temporaryDirectory(prefix: String) throws -> Path {
+        // TODO: Test
         let p = Path.tempDirectory().appending(prefix + ".XXXXXXX")
         let buf = Array(p.description.utf8)
         let _ = mkdtemp(UnsafeMutablePointer(buf))
@@ -319,10 +369,13 @@ public class FS {
                     if mkfifo(destinationPath.description, file.mode.rawValue) < 0 {
                         throw errnoToError(errno: errno)
                     }
+                    try FS.setAttributes(path: destinationPath, mode: file.mode)
                 case .Directory:
                     try FS.createDirectory(path: destinationPath)
+                    try FS.setAttributes(path: destinationPath, mode: file.mode)
                 case .File:
                     try FS._copy_file(from: file.path, to: destinationPath)
+                    try FS.setAttributes(path: destinationPath, mode: file.mode)
                 case .Symlink:
                     if let target = file.linkTarget {
                         try FS.symlinkItem(from: target, to: destinationPath)

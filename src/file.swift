@@ -309,6 +309,10 @@ public class File {
     public func copyTo(path: Path) throws {
         let output = try File(path: path, mode: .WriteOnly, binary: true)
         try self.copyTo(file: output)
+        if let srcPath = self.path {
+            let fileMode = try FS.getAttributes(path: srcPath)
+            try FS.setAttributes(path: path, mode: fileMode)
+        }
     }
 
     /// Copy this file to another file
