@@ -84,7 +84,7 @@ class PathTests: XCTestCase {
     func testJoin() {
         let p = Path(string: "/test/dir")
         let q = Path(string: "bar")
-        let r = p.join(path: q)
+        let r = p + q
         XCTAssert(r.components.count == 3)
         if r.components.count >= 3 {
             XCTAssert(r.components[0] == "test")
@@ -97,7 +97,7 @@ class PathTests: XCTestCase {
     func testJoinAbsolute() {
         let p = Path(string: "/test/dir")
         let q = Path(string: "/bar")
-        let r = p.join(path: q)
+        let r = p + q
         XCTAssert(r.components.count == 1)
         if r.components.count > 0 {
             XCTAssert(r.components[0] == "bar")

@@ -155,7 +155,7 @@ public class FS {
             throw errnoToError(errno: errno)
         }
         if let dir = String(validatingUTF8: buffer) {
-            return Path(string: dir)
+            return Path(dir)
         } else {
             throw SysError.InvalidArgument
         }
@@ -295,7 +295,7 @@ public class FS {
         let buf = Array(p.description.utf8)
         let _ = mkdtemp(UnsafeMutablePointer(buf))
         if let dirname = String(validatingUTF8: UnsafeMutablePointer(buf)) {
-            let path = Path(string: dirname)
+            let path = Path(dirname)
             return path
         } else {
             throw SysError.UnknownError
@@ -313,7 +313,7 @@ public class FS {
             guard let relpath = file.path.relativeTo(path: from) else {
                 throw SysError.InvalidArgument
             }
-            let destinationPath = to.join(path: relpath)
+            let destinationPath = to + relpath
             switch file.type {
                 case .FIFO:
                     if mkfifo(destinationPath.description, file.mode.rawValue) < 0 {

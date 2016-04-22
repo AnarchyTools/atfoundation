@@ -117,7 +117,7 @@ public struct FileInfo {
             var link = [Int8](repeating: 0, count: 1025)
             readlink(path.description, &link, 1024)
             if let target = String(validatingUTF8: link) {
-                self.linkTarget = Path(string: target)
+                self.linkTarget = Path(target)
             } else {
                 self.linkTarget = nil
             }

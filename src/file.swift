@@ -121,7 +121,7 @@ public class File {
         let fd = mkstemp(UnsafeMutablePointer(buf))
         if let filename = String(validatingUTF8: UnsafeMutablePointer(buf)) {
             try self.init(fd: fd, mode: .ReadAndWrite, binary: binary, takeOwnership: true)
-            self.path = Path(string: filename)
+            self.path = Path(filename)
         } else {
             throw SysError.UnknownError
         }

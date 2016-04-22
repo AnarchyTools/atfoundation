@@ -11,7 +11,7 @@ public struct URL {
 
     public init(string: String) {
         self.domain = ""
-        self.path = Path(string: "/")
+        self.path = Path("/")
         self.port = -1
 
         var parserState = ParserState.Schema("")
@@ -85,7 +85,7 @@ public struct URL {
                 var path: String? = nil
                 (newState, path) = self._parsePath(character, data)
                 if let path = path {
-                    self.path = Path(string: path)
+                    self.path = Path(path)
                 }
             case .Parameter(let data):
                 var parameter: String? = nil

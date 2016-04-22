@@ -13,13 +13,16 @@ public struct Path {
     /// is this an absolute or relative path
     public let isAbsolute: Bool
 
+    /// delimiter between path components
+    public var delimiter: Character
+
     /// Initialize with a string, the string is split
     /// into components by the rules of the current platform
     ///
     /// - Parameter string: The string to parse
-    public init(string: String) {
-        // TODO: allow other delimiters than slashes
-        var components = string.split(character: "/")
+    public init(_ string: String, delimiter: Character = "/") {
+        self.delimiter = "/"
+        var components = string.split(character: self.delimiter)
         if components[0] == "" {
             self.isAbsolute = true
             components.remove(at: 0)
@@ -36,6 +39,7 @@ public struct Path {
     public init(components: [String], absolute: Bool = false) {
         self.components = components
         self.isAbsolute = absolute
+        self.delimiter = "/"
     }
 
     /// Create a new path instance by appending a component
@@ -72,13 +76,12 @@ public struct Path {
     /// - Parameter path: other path to append to this instance.
     ///                   If the other path is absolute the result
     ///                   is the other path without this instance.
-    public func join(path: Path) -> Path {
-        // TODO: overload '+' to join
+    public func join(_ path: Path) -> Path {
         if path.isAbsolute {
             return Path(components: path.components, absolute: true)
         } else {
             var myComponents = self.components
-            myComponents.append(contentsOf: path.components)
+            myComponents += path.components
             return Path(components: myComponents, absolute: self.isAbsolute)
         }
     }
@@ -138,7 +141,7 @@ public struct Path {
     public static func homeDirectory() -> Path? {
         let home = getenv("HOME")
         if let s = String(validatingUTF8: home) {
-            return Path(string: s)
+            return Path(s)
         }
         return nil
     }
@@ -148,17 +151,33 @@ public struct Path {
     /// - Returns: path instance with temp directory
     public static func tempDirectory() -> Path {
         // TODO: temp dirs for other platforms
-        return Path(string: "/tmp")
+        return Path("/tmp")
     }
+}
+
+public func +(lhs: Path, rhs: String) -> Path {
+    return lhs.join(Path(rhs))
+}
+
+public func +(lhs: Path, rhs: Path) -> Path {
+    return lhs.join(rhs)
+}
+
+public func +=(lhs: inout Path, rhs: String) {
+    lhs = lhs.join(Path(rhs))
+}
+
+public func +=(lhs: inout Path, rhs: Path) {
+    lhs = lhs.join(rhs)
 }
 
 extension Path: CustomStringConvertible {
 
     /// Convert path back to a String
     public var description: String {
-        var result = String.join(parts: components, delimiter: "/")
+        var result = String.join(parts: components, delimiter: self.delimiter)
         if self.isAbsolute {
-            result = "/" + result
+            result = "\(self.delimiter)" + result
         }
         return result
     }
