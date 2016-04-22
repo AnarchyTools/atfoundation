@@ -14,7 +14,7 @@ public extension String {
     /// - parameter range: range to replace
     /// - parameter replacement: replacement
     /// - returns: new string with substituted range
-    public func stringByReplacing(range: Range<String.Index>, replacement: String) -> String {
+    public func replacing(range: Range<String.Index>, replacement: String) -> String {
         let before = self.subString(range: self.startIndex..<range.startIndex)
         let after = self.subString(range: range.endIndex..<self.endIndex)
         return String.join(parts: [before, after], delimiter: replacement)
@@ -25,7 +25,7 @@ public extension String {
     /// - parameter searchTerm: substring to search
     /// - parameter replacement: replacement to substitute
     /// - returns: new string with applied substitutions
-    public func stringByReplacing(searchTerm: String, replacement: String) -> String {
+    public func replacing(searchTerm: String, replacement: String) -> String {
         if searchTerm.characters.count == 0 {
             return self
         }
@@ -38,7 +38,7 @@ public extension String {
     /// - parameter range: range to replace
     /// - parameter replacement: substitute
     public mutating func replace(range: Range<String.Index>, replacement: String) {
-        self = self.stringByReplacing(range: range, replacement: replacement)
+        self = self.replacing(range: range, replacement: replacement)
     }
 
     /// Replace substring in string, modifies self
@@ -50,7 +50,7 @@ public extension String {
             return
         }
 
-        self = self.stringByReplacing(searchTerm: searchTerm, replacement: replacement)
+        self = self.replacing(searchTerm: searchTerm, replacement: replacement)
     }
 
 }
