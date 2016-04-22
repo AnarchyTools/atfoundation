@@ -1,12 +1,14 @@
 #if os(Linux)
 import Glibc
+public typealias Mode_t = UInt32
 #else
 import Darwin
+public typealias Mode_t = UInt16
 #endif
 
 /// UNIX File mode
 public struct FileMode: OptionSet {
-    public let rawValue: UInt16
+    public let rawValue: Mode_t
 
     public static let Inaccessible = FileMode(rawValue: 0)
 
@@ -33,7 +35,7 @@ public struct FileMode: OptionSet {
     public static let SetGID       = FileMode(rawValue: 1 << 10)
     public static let SetUID       = FileMode(rawValue: 1 << 11)
 
-    public init(rawValue: UInt16) {
+    public init(rawValue: Mode_t) {
         self.rawValue = rawValue & ((1 << 12) - 1)
     }
 }
@@ -57,7 +59,7 @@ extension FileMode: CustomStringConvertible {
     }
 }
 
-public enum FileType: UInt16 {
+public enum FileType: Mode_t {
     case Invalid = 0
     case FIFO = 1
     case CharacterDevice = 2
@@ -68,7 +70,7 @@ public enum FileType: UInt16 {
     case Socket = 12
     case Whiteout = 14
 
-    private init?(statMode: UInt16) {
+    private init?(statMode: Mode_t) {
         self.init(rawValue: (statMode & 0xf000) >> 12)
     }
 }
@@ -110,9 +112,9 @@ public struct FileInfo {
         self.path = path
         self.owner = statBuf.st_uid
         self.group = statBuf.st_gid
-        self.mode = FileMode(rawValue: statBuf.st_mode)
+        self.mode = FileMode(rawValue: Mode_t(statBuf.st_mode))
         self.size = UInt64(statBuf.st_size)
-        self.type = FileType(statMode: statBuf.st_mode)!
+        self.type = FileType(statMode: Mode_t(statBuf.st_mode))!
         if self.type == .Symlink {
             var link = [Int8](repeating: 0, count: 1025)
             readlink(path.description, &link, 1024)
@@ -125,9 +127,15 @@ public struct FileInfo {
             self.linkTarget = nil
         }
 
-        self.mTime = statBuf.st_mtimespec.tv_sec
-        self.cTime = statBuf.st_ctimespec.tv_sec
-        self.aTime = statBuf.st_atimespec.tv_sec
+        #if os(Linux)
+            self.mTime = statBuf.st_mtim.tv_sec
+            self.cTime = statBuf.st_ctim.tv_sec
+            self.aTime = statBuf.st_atim.tv_sec
+        #else
+            self.mTime = statBuf.st_mtimespec.tv_sec
+            self.cTime = statBuf.st_ctimespec.tv_sec
+            self.aTime = statBuf.st_atimespec.tv_sec
+        #endif
     }
 }
 

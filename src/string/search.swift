@@ -150,7 +150,7 @@ public extension String {
     ///
     /// - parameter prefix: the prefix to check for
     /// - returns: true if the prefix was an empty string or the string has the prefix
-    public func hasPrefix(prefix: String) -> Bool {
+    public func hasPrefix(_ prefix: String) -> Bool {
         if prefix.characters.count == 0 {
             // if the prefix has a length of zero every string is prefixed by that
             return true
@@ -192,7 +192,7 @@ public extension String {
     ///
     /// - parameter suffix: the suffix to check for
     /// - returns: true if the suffix was an empty string or the string has the suffix
-    public func hasSuffix(suffix: String) -> Bool {
+    public func hasSuffix(_ suffix: String) -> Bool {
         if suffix.characters.count == 0 {
             // if the suffix has a length of zero every string is suffixed by that
             return true

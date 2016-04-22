@@ -227,6 +227,12 @@ public class FS {
         }
     }
 
+    #if os(Linux)
+        public typealias Dir_t = OpaquePointer
+    #else
+        public typealias Dir_t = UnsafeMutablePointer<DIR>
+    #endif
+
     /// Iterate over all entries in a directory
     ///
     /// - Parameter path: the path to iterate over
@@ -236,7 +242,7 @@ public class FS {
         guard let d = opendir(path.description) else {
             throw errnoToError(errno: errno)
         }
-        var deStack = [(UnsafeMutablePointer<DIR>, dirent, Path)]()
+        var deStack = [(Dir_t, dirent, Path)]()
         deStack.append((d, dirent(), path))
 
         return AnyIterator {
@@ -277,7 +283,12 @@ public class FS {
                     }
 
                     let subPath = path.appending(filename)
-                    if Int32(de.d_type) == DT_DIR && recursive {
+                    #if os(Linux)
+                        let typ = Int(de.d_type)
+                    #else
+                        let typ = Int32(de.d_type)
+                    #endif
+                    if typ == DT_DIR && recursive {
                         if let subD = opendir(subPath.description) {
                             deStack.append((subD, dirent(), subPath))
                         }
@@ -428,7 +439,12 @@ public class FS {
                 }
 
                 let subPath = path.appending(filename)
-                if Int32(de.d_type) == DT_DIR {
+                #if os(Linux)
+                    let typ = Int(de.d_type)
+                #else
+                    let typ = Int32(de.d_type)
+                #endif
+                if typ == DT_DIR {
                     try FS._rmdir_recursive(path: subPath)
                 } else {
                     if unlink(subPath.description) != 0 {
