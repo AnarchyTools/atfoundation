@@ -42,6 +42,16 @@ public struct Path {
         self.delimiter = "/"
     }
 
+    /// Initialize empty path
+    ///
+    /// - Parameter absolute: If set to true the empty path is equal to
+    ///                       the root path, else it equals the current path
+    public init(absolute: Bool = false) {
+        self.components = []
+        self.isAbsolute = absolute
+        self.delimiter = "/"
+    }
+
     /// Create a new path instance by appending a component
     ///
     /// - Parameter component: path component to append
@@ -175,6 +185,13 @@ extension Path: CustomStringConvertible {
 
     /// Convert path back to a String
     public var description: String {
+        if self.components.count == 0 {
+            if self.isAbsolute {
+                return "\(self.delimiter)"
+            } else {
+                return "."
+            }
+        }
         var result = String.join(parts: components, delimiter: self.delimiter)
         if self.isAbsolute {
             result = "\(self.delimiter)" + result
