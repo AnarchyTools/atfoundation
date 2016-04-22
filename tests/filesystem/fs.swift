@@ -5,27 +5,27 @@ import XCTest
 class FSTests: XCTestCase {
 
     func testFileExists() {
-        let p = Path(string:"./build.atpkg")
+        let p = Path("./build.atpkg")
         XCTAssert(FS.fileExists(path: p) == true)
     }
 
     func testFileDoesNotExist() {
-        let p = Path(string:"./does_not_exist")
+        let p = Path("./does_not_exist")
         XCTAssert(FS.fileExists(path: p) == false)
     }
 
     func testIsDirExisting() {
-        let p = Path(string:"./src")
+        let p = Path("./src")
         XCTAssert(FS.isDirectory(path: p) == true)
     }
 
     func testIsDirNonExisting() {
-        let p = Path(string:"./does_not_exist")
+        let p = Path("./does_not_exist")
         XCTAssert(FS.isDirectory(path: p) == false)
     }
 
     func testIsDirFile() {
-        let p = Path(string:"./build.atpkg")
+        let p = Path("./build.atpkg")
         XCTAssert(FS.isDirectory(path: p) == false)
     }
 

@@ -5,7 +5,7 @@ import XCTest
 class PathTests: XCTestCase {
 
     func testInitNoDelimiter() {
-        let p = Path(string: "test")
+        let p = Path("test")
         XCTAssert(p.components.count == 1)
         if p.components.count >= 1 {
             XCTAssert(p.components[0] == "test")
@@ -14,7 +14,7 @@ class PathTests: XCTestCase {
     }
 
     func testInitWithDelimiter() {
-        let p = Path(string: "test/dir")
+        let p = Path("test/dir")
         XCTAssert(p.components.count == 2)
         if p.components.count >= 2 {
             XCTAssert(p.components[0] == "test")
@@ -24,7 +24,7 @@ class PathTests: XCTestCase {
     }
 
     func testInitAbsolutePath() {
-        let p = Path(string: "/test/dir")
+        let p = Path("/test/dir")
         XCTAssert(p.components.count == 2)
         if p.components.count >= 2 {
             XCTAssert(p.components[0] == "test")
@@ -54,7 +54,7 @@ class PathTests: XCTestCase {
     }
 
     func testAppending() {
-        let p = Path(string: "/test/dir")
+        let p = Path("/test/dir")
         let q = p.appending("bar")
         XCTAssert(q.components.count == 3)
         if q.components.count >= 3 {
@@ -64,14 +64,14 @@ class PathTests: XCTestCase {
     }
 
     func testRemovingLastComponent() {
-        let p = Path(string: "/test/dir/foo")
+        let p = Path("/test/dir/foo")
         let q = p.removingLastComponent()
         XCTAssert(q.components.count == 2)
         XCTAssert(q.isAbsolute == true)
     }
 
     func testRemovingFirstComponent() {
-        let p = Path(string: "/test/dir/foo")
+        let p = Path("/test/dir/foo")
         let q = p.removingFirstComponent()
         XCTAssert(q.components.count == 2)
         if q.components.count >= 2 {
@@ -82,8 +82,8 @@ class PathTests: XCTestCase {
     }
 
     func testJoin() {
-        let p = Path(string: "/test/dir")
-        let q = Path(string: "bar")
+        let p = Path("/test/dir")
+        let q = Path("bar")
         let r = p + q
         XCTAssert(r.components.count == 3)
         if r.components.count >= 3 {
@@ -95,8 +95,8 @@ class PathTests: XCTestCase {
     }
 
     func testJoinAbsolute() {
-        let p = Path(string: "/test/dir")
-        let q = Path(string: "/bar")
+        let p = Path("/test/dir")
+        let q = Path("/bar")
         let r = p + q
         XCTAssert(r.components.count == 1)
         if r.components.count > 0 {
@@ -106,8 +106,8 @@ class PathTests: XCTestCase {
     }
 
     func testRelativeTo() {
-        let p = Path(string: "/this/is/a/long/path/it/goes/on/and/on")
-        let q = Path(string: "/this/is/a/long/path")
+        let p = Path("/this/is/a/long/path/it/goes/on/and/on")
+        let q = Path("/this/is/a/long/path")
         if let r = p.relativeTo(path: q) {
             XCTAssert(r.components.count == 5)
             if r.components.count == 5 {
@@ -124,8 +124,8 @@ class PathTests: XCTestCase {
     }
 
     func testRelativeUpTo() {
-        let p = Path(string: "/this/is/another/long/path/it/goes/on/and/on")
-        let q = Path(string: "/this/is/a/long/path")
+        let p = Path("/this/is/another/long/path/it/goes/on/and/on")
+        let q = Path("/this/is/a/long/path")
         if let r = p.relativeTo(path: q) {
             XCTAssert(r.components.count == 11)
             if r.components.count >= 11 {
@@ -148,8 +148,8 @@ class PathTests: XCTestCase {
     }
 
     func testRelativeToRelative() {
-        let p = Path(string: "this/is/a/long/path/it/goes/on/and/on")
-        let q = Path(string: "/this/is/a/long/path")
+        let p = Path("this/is/a/long/path/it/goes/on/and/on")
+        let q = Path("/this/is/a/long/path")
         let r = p.relativeTo(path: q)
         XCTAssert(r == nil)
     }
@@ -184,12 +184,12 @@ class PathTests: XCTestCase {
     }
 
     func testDescriptionRelative() {
-        let p = Path(string:"relative/path")
+        let p = Path("relative/path")
         XCTAssert(p.description == "relative/path")
     }
 
     func testDescriptionAbsolute() {
-        let p = Path(string:"/absolute/path")
+        let p = Path("/absolute/path")
         XCTAssert(p.description == "/absolute/path")
     }
 }
