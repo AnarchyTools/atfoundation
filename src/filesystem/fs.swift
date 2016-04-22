@@ -286,6 +286,22 @@ public class FS {
         }
     }
 
+    /// Create and return a unique temporary directory
+    ///
+    /// - Parameter prefix: prefix name of the directory
+    /// - Returns: path to the already created directory
+    public class func temporaryDirectory(prefix: String) throws -> Path {
+        let p = Path.tempDirectory().appending(prefix + ".XXXXXXX")
+        let buf = Array(p.description.utf8)
+        let _ = mkdtemp(UnsafeMutablePointer(buf))
+        if let dirname = String(validatingUTF8: UnsafeMutablePointer(buf)) {
+            let path = Path(string: dirname)
+            return path
+        } else {
+            throw SysError.UnknownError
+        }
+
+    }
 
     /// Recursively copy a directory
     ///
