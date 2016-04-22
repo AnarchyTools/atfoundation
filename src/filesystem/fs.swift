@@ -342,11 +342,13 @@ public class FS {
     public class func temporaryDirectory(prefix: String) throws -> Path {
         // TODO: Test
         let p = Path.tempDirectory().appending(prefix + ".XXXXXXX")
-        let buf = Array(p.description.utf8)
-        let _ = mkdtemp(UnsafeMutablePointer(buf))
+        var buf = Array(p.description.utf8)
+        buf.append(0)
+        if mkdtemp(UnsafeMutablePointer(buf)) == nil {
+            throw errnoToError(errno: errno)
+        }
         if let dirname = String(validatingUTF8: UnsafeMutablePointer(buf)) {
-            let path = Path(dirname)
-            return path
+            return Path(dirname)
         } else {
             throw SysError.UnknownError
         }

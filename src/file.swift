@@ -117,12 +117,14 @@ public class File {
     /// - Parameter binary: optional, open in binary mode, defaults to text mode
     public convenience init(tempFileAtPath path: Path, prefix: String, binary: Bool = false) throws {
         let p = path.appending(prefix + ".XXXXXXX")
-        let buf = Array(p.description.utf8)
+        var buf = Array(p.description.utf8)
+        buf.append(0)
         let fd = mkstemp(UnsafeMutablePointer(buf))
         if let filename = String(validatingUTF8: UnsafeMutablePointer(buf)) {
             try self.init(fd: fd, mode: .ReadAndWrite, binary: binary, takeOwnership: true)
             self.path = Path(filename)
         } else {
+            close(fd)
             throw SysError.UnknownError
         }
     }
