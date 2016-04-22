@@ -39,7 +39,7 @@ public enum SysError: Int32, ErrorProtocol {
     case NameTooLong = 36
     case NoLockAvailable = 37
     case InvalidSystemCall = 38
-    // case DirectoryNotEmpty = 39
+    case DirectoryNotEmpty = 39
     case SymlinkLoop = 40
 
     // Network
@@ -101,7 +101,7 @@ public enum SysError: Int32, ErrorProtocol {
     case NameTooLong = 63
     case NoLockAvailable = 77
     case InvalidSystemCall = 78
-    // case DirectoryNotEmpty = ?
+    case DirectoryNotEmpty = 66
     case SymlinkLoop = 62
 
     // Network
