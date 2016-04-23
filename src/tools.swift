@@ -1,3 +1,8 @@
+#if os(Linux)
+    @_exported import Glibc
+#else
+    @_exported import Darwin
+#endif
 
 // So apparently this is how you access a fixed length C array from
 // an imported struct -.-
