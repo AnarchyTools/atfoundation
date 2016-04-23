@@ -15,21 +15,21 @@ public struct FileMode: OptionSet {
     public static let ExecOthers   = FileMode(rawValue: 1 << 0)
     public static let WriteOthers  = FileMode(rawValue: 1 << 1)
     public static let ReadOthers   = FileMode(rawValue: 1 << 2)
-    public static let RWOthers     = [ReadOthers, WriteOthers]
+    public static let RWOthers     = ReadOthers + WriteOthers
 
     public static let ExecGroup    = FileMode(rawValue: 1 << 3)
     public static let WriteGroup   = FileMode(rawValue: 1 << 4)
     public static let ReadGroup    = FileMode(rawValue: 1 << 5)
-    public static let RWGroup      = [ReadGroup, WriteGroup]
+    public static let RWGroup      = ReadGroup + WriteGroup
 
     public static let ExecOwner    = FileMode(rawValue: 1 << 6)
     public static let WriteOwner   = FileMode(rawValue: 1 << 7)
     public static let ReadOwner    = FileMode(rawValue: 1 << 8)
-    public static let RWOwner      = [ReadOwner, WriteOwner]
+    public static let RWOwner      = ReadOwner + WriteOwner
 
-    public static let ExecAll      = [ExecOthers, ExecGroup, ExecOwner]
-    public static let WriteAll     = [WriteOthers, WriteGroup, WriteOwner]
-    public static let ReadAll      = [ReadOthers, ReadGroup, ReadOwner]
+    public static let ExecAll      = ExecOthers  + ExecGroup  + ExecOwner
+    public static let WriteAll     = WriteOthers + WriteGroup + WriteOwner
+    public static let ReadAll      = ReadOthers  + ReadGroup  + ReadOwner
 
     public static let StickyBit    = FileMode(rawValue: 1 << 9)
     public static let SetGID       = FileMode(rawValue: 1 << 10)
@@ -39,6 +39,23 @@ public struct FileMode: OptionSet {
         self.rawValue = rawValue & ((1 << 12) - 1)
     }
 }
+
+public func +(lhs: FileMode, rhs: FileMode) -> FileMode {
+    return FileMode(rawValue: lhs.rawValue | rhs.rawValue)
+}
+
+public func +=(lhs: inout FileMode, rhs: FileMode) {
+    lhs = FileMode(rawValue: lhs.rawValue | rhs.rawValue)
+}
+
+public func -(lhs: FileMode, rhs: FileMode) -> FileMode {
+    return FileMode(rawValue: lhs.rawValue & ~rhs.rawValue)
+}
+
+public func -=(lhs: inout FileMode, rhs: FileMode) {
+    lhs = FileMode(rawValue: lhs.rawValue & ~rhs.rawValue)
+}
+
 
 extension FileMode: CustomStringConvertible {
     public var description : String {
