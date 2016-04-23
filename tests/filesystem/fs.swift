@@ -119,6 +119,23 @@ class FSTests: XCTestCase {
             XCTFail("Error thrown \(error)")
         }
     }
+
+    func testChmodFile() {
+        do {
+            let p = try FS.temporaryDirectory() + "testfile.tmp"
+            try FS.touchItem(path: p)
+            XCTAssert(FS.fileExists(path: p) == true)
+            var attrib = try FS.getAttributes(path: p)
+            XCTAssert(attrib.description != "rw-rw-rw-")
+            try FS.setAttributes(path: p, mode: FileMode.ReadAll + FileMode.WriteAll)
+            attrib = try FS.getAttributes(path: p)
+            XCTAssert(attrib.description == "rw-rw-rw-", attrib.description)
+            try FS.removeItem(path: p)
+            XCTAssert(FS.fileExists(path: p) == false)
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
 }
 
 extension FSTests {
@@ -133,6 +150,7 @@ extension FSTests {
             ("testCreateAndRemoveDirectory", testCreateAndRemoveDirectory),
             ("testCreateAndRemoveDirectories", testCreateAndRemoveDirectories),
             ("testGetInfo", testGetInfo),
+            ("testChmodFile", testChmodFile),
         ]
     }
 }

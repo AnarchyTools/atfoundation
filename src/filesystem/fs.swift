@@ -185,7 +185,6 @@ public class FS {
     /// - Parameter path: path to item to change
     /// - Parameter mode: attributes to set
     public class func setAttributes(path: Path, mode: FileMode) throws {
-        // TODO: Test
         if chmod(path.description, mode.rawValue) < 0 {
             throw errnoToError(errno: errno)
         }
