@@ -18,12 +18,19 @@
 
   :tasks {
     :atfoundation {
+      :tool "shell"
+      :dependencies ["foundation-swift"]
+      :script "deps/merge_pcre.sh"
+    }
+
+    :foundation-swift {
       :tool "atllbuild"
       :sources ["src/**.swift"]
+      :dependencies ["pcre"]
       :name "atfoundation"
       :output-type "static-library"
       :publish-product true
-      :compile-options ["-enable-testing" "-g"]
+      :compile-options ["-enable-testing" "-g" "-Xcc" "-Ibin/pcre/include"]
 
       :overlays {
         :bootstrap-osx {
@@ -37,6 +44,14 @@
           :llbuildyaml "bootstrap/bootstrap-linux-atfoundation.swift-build"
         }
       }
+
+      :umbrella-header "deps/umbrella.h"
+      :module-map "synthesized"
+    }
+
+    :pcre {
+      :tool "shell"
+      :script "deps/build_pcre.sh"
     }
 
     :atfoundation-tests {

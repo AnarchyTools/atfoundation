@@ -16,5 +16,6 @@ XCTMain([
 	testCase(SubstringTests.allTests),
 	testCase(WhitespaceTests.allTests),
 	testCase(ReplaceTests.allTests),
-    testCase(PathTests.allTests)
+    testCase(PathTests.allTests),
+    testCase(RegexTests.allTests)
 ])
