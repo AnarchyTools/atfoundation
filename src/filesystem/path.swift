@@ -21,7 +21,7 @@ public struct Path {
     ///
     /// - Parameter string: The string to parse
     public init(_ string: String, delimiter: Character = "/") {
-        self.delimiter = "/"
+        self.delimiter = delimiter
         var components = string.split(character: self.delimiter)
         if components[0] == "" {
             self.isAbsolute = true
