@@ -190,6 +190,88 @@ public class FS {
         }
     }
 
+    /// Fetch a group name for a group id
+    ///
+    /// - Parameter id: group id to resolve
+    /// - Returns: string with group name or nil if it could not be resolved
+    public class func resolveGroup(id: gid_t) throws -> String? {
+        var grpBuf = group()
+        var buffer = [Int8](repeating: 0, count: 1024)
+        var result:UnsafeMutablePointer<group>? = nil
+        let err = getgrgid_r(id, &grpBuf, &buffer, 1024, &result)
+
+        if err != 0 {
+            throw errnoToError(errno: err)
+        }
+        if result != nil {
+            return String(validatingUTF8: grpBuf.gr_name)
+        } else {
+            return nil
+        }
+    }
+
+    /// Fetch a group id for a group name
+    ///
+    /// - Parameter name: group name to resolve
+    /// - Returns: group id or nil if it could not be resolved
+    public class func resolveGroup(name: String) throws -> gid_t? {
+        var grpBuf = group()
+        var buffer = [Int8](repeating: 0, count: 1024)
+        var result:UnsafeMutablePointer<group>? = nil
+        let err = getgrnam_r(name, &grpBuf, &buffer, 1024, &result)
+
+        if err != 0 {
+            throw errnoToError(errno: err)
+        }
+
+        if result != nil {
+            return grpBuf.gr_gid
+        } else {
+            return nil
+        }
+    }
+
+    /// Fetch a user name for a user id
+    ///
+    /// - Parameter id: user id to resolve
+    /// - Returns: string with user name or nil if it could not be resolved
+    public class func resolveUser(id: uid_t) throws -> String? {
+        var pwBuf = passwd()
+        var buffer = [Int8](repeating: 0, count: 1024)
+        var result:UnsafeMutablePointer<passwd>? = nil
+        let err = getpwuid_r(id, &pwBuf, &buffer, 1024, &result)
+
+        if err != 0 {
+            throw errnoToError(errno: err)
+        }
+        if result != nil {
+            return String(validatingUTF8: pwBuf.pw_name)
+        } else {
+            return nil
+        }
+    }
+
+    /// Fetch a user id for a user name
+    ///
+    /// - Parameter name: user name to resolve
+    /// - Returns: user id or nil if it could not be resolved
+    public class func resolveUser(name: String) throws -> uid_t? {
+        var pwBuf = passwd()
+        var buffer = [Int8](repeating: 0, count: 1024)
+        var result:UnsafeMutablePointer<passwd>? = nil
+        let err = getpwnam_r(name, &pwBuf, &buffer, 1024, &result)
+
+        if err != 0 {
+            throw errnoToError(errno: err)
+        }
+
+        if result != nil {
+            return pwBuf.pw_uid
+        } else {
+            return nil
+        }
+    }
+
     /// Get working directory
     ///
     /// - Returns: absolute path to current directory

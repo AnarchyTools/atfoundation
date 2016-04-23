@@ -58,8 +58,8 @@ class FSTests: XCTestCase {
     func testCreateAndRemoveDirectories() {
         do {
             let p = try FS.temporaryDirectory() + "tempdir.tmp"
-        let s = p.appending("subdir")
-        let q = s.appending("file.tmp")
+            let s = p.appending("subdir")
+            let q = s.appending("file.tmp")
             try FS.createDirectory(path: s, intermediate: true)
             XCTAssert(FS.isDirectory(path: p) == true)
             XCTAssert(FS.isDirectory(path: s) == true)
@@ -136,6 +136,53 @@ class FSTests: XCTestCase {
             XCTFail("Error thrown \(error)")
         }
     }
+
+    func testResolveGroup() {
+        do {
+            let gid = getgid()
+            let name = try FS.resolveGroup(id: gid)
+            XCTAssertNotNil(name)
+            let resolved_gid = try FS.resolveGroup(name: name!)
+            XCTAssertNotNil(resolved_gid)
+            XCTAssert(gid == resolved_gid!)
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+
+    func testResolveUser() {
+        do {
+            let uid = getuid()
+            let name = try FS.resolveUser(id: uid)
+            XCTAssertNotNil(name)
+            let resolved_uid = try FS.resolveUser(name: name!)
+            XCTAssertNotNil(resolved_uid)
+            XCTAssert(uid == resolved_uid!)
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+
+    func testSetGroup() {
+        do {
+            let p = try FS.temporaryDirectory() + "testfile.tmp"
+            try FS.touchItem(path: p)
+            XCTAssert(FS.fileExists(path: p) == true)
+            let gid = try FS.getGroup(path: p)
+            let everyone = try FS.resolveGroup(name: "everyone")
+            XCTAssertNotNil(everyone)
+            try FS.setGroup(path: p, newGroup: everyone!)
+            let newGroup = try FS.getGroup(path: p)
+            XCTAssert(gid != newGroup)
+            XCTAssert(newGroup == everyone!)
+
+            try FS.removeItem(path: p)
+            XCTAssert(FS.fileExists(path: p) == false)
+        } catch {
+            XCTFail("Error thrown \(error)")
+        }
+    }
+
 }
 
 extension FSTests {
@@ -151,6 +198,9 @@ extension FSTests {
             ("testCreateAndRemoveDirectories", testCreateAndRemoveDirectories),
             ("testGetInfo", testGetInfo),
             ("testChmodFile", testChmodFile),
+            ("testResolveGroup", testResolveGroup),
+            ("testResolveUser", testResolveUser),
+            ("testSetGroup", testSetGroup)
         ]
     }
 }
