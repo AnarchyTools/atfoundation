@@ -118,7 +118,7 @@ public class FS {
     ///
     /// - Parameter path: path to query
     /// - Returns: User id of owner
-    public class func getOwner(path: Path) throws -> UInt32 {
+    public class func getOwner(path: Path) throws -> uid_t {
         return try FS.getInfo(path: path).owner
     }
 
@@ -126,7 +126,7 @@ public class FS {
     ///
     /// - Parameter path: path to item
     /// - Parameter newOwner: User ID of new owner
-    public class func setOwner(path: Path, newOwner: UInt32) throws {
+    public class func setOwner(path: Path, newOwner: uid_t) throws {
         // TODO: Test
         let info = try self.getInfo(path: path)
         if chown(path.description, newOwner, info.group) < 0 {
@@ -138,7 +138,7 @@ public class FS {
     ///
     /// - Parameter path: path to query
     /// - Returns: Group id of owner
-    public class func getGroup(path: Path) throws -> UInt32 {
+    public class func getGroup(path: Path) throws -> gid_t {
         return try FS.getInfo(path: path).group
     }
 
@@ -146,8 +146,7 @@ public class FS {
     ///
     /// - Parameter path: path to item
     /// - Parameter newGroup: Group ID of new owner
-    public class func setGroup(path: Path, newGroup: UInt32) throws {
-        // TODO: Test
+    public class func setGroup(path: Path, newGroup: gid_t) throws {
         let info = try self.getInfo(path: path)
         if chown(path.description, info.owner, newGroup) < 0 {
             throw errnoToError(errno: errno)
@@ -159,8 +158,7 @@ public class FS {
     /// - Parameter path: path to item
     /// - Parameter owner: User ID of new owner
     /// - Parameter group: Group ID of new owner
-    public class func setOwnerAndGroup(path: Path, owner: UInt32, group: UInt32) throws {
-        // TODO: Test
+    public class func setOwnerAndGroup(path: Path, owner: uid_t, group: gid_t) throws {
         if chown(path.description, owner, group) < 0 {
             throw errnoToError(errno: errno)
         }
@@ -350,8 +348,7 @@ public class FS {
     ///
     /// - Parameter prefix: prefix name of the directory
     /// - Returns: path to the already created directory
-    public class func temporaryDirectory(prefix: String) throws -> Path {
-        // TODO: Test
+    public class func temporaryDirectory(prefix: String = "tempdir") throws -> Path {
         let p = Path.tempDirectory().appending(prefix + ".XXXXXXX")
         var buf = Array(p.description.utf8)
         buf.append(0)
@@ -370,7 +367,7 @@ public class FS {
     ///
     /// - Parameter from: source
     /// - Parameter to: destination
-    private class func _copy_recursive(from: Path, to: Path) throws {
+    @inline(__always) private class func _copy_recursive(from: Path, to: Path) throws {
         let iterator = try FS.iterateItems(path: from, recursive: true, includeHidden: true)
         for file in iterator {
             guard let relpath = file.path.relativeTo(path: from) else {
@@ -404,7 +401,7 @@ public class FS {
     ///
     /// - Parameter from: source
     /// - Parameter to: destination, will be truncated before copying
-    private class func _copy_file(from: Path, to: Path) throws {
+    @inline(__always) private class func _copy_file(from: Path, to: Path) throws {
         let source = try File(path: from, mode: .ReadOnly, binary: true)
         try source.copyTo(path: to)
     }
