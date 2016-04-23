@@ -98,11 +98,11 @@ public struct FileInfo {
     /// path to the file
     public let path: Path
 
-    /// owner
-    public let owner: UInt32
+    /// owner id
+    public let owner: uid_t
 
-    /// group
-    public let group: UInt32
+    /// group id
+    public let group: gid_t
 
     /// mode
     public let mode: FileMode
@@ -124,6 +124,30 @@ public struct FileInfo {
 
     /// last access timestamp
     public let aTime: Int
+
+    /// owner name, if unresolvable defaults to stringified owner id
+    public var ownerName: String {
+        do {
+            if let name = try FS.resolveUser(id: self.owner) {
+                return name
+            }
+        } catch {
+            // just ignore errors and return the user id as a string
+        }
+        return "\(self.owner)"
+    }
+
+    /// group name, if unresolvable defaults to stringified group id
+    public var groupName: String {
+        do {
+            if let name = try FS.resolveGroup(id: self.group) {
+                return name
+            }
+        } catch {
+            // just ignore errors and return the user id as a string
+        }
+        return "\(self.group)"
+    }
 
     internal init(path: Path, statBuf: stat) {
         self.path = path
