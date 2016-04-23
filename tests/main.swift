@@ -10,11 +10,11 @@ import XCTest
 
 print("Starting tests...")
 
-XCTMain(testCases: [
-	testCase(allTests: SearchTests.allTests),
-	testCase(allTests: SplitTests.allTests),
-	testCase(allTests: SubstringTests.allTests),
-	testCase(allTests: WhitespaceTests.allTests),
-	testCase(allTests: ReplaceTests.allTests),
-    testCase(allTests: PathTests.allTests)
+XCTMain([
+	testCase(SearchTests.allTests),
+	testCase(SplitTests.allTests),
+	testCase(SubstringTests.allTests),
+	testCase(WhitespaceTests.allTests),
+	testCase(ReplaceTests.allTests),
+    testCase(PathTests.allTests)
 ])
