@@ -30,8 +30,8 @@ class FSTests: XCTestCase {
     }
 
     func testTouchAndRemoveFile() {
-        let p = Path.tempDirectory().appending("testfile.tmp")
         do {
+            let p = try FS.temporaryDirectory() + "tempfile.tmp"
             try FS.touchItem(path: p)
             XCTAssert(FS.fileExists(path: p) == true)
             try FS.touchItem(path: p)
@@ -43,8 +43,8 @@ class FSTests: XCTestCase {
     }
 
     func testCreateAndRemoveDirectory() {
-        let p = Path.tempDirectory().appending("tempdir.tmp")
         do {
+            let p = try FS.temporaryDirectory() + "tempdir.tmp"
             try FS.createDirectory(path: p)
             XCTAssert(FS.isDirectory(path: p) == true)
             try FS.removeItem(path: p)
@@ -56,10 +56,10 @@ class FSTests: XCTestCase {
     }
 
     func testCreateAndRemoveDirectories() {
-        let p = Path.tempDirectory().appending("tempdir.tmp")
+        do {
+            let p = try FS.temporaryDirectory() + "tempdir.tmp"
         let s = p.appending("subdir")
         let q = s.appending("file.tmp")
-        do {
             try FS.createDirectory(path: s, intermediate: true)
             XCTAssert(FS.isDirectory(path: p) == true)
             XCTAssert(FS.isDirectory(path: s) == true)
@@ -74,8 +74,8 @@ class FSTests: XCTestCase {
     }
 
     func testGetInfo() {
-        let p = Path.tempDirectory().appending("testfile.tmp")
         do {
+            let p = try FS.temporaryDirectory() + "testfile.tmp"
             try FS.touchItem(path: p)
             XCTAssert(FS.fileExists(path: p) == true)
             let info1 = try FS.getInfo(path: p)
