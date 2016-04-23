@@ -43,7 +43,7 @@ public struct URL {
         case Invalid
     }
 
-    private mutating func _parse(_ character: Character, _ state: ParserState) -> ParserState {
+    @inline(__always) private mutating func _parse(_ character: Character, _ state: ParserState) -> ParserState {
         var newState: ParserState
         switch state {
             case .Schema(let data):
@@ -110,7 +110,7 @@ public struct URL {
         return newState
     }
 
-    private func _parseSchema(_ character: Character, _ data: String) -> (ParserState, String?) {
+    @inline(__always) private func _parseSchema(_ character: Character, _ data: String) -> (ParserState, String?) {
         switch character {
             case "0"..."9", "a"..."z", "A"..."Z", "-":
                 var value = data
@@ -125,7 +125,7 @@ public struct URL {
         }
     }
 
-    private func _parseAfterSchema(_ character: Character) -> ParserState {
+    @inline(__always) private func _parseAfterSchema(_ character: Character) -> ParserState {
         switch character {
             case "/":
                 return .AfterSchema
@@ -135,7 +135,7 @@ public struct URL {
         }
     }
 
-    private func _parseDomain(_ character: Character, _ data: String) -> (ParserState, String?) {
+    @inline(__always) private func _parseDomain(_ character: Character, _ data: String) -> (ParserState, String?) {
         var value = data
         switch character {
             case "0"..."9", "a"..."z", "A"..."Z", "-", ".", "@", ":":
@@ -148,7 +148,7 @@ public struct URL {
         }
     }
 
-    private func _parsePath(_ character: Character, _ data: String) -> (ParserState, String?) {
+    @inline(__always) private func _parsePath(_ character: Character, _ data: String) -> (ParserState, String?) {
         var value = data
         switch character {
             case "0"..."9", "a"..."z", "A"..."Z", "-", ".", "_", "~", "%", "/":
@@ -161,7 +161,7 @@ public struct URL {
         }
     }
 
-    private func _parseParameter(_ character: Character, _ data: String) -> (ParserState, String?) {
+    @inline(__always) private func _parseParameter(_ character: Character, _ data: String) -> (ParserState, String?) {
         switch character {
             case "0"..."9", "a"..."z", "A"..."Z", "-", ".", "_", "~", "%", "=", "/":
                 var value = data
@@ -176,7 +176,7 @@ public struct URL {
         }
     }
 
-    private func _parseFragment(_ character: Character, _ data: String) -> ParserState {
+    @inline(__always) private func _parseFragment(_ character: Character, _ data: String) -> ParserState {
         var value = data
         value.append(character)
         return .Fragment(value)
