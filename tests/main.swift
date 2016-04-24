@@ -24,5 +24,6 @@ XCTMain([
 	testCase(ReplaceTests.allTests),
     testCase(PathTests.allTests),
     testCase(RegexTests.allTests),
-    testCase(DateTests.allTests)
+    testCase(DateTests.allTests),
+    testCase(LoggerTests.allTests),
 ])
