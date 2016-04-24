@@ -115,8 +115,32 @@ public struct FileInfo {
     /// owner id
     public let owner: uid_t
 
+    /// owner name, if unresolvable defaults to stringified owner id
+    public var ownerName: String {
+        do {
+            if let name = try FS.resolveUser(id: self.owner) {
+                return name
+            }
+        } catch {
+            // just ignore errors and return the user id as a string
+        }
+        return "\(self.owner)"
+    }
+
     /// group id
     public let group: gid_t
+
+    /// group name, if unresolvable defaults to stringified group id
+    public var groupName: String {
+        do {
+            if let name = try FS.resolveGroup(id: self.group) {
+                return name
+            }
+        } catch {
+            // just ignore errors and return the user id as a string
+        }
+        return "\(self.group)"
+    }
 
     /// mode
     public let mode: FileMode
@@ -133,34 +157,25 @@ public struct FileInfo {
     /// modification timestamp
     public let mTime: Int
 
+    /// modification date
+    public var modificationDate: Date {
+        return Date(timestamp: self.mTime)
+    }
+
     /// creation timestamp
     public let cTime: Int
+
+    /// creation date
+    public var creationDate: Date {
+        return Date(timestamp: self.cTime)
+    }
 
     /// last access timestamp
     public let aTime: Int
 
-    /// owner name, if unresolvable defaults to stringified owner id
-    public var ownerName: String {
-        do {
-            if let name = try FS.resolveUser(id: self.owner) {
-                return name
-            }
-        } catch {
-            // just ignore errors and return the user id as a string
-        }
-        return "\(self.owner)"
-    }
-
-    /// group name, if unresolvable defaults to stringified group id
-    public var groupName: String {
-        do {
-            if let name = try FS.resolveGroup(id: self.group) {
-                return name
-            }
-        } catch {
-            // just ignore errors and return the user id as a string
-        }
-        return "\(self.group)"
+    /// last access date
+    public var accessDate: Date {
+        return Date(timestamp: self.aTime)
     }
 
     internal init(path: Path, statBuf: stat) {
