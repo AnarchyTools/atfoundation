@@ -20,7 +20,7 @@ public extension String {
     public func stringByTrimmingWhitespace() -> String {
         var startIndex:String.CharacterView.Index = self.startIndex
         for (index, c) in self.characters.enumerated() {
-            if !Charset.isUnicodeWhitespace(character: c) {
+            if !Charset.isUnicodeWhitespaceOrNewline(character: c) {
                 startIndex = self.startIndex.advanced(by: index)
                 break
             }
@@ -28,7 +28,7 @@ public extension String {
 
         var endIndex = self.endIndex.advanced(by: -1)
         for _ in 0..<self.characters.count {
-            if !Charset.isUnicodeWhitespace(character: self.characters[endIndex]) {
+            if !Charset.isUnicodeWhitespaceOrNewline(character: self.characters[endIndex]) {
                 break
             }
             endIndex = endIndex.advanced(by: -1)
