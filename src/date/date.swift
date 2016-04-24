@@ -60,7 +60,7 @@ public struct Date {
     }
 
     /// Time tuple
-    public var time: (hour: Int32, minute: Int32, second: Int32) {
+    public var timeTuple: (hour: Int32, minute: Int32, second: Int32) {
         let v = self._timeStruct()
         return (hour: v.tm_hour, minute: v.tm_min, second: v.tm_sec)
     }
@@ -91,7 +91,7 @@ public struct Date {
     }
 
     /// Date tuple
-    public var date: (year: Int32, month: Int32, day: Int32) {
+    public var dateTuple: (year: Int32, month: Int32, day: Int32) {
         let v = self._timeStruct()
         return (year: v.tm_year + 1900, month: v.tm_mon + 1, day: v.tm_mday)
     }
@@ -173,6 +173,13 @@ public struct Date {
             return nil
         }
         self.timestamp = timegm(&time)
+    }
+
+    /// Return current time/date
+    ///
+    /// - Returns: Date() instance with current timestamp
+    public static func now() -> Date {
+        return Date(timestamp: time(nil))
     }
 
     /// Format a date by defined format
