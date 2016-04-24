@@ -23,7 +23,6 @@ XCTMain([
 	testCase(WhitespaceTests.allTests),
 	testCase(ReplaceTests.allTests),
     testCase(PathTests.allTests),
-    testCase(RegexTests.allTests),
     testCase(DateTests.allTests),
     testCase(LoggerTests.allTests),
 ])
