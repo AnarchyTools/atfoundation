@@ -29,3 +29,16 @@ public func fixedCArrayToArray<T, E>(data: inout T) -> [E] {
         return [E](buffer)
     }
 }
+
+/// internal extension to convert a string to an integer array
+public extension Sequence where Iterator.Element == CChar {
+    static func fromString(_ string: String) -> [CChar] {
+        var temp = [CChar]()
+        temp.reserveCapacity(string.utf8.count)
+        for c in string.utf8 {
+            temp.append(CChar(c))
+        }
+        temp.append(CChar(0))
+        return temp
+    }
+}

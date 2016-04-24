@@ -6,19 +6,6 @@
 //  Copyright © 2015 Johannes Schriewer. All rights reserved.
 //
 
-/// internal extension to convert a string to an integer array
-extension Sequence where Iterator.Element == CChar {
-    static func fromString(_ string: String) -> [CChar] {
-        var temp = [CChar]()
-        temp.reserveCapacity(string.utf8.count)
-        for c in string.utf8 {
-            temp.append(CChar(c))
-        }
-        temp.append(CChar(0))
-        return temp
-    }
-}
-
 /// Regular expression matcher based on pcre
 public class RegEx {
     private let compiled: OpaquePointer?
