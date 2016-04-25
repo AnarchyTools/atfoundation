@@ -239,6 +239,16 @@ extension URL: CustomStringConvertible {
     }
 }
 
+extension URL: Hashable {
+    public var hashValue: Int {
+        return self.description.hashValue
+    }
+}
+
+public func ==(lhs: URL, rhs: URL) -> Bool {
+    return lhs.description == rhs.description
+}
+
 public extension String {
     public var urlEncoded: String {
         let dict = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F" ]
