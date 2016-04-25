@@ -6,7 +6,8 @@ linux:
     script:
         - apt-get update
         - apt-get install --no-install-recommends xz-utils curl git ca-certificates -y
-        - curl -L https://github.com/AnarchyTools/atbuild/releases/download/0.10.0/atbuild-0.10.0-linux.tar.xz | tar xJ -C /usr/local
+        - curl -L https://github.com/AnarchyTools/atbuild/releases/download/0.10.0/atbuild-0.10.0-linux.tar.xz | tar xJ
+        - cp atbuild-*/atbuild /usr/local/bin/
         - atbuild check
     tags:
         - autoscale-linux
