@@ -184,7 +184,7 @@ class FSTests: XCTestCase {
             XCTAssert(FS.fileExists(path: p) == true)
             let gid = try FS.getGroup(path: p)
             #if os(Linux)
-                let everyone = try FS.resolveGroup(name: "nobody")
+                let everyone = try FS.resolveGroup(name: "nogroup")
             #else
                 let everyone = try FS.resolveGroup(name: "everyone")
             #endif
