@@ -25,4 +25,5 @@ XCTMain([
     testCase(PathTests.allTests),
     testCase(DateTests.allTests),
     testCase(LoggerTests.allTests),
+    testCase(FSTests.allTests)
 ])

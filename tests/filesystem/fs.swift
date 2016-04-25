@@ -197,6 +197,11 @@ class FSTests: XCTestCase {
         }
     }
 
+    func testLoadNonexistentFile() {
+        let p = Path("doesnotexist.file")
+        let _ = try? File(path: p, mode: .ReadOnly)
+    }
+
 }
 
 extension FSTests {
@@ -214,7 +219,8 @@ extension FSTests {
             ("testChmodFile", testChmodFile),
             ("testResolveGroup", testResolveGroup),
             ("testResolveUser", testResolveUser),
-            ("testSetGroup", testSetGroup)
+            ("testSetGroup", testSetGroup),
+            ("testLoadNonexistentFile", testLoadNonexistentFile)
         ]
     }
 }
