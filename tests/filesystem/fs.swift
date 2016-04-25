@@ -183,7 +183,11 @@ class FSTests: XCTestCase {
             try FS.touchItem(path: p)
             XCTAssert(FS.fileExists(path: p) == true)
             let gid = try FS.getGroup(path: p)
-            let everyone = try FS.resolveGroup(name: "everyone")
+            #if os(Linux)
+                let everyone = try FS.resolveGroup(name: "nobody")
+            #else
+                let everyone = try FS.resolveGroup(name: "everyone")
+            #endif
             XCTAssertNotNil(everyone)
             try FS.setGroup(path: p, newGroup: everyone!)
             let newGroup = try FS.getGroup(path: p)
