@@ -1,0 +1,21 @@
+stages:
+- build
+
+linux:
+    stage: build
+    script:
+        - apt-get update
+        - apt-get install --no-install-recommends xz-utils curl git ca-certificates -y
+        - curl -L https://github.com/AnarchyTools/atbuild/releases/download/0.10.0/atbuild-0.10.0-linux.tar.xz | tar xJ -C /usr/local
+        - atbuild check
+    tags:
+        - autoscale-linux
+    image: drewcrawford/swift:latest
+
+osx:
+    stage: build
+    script: 
+        - atbuild check
+    tags:
+        - openswift
+        - atbuild
