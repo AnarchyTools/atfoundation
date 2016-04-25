@@ -183,7 +183,11 @@ class FSTests: XCTestCase {
             try FS.touchItem(path: p)
             XCTAssert(FS.fileExists(path: p) == true)
             let gid = try FS.getGroup(path: p)
-            let everyone = try FS.resolveGroup(name: "everyone")
+            #if os(Linux)
+                let everyone = try FS.resolveGroup(name: "nogroup")
+            #else
+                let everyone = try FS.resolveGroup(name: "everyone")
+            #endif
             XCTAssertNotNil(everyone)
             try FS.setGroup(path: p, newGroup: everyone!)
             let newGroup = try FS.getGroup(path: p)
@@ -195,6 +199,11 @@ class FSTests: XCTestCase {
         } catch {
             XCTFail("Error thrown \(error)")
         }
+    }
+
+    func testLoadNonexistentFile() {
+        let p = Path("doesnotexist.file")
+        let _ = try? File(path: p, mode: .ReadOnly)
     }
 
 }
@@ -214,7 +223,8 @@ extension FSTests {
             ("testChmodFile", testChmodFile),
             ("testResolveGroup", testResolveGroup),
             ("testResolveUser", testResolveUser),
-            ("testSetGroup", testSetGroup)
+            ("testSetGroup", testSetGroup),
+            ("testLoadNonexistentFile", testLoadNonexistentFile)
         ]
     }
 }

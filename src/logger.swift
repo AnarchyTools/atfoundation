@@ -157,7 +157,7 @@ public class Log {
 
     private class func _fwrite(_ stream: UnsafeMutablePointer<FILE>, _ data: String) {
         let buf = [CChar].fromString(data)
-        fwrite(buf, buf.count, 1, stream)
+        fwrite(buf, buf.count - 1, 1, stream)
     }
 
     /// Only use class functions please

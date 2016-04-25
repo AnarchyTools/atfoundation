@@ -27,7 +27,7 @@ public class File {
     private(set) public var path: Path?
 
     /// take ownership of the file descriptor/pointer
-    private let closeWhenDeallocated: Bool
+    private var closeWhenDeallocated: Bool
 
     /// File mode
     public enum Mode:String {
@@ -85,12 +85,13 @@ public class File {
             openMode += "b"
         }
         self.path = path
-        self.closeWhenDeallocated = true
 
+        self.closeWhenDeallocated = false
         self.fp = fopen(path.description, openMode)
         if self.fp == nil {
             throw errnoToError(errno: errno)
         }
+        self.closeWhenDeallocated = true
     }
 
     /// Initialize with a file descriptor

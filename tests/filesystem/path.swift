@@ -171,10 +171,11 @@ class PathTests: XCTestCase {
     func testHomeDir() {
         if let p = Path.homeDirectory() {
 #if os(Linux)
-            XCTAssert(p.components.count == 2)
-            if p.components.count >= 2 {
-                XCTAssert(p.components[0] == "home")
-            }
+            XCTAssert(p.components.count > 0, "Home dir has \(p.components.count) components")
+            // disabled because CI has something other than /home/ci
+            // if p.components.count >= 2 {
+            //     XCTAssert(p.components[0] == "home")
+            // }
             XCTAssert(p.isAbsolute == true)
 #else
             XCTAssert(p.components.count == 2)
