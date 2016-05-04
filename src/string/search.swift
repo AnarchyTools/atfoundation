@@ -23,19 +23,20 @@ public extension String {
     /// - returns: `String.Index` if character was found or `nil`
     public func position(character: Character, index: String.Index? = nil, reverse: Bool = false) -> String.Index? {
         if reverse {
-            var i = (index == nil) ? self.endIndex.predecessor() : index!
+            var i = (index == nil) ? self.index(before: self.endIndex) : index!
             while i >= self.startIndex {
                 if self.characters[i] == character {
                     return i
                 }
-                i = i.predecessor()
+                i = self.index(before: i)
             }
         } else {
-            let start = (index == nil) ? self.startIndex : index!
-            for i in start..<self.endIndex {
+            var i = (index == nil) ? self.startIndex : index!
+            while i < self.endIndex {
                 if self.characters[i] == character {
                     return i
                 }
+                i = self.index(after: i)
             }
         }
         return nil
@@ -50,7 +51,7 @@ public extension String {
         var p = self.position(character: character)
         while p != nil  {
             result.append(p!)
-            p = self.position(character: character, index: p!.successor())
+            p = self.position(character: character, index: self.index(after: p!))
         }
         return result
     }
@@ -68,13 +69,13 @@ public extension String {
         }
 
         if reverse {
-            if index != nil && self.startIndex.distance(to: index!) < string.characters.count {
+            if index != nil && self.distance(from: startIndex, to: index!) < string.characters.count {
                 // can not find match because string is too short for match
                 return nil
             }
 
             // start with index/self.endIndex and go back
-            var i = (index == nil) ? self.endIndex.advanced(by: -string.characters.count) : index!
+            var i = (index == nil) ?  self.index(endIndex, offsetBy:  -string.characters.count) : index!
             while i >= self.startIndex {
 
                 var idx = i
@@ -86,22 +87,22 @@ public extension String {
                         match = false
                         break
                     }
-                    idx = idx.successor()
+                    idx = self.index(after: idx)
                 }
                 if match {
                     return i
                 }
-                i = i.predecessor()
+                i = self.index(before: i)
             }
         } else {
-            if index != nil && index!.distance(to: self.endIndex) < string.characters.count {
+            if index != nil && self.distance(from: index!, to: self.endIndex) < string.characters.count {
                 // can not find match because string is too short for match
                 return nil
             }
             let start = (index == nil) ? self.startIndex : index!
-
+            var i = start
             // iterate from start to end - search string length
-            for i in start..<self.endIndex.advanced(by: -string.characters.count) {
+            while i < endIndex {
                 var idx = i
 
                 // compare substring
@@ -111,11 +112,12 @@ public extension String {
                         match = false
                         break
                     }
-                    idx = idx.successor()
+                    idx = self.index(after: idx)
                 }
                 if match {
                     return i
                 }
+                i = self.index(after: i)
             }
         }
         return nil
@@ -130,7 +132,7 @@ public extension String {
         var p = self.position(string: string)
         while p != nil  {
             result.append(p!)
-            p = self.position(string: string, index: p!.successor())
+            p = self.position(string: string, index: self.index(after: p!))
         }
         return result
     }
@@ -171,23 +173,23 @@ public extension String {
         }
 
         // quick check if first and last char match
-        if self.characters.first! == prefix.characters.first! && self.characters[self.startIndex.advanced(by: prefix.characters.count - 1)] == prefix.characters.last! {
+        if self.characters.first! == prefix.characters.first! && self.characters[self.index(self.startIndex, offsetBy: prefix.characters.count - 1)] == prefix.characters.last! {
             // if prefix length == 2 instantly return true
             if prefix.characters.count == 2 {
                 return true
             }
 
             // match, thorough check
-            var selfIndex = self.startIndex.successor()
-            var prefixIndex = prefix.startIndex.successor()
+            var selfIndex = self.index(after:self.startIndex)
+            var prefixIndex = prefix.index(after:prefix.startIndex)
 
             // first and last already checked
             for _ in 1..<(prefix.characters.count - 1) {
                 if self.characters[selfIndex] != prefix.characters[prefixIndex] {
                     return false
                 }
-                selfIndex = selfIndex.successor()
-                prefixIndex = prefixIndex.successor()
+                selfIndex = self.index(after: selfIndex)
+                prefixIndex = prefix.index(after: prefixIndex)
             }
             return true
         }
@@ -213,23 +215,23 @@ public extension String {
         }
 
         // quick check if first and last char match
-        if self.characters.last! == suffix.characters.last! && self.characters[self.startIndex.advanced(by: self.characters.count - suffix.characters.count)] == suffix.characters.first! {
+        if self.characters.last! == suffix.characters.last! && self.characters[self.index(self.startIndex, offsetBy: self.characters.count - suffix.characters.count)] == suffix.characters.first! {
             // if suffix length == 2 instantly return true
             if suffix.characters.count == 2 {
                 return true
             }
 
             // match, thorough check
-            var selfIndex = self.startIndex.advanced(by: self.characters.count - suffix.characters.count + 1)
-            var suffixIndex = suffix.startIndex.successor()
+            var selfIndex = self.index(self.startIndex, offsetBy: self.characters.count - suffix.characters.count + 1)
+            var suffixIndex = suffix.index(after: suffix.startIndex)
 
             // first and last already checked
             for _ in 1..<(suffix.characters.count - 1) {
                 if self.characters[selfIndex] != suffix.characters[suffixIndex] {
                     return false
                 }
-                selfIndex = selfIndex.successor()
-                suffixIndex = suffixIndex.successor()
+                selfIndex = self.index(after: selfIndex)
+                suffixIndex = suffix.index(after: suffixIndex)
             }
             return true
         }

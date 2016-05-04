@@ -276,11 +276,12 @@ public extension String {
         while true {
             let c = self[index]
             if c == "%" {
-                if let highIndex = dict.index(of: self[index.advanced(by: 1)]), let lowIndex = dict.index(of: self[index.advanced(by: 2)]) {
+
+                if let highIndex = dict.index(of: self[self.index(after: index)]), let lowIndex = dict.index(of: self[self.index(index, offsetBy: 2)]) {
                     let high = Int8(truncatingBitPattern: dict.startIndex.distance(to: highIndex))
                     let low = Int8(truncatingBitPattern: dict.startIndex.distance(to: lowIndex))
                     result.append(high << 4 + low)
-                    index = index.advanced(by: 2)
+                    index = self.index(index, offsetBy: 2)
                 } else {
                     let s = String(c)
                     for item in s.utf8 {
@@ -294,7 +295,7 @@ public extension String {
                 }
             }
 
-            index = index.successor()
+            index = self.index(after: index)
             if index == self.endIndex {
                 break
             }

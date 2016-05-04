@@ -20,7 +20,7 @@ class SubstringTests: XCTestCase {
 
     func testSubstring() {
         let s = "Extract (a rather unimportant) substring"
-        let substring = s.subString(range: s.startIndex.advanced(by: 8)...s.startIndex.advanced(by: 29))
+        let substring = s.subString(range: s.index(s.startIndex, offsetBy: 8)..<s.index(s.startIndex, offsetBy: 30))
         XCTAssert(substring == "(a rather unimportant)")
     }
 
@@ -32,13 +32,13 @@ class SubstringTests: XCTestCase {
 
     func testSubstringToIndex() {
         let s = "Extract (a rather unimportant) substring"
-        let substring = s.subString(toIndex: s.startIndex.advanced(by: 8))
+        let substring = s.subString(toIndex: s.index(s.startIndex, offsetBy: 8))
         XCTAssert(substring == "Extract ")
     }
 
     func testSubstringFromIndex() {
         let s = "Extract (a rather unimportant) substring"
-        let substring = s.subString(fromIndex: s.startIndex.advanced(by: 8))
+        let substring = s.subString(fromIndex: s.index(s.startIndex, offsetBy: 8))
         XCTAssert(substring == "(a rather unimportant) substring")
     }
 }

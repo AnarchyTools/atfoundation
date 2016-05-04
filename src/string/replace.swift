@@ -21,8 +21,8 @@ public extension String {
     /// - parameter replacement: replacement
     /// - returns: new string with substituted range
     public func replacing(range: Range<String.Index>, replacement: String) -> String {
-        let before = self.subString(range: self.startIndex..<range.startIndex)
-        let after = self.subString(range: range.endIndex..<self.endIndex)
+        let before = self.subString(range: self.startIndex..<range.lowerBound)
+        let after = self.subString(range: range.upperBound..<self.endIndex)
         return String.join(parts: [before, after], delimiter: replacement)
     }
 
@@ -36,10 +36,7 @@ public extension String {
             return self
         }
         let comps = self.split(string: searchTerm)
-        var replaced = String.join(parts: comps, delimiter: replacement)
-        if self.hasSuffix(searchTerm) {
-            replaced = replaced.subString(toIndex: replaced.endIndex.advanced(by: -searchTerm.characters.count)) + replacement
-        }
+        let replaced = String.join(parts: comps, delimiter: replacement)
         return replaced
     }
 

@@ -21,9 +21,10 @@ public extension String {
     /// - returns: substring or `nil` if start index out of range
     public func subString(range: Range<String.Index>) -> String {
         var result = ""
-        result.reserveCapacity(range.count)
-        for idx in range {
-            result.append(self.characters[idx])
+
+        result.reserveCapacity(self.distance(from: range.upperBound, to: range.lowerBound))
+        for char in self.characters[range.lowerBound..<range.upperBound] {
+            result.append(char)
         }
         return result
     }
