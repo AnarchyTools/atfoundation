@@ -18,22 +18,24 @@ public extension String {
     ///
     /// - returns: trimmed string
     public func stringByTrimmingWhitespace() -> String {
-        var startIndex:String.CharacterView.Index = self.startIndex
-        for (index, c) in self.characters.enumerated() {
+        var startIndex = self.characters.startIndex
+        var index = self.characters.startIndex
+        for c in self.characters {
             if !Charset.isUnicodeWhitespaceOrNewline(character: c) {
-                startIndex = self.startIndex.advanced(by: index)
+                startIndex = index
                 break
             }
+            index = self.index(after: index)
         }
 
-        var endIndex = self.endIndex.advanced(by: -1)
+        var endIndex = self.characters.index(before: self.characters.endIndex)
         for _ in 0..<self.characters.count {
             if !Charset.isUnicodeWhitespaceOrNewline(character: self.characters[endIndex]) {
                 break
             }
-            endIndex = endIndex.advanced(by: -1)
+            endIndex = self.characters.index(before: endIndex)
         }
 
-        return self.subString(range: startIndex...endIndex)
+        return self.subString(range: startIndex..<self.characters.index(after: endIndex))
     }
 }

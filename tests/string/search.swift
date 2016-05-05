@@ -23,7 +23,7 @@ class SearchTests: XCTestCase {
         let c: Character = "."
         let s = "Just a string with a . in it"
         if let result = s.position(character: c) {
-            XCTAssert(s.startIndex.advanced(by: 21) == result)
+            XCTAssert(s.index(s.startIndex, offsetBy: 21) == result)
         } else {
             XCTFail(". not found")
         }
@@ -41,7 +41,7 @@ class SearchTests: XCTestCase {
         let c: Character = "i"
         let s = "Just a string with a . in it"
         if let result = s.position(character: c, reverse: true) {
-            XCTAssert(s.startIndex.advanced(by: 26) == result)
+            XCTAssert(s.index(s.startIndex, offsetBy: 26) == result)
         } else {
             XCTFail("i not found")
         }
@@ -50,8 +50,8 @@ class SearchTests: XCTestCase {
     func testPositionOfCharStartIndex() {
         let c: Character = "i"
         let s = "Just a string with a . in it"
-        if let result = s.position(character: c, index: s.startIndex.advanced(by: 22)) {
-            XCTAssert(s.startIndex.advanced(by: 23) == result)
+        if let result = s.position(character: c, index: s.index(s.startIndex, offsetBy: 22)) {
+            XCTAssert(s.index(s.startIndex, offsetBy: 23) == result)
         } else {
             XCTFail("i not found")
         }
@@ -60,8 +60,8 @@ class SearchTests: XCTestCase {
     func testPositionOfCharStartIndexReverse() {
         let c: Character = "i"
         let s = "Just a string with a . in it"
-        if let result = s.position(character: c, index: s.startIndex.advanced(by: 25), reverse: true) {
-            XCTAssert(s.startIndex.advanced(by: 23) == result)
+        if let result = s.position(character: c, index: s.index(s.startIndex, offsetBy: 25), reverse: true) {
+            XCTAssert(s.index(s.startIndex, offsetBy: 23) == result)
         } else {
             XCTFail("i not found")
         }
@@ -73,10 +73,10 @@ class SearchTests: XCTestCase {
         let result = s.positions(character: c)
         XCTAssert(result.count == 4)
         if result.count == 4 {
-            XCTAssert(result[0] == s.startIndex.advanced(by: 10))
-            XCTAssert(result[1] == s.startIndex.advanced(by: 15))
-            XCTAssert(result[2] == s.startIndex.advanced(by: 23))
-            XCTAssert(result[3] == s.startIndex.advanced(by: 26))
+            XCTAssert(result[0] == s.index(s.startIndex, offsetBy: 10))
+            XCTAssert(result[1] == s.index(s.startIndex, offsetBy: 15))
+            XCTAssert(result[2] == s.index(s.startIndex, offsetBy: 23))
+            XCTAssert(result[3] == s.index(s.startIndex, offsetBy: 26))
         }
     }
 
@@ -93,7 +93,7 @@ class SearchTests: XCTestCase {
         let n = "a "
         let s = "Just a string with a . in it"
         if let result = s.position(string: n) {
-            XCTAssert(s.startIndex.advanced(by: 5) == result)
+            XCTAssert(s.index(s.startIndex, offsetBy: 5) == result)
         } else {
             XCTFail("'a ' not found")
         }
@@ -111,7 +111,7 @@ class SearchTests: XCTestCase {
         let n = "a "
         let s = "Just a string with a . in it"
         if let result = s.position(string: n, reverse: true) {
-            XCTAssert(s.startIndex.advanced(by: 19) == result)
+            XCTAssert(s.index(s.startIndex, offsetBy: 19) == result)
         } else {
             XCTFail("'a ' not found")
         }
@@ -120,8 +120,8 @@ class SearchTests: XCTestCase {
     func testPositionOfStringStartIndex() {
         let n = "a "
         let s = "Just a string with a . in it"
-        if let result = s.position(string: n, index: s.startIndex.advanced(by: 10)) {
-            XCTAssert(s.startIndex.advanced(by: 19) == result)
+        if let result = s.position(string: n, index: s.index(s.startIndex, offsetBy: 10)) {
+            XCTAssert(s.index(s.startIndex, offsetBy: 19) == result)
         } else {
             XCTFail("'a ' not found")
         }
@@ -130,8 +130,8 @@ class SearchTests: XCTestCase {
     func testPositionOfStringStartIndexReverse() {
         let n = "a "
         let s = "Just a string with a . in it"
-        if let result = s.position(string: n, index: s.startIndex.advanced(by: 10), reverse: true) {
-            XCTAssert(s.startIndex.advanced(by: 5) == result)
+        if let result = s.position(string: n, index: s.index(s.startIndex, offsetBy: 10), reverse: true) {
+            XCTAssert(s.index(s.startIndex, offsetBy: 5) == result)
         } else {
             XCTFail("'a ' not found")
         }
@@ -143,8 +143,8 @@ class SearchTests: XCTestCase {
         let result = s.positions(string: n)
         XCTAssert(result.count == 2)
         if result.count == 2 {
-            XCTAssert(result[0] == s.startIndex.advanced(by: 5))
-            XCTAssert(result[1] == s.startIndex.advanced(by: 19))
+            XCTAssert(result[0] == s.index(s.startIndex, offsetBy:  5))
+            XCTAssert(result[1] == s.index(s.startIndex, offsetBy:  19))
         }
     }
 

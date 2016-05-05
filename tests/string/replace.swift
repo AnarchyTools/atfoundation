@@ -37,12 +37,12 @@ class ReplaceTests: XCTestCase {
 
     func testNewStringRange() {
         let s = "Hello World!"
-        XCTAssert(s.replacing(range: s.startIndex.advanced(by: 6)..<s.startIndex.advanced(by: 6+5), replacement: "You") == "Hello You!")
+        XCTAssert(s.replacing(range: s.index(s.startIndex, offsetBy: 6)..<s.index(s.startIndex, offsetBy: 6+5), replacement: "You") == "Hello You!")
     }
 
     func testNewStringRangeWithEmpty() {
         let s = "Hello World!"
-        XCTAssert(s.replacing(range: s.startIndex.advanced(by: 5)..<s.startIndex.advanced(by: 6+5), replacement: "") == "Hello!")
+        XCTAssert(s.replacing(range: s.index(s.startIndex, offsetBy: 5)..<s.index(s.startIndex, offsetBy: 6+5), replacement: "") == "Hello!")
     }
 
     func testNewStringReplacingEnd() {
@@ -72,13 +72,13 @@ class ReplaceTests: XCTestCase {
 
     func testModifyRange() {
         var s = "Hello World!"
-        s.replace(range: s.startIndex.advanced(by: 6)..<s.startIndex.advanced(by: 6+5), replacement: "You")
+        s.replace(range: s.index(s.startIndex, offsetBy: 6)..<s.index(s.startIndex, offsetBy: 6+5), replacement: "You")
         XCTAssert(s == "Hello You!")
     }
 
     func testModifyRangeWithEmpty() {
         var s = "Hello World!"
-        s.replace(range: s.startIndex.advanced(by: 5)..<s.startIndex.advanced(by: 6+5), replacement: "")
+        s.replace(range: s.index(s.startIndex, offsetBy: 5)..<s.index(s.startIndex, offsetBy: 6+5), replacement: "")
         XCTAssert(s == "Hello!")
     }
 

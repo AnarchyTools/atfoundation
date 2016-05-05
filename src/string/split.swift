@@ -136,11 +136,10 @@ public extension String {
     public func split(string: String, maxSplits: Int = 0) -> [String] {
         var result = [String]()
         let positions = self.positions(string: string)
-
         var start = self.startIndex
         for idx in positions {
             result.append(self.subString(range: start..<idx))
-            start = idx.advanced(by: string.characters.count)
+            start = self.index(idx, offsetBy: string.characters.count)
             if result.count == maxSplits {
                 break
             }
