@@ -35,8 +35,28 @@ public struct URL {
                 break
             }
         }
-        if case .Fragment(let data) = parserState where data.characters.count > 0 {
-            self.fragment = data
+        switch parserState {
+            case .Schema(let schema):
+                self.schema = schema
+            case .Domain(let domain):
+                self.domain = domain
+            case .Path(let path):
+                self.path = Path(path)
+            case .Parameter(let parameter):
+                let parts = parameter.split(character: "=", maxSplits: 1)
+                if parts.count == 2 {
+                    if let parameter = parts[0].urlDecoded, let value = parts[1].urlDecoded {
+                        self.parameters.append((name: parameter, value: value))
+                    }
+                } else {
+                    if let parameter = parameter.urlDecoded {
+                        self.parameters.append((name: parameter, value: nil))
+                    }
+                }
+            case .Fragment(let fragment):
+                self.fragment = fragment
+            default:
+                break
         }
 
         if self.schema == "http" && self.port < 0 {
