@@ -20,6 +20,7 @@ class LoggerTests: XCTestCase {
     func testLogStdErr() {
         Log.logLevel = .Debug
         Log.logTarget = .StdErr
+        Log.logFileAndLine = true
 
         Log.debug("debug log", Log.logTarget)
         Log.info("info log", Log.logTarget)
@@ -31,6 +32,7 @@ class LoggerTests: XCTestCase {
     func testLogStdOut() {
         Log.logLevel = .Debug
         Log.logTarget = .StdOut
+        Log.logFileAndLine = true
 
         Log.debug("debug log", Log.logTarget)
         Log.info("info log", Log.logTarget)
@@ -44,6 +46,7 @@ class LoggerTests: XCTestCase {
             Log.logLevel = .Debug
             Log.logFileName = try FS.temporaryDirectory() + "logfile.log"
             Log.logTarget = .File
+            Log.logFileAndLine = true
 
             Log.debug("debug log", Log.logTarget)
             Log.info("info log", Log.logTarget)
