@@ -50,6 +50,11 @@ public extension LoggerProcotol {
     /// - parameter stream: file stream to write to
     /// - parameter level: level to fetch to color for, set to `nil` to reset color
     internal func colorize(_ stream: UnsafeMutablePointer<FILE>, _ level: Log.LogLevel?) {
+        let tty = isatty(fileno(stderr)) != 0
+        if !tty {
+            return
+        }
+
         var color: String
 
         if let level = level {
