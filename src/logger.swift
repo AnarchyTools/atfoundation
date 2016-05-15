@@ -12,36 +12,116 @@
 	import Darwin
 #endif
 
-/// Basic Logging class, can write to file or stdout/stderr
-public class Log {
+/// If you want to write your own logger conform to `LoggerProtocol` and set `Log.logger = MyLogger()`
+public protocol LoggerProcotol {
 
-    /// Log level
-    public enum LogLevel: Int {
-        case Debug = 0
-        case Info  = 1
-        case Warn  = 2
-        case Error = 3
-        case Fatal = 4
+    /// Primary function to log something
+    func log(_ level: Log.LogLevel, _ msg: [Any], file: String?, line: Int?, function: String?)
+}
+
+public extension LoggerProcotol {
+
+    /// Convenience override if you don't want to log the file and line info
+    ///
+    /// - parameter level: log severity
+    /// - parameter msg: data to log
+    public func log(_ level: Log.LogLevel, _ msg: [Any]) {
+        self.log(level, msg, file: nil, line: nil, function: nil)
     }
 
-    /// Log target
-    public enum LogTarget {
-        case StdErr
-        case StdOut
-        case File
+    /// Internal helper for fwrite from string
+    ///
+    /// - parameter stream: file stream to write to
+    /// - parameter data: string to write
+    internal func _fwrite(_ stream: UnsafeMutablePointer<FILE>, _ data: String) {
+        let buf = [CChar].fromString(data)
+        fwrite(buf, buf.count - 1, 1, stream)
     }
 
-    /// Active log level
-    public static var logLevel: LogLevel = .Debug
 
-    /// Log file and line too?
-    public static var logFileAndLine: Bool = false
+    /// Internal helper for colorizing log output on terminals
+    ///
+    /// - parameter stream: file stream to write to
+    /// - parameter level: level to fetch to color for, set to `nil` to reset color
+    internal func colorize(_ stream: UnsafeMutablePointer<FILE>, _ level: Log.LogLevel?) {
+        var color: String
 
-    /// Active log target
-    public static var logTarget: LogTarget = .StdErr
+        if let level = level {
+            switch level {
+                case .Debug:
+                    color = "1;37"
+                case .Info:
+                    color = "0"
+                case .Warn:
+                    color = "1;33"
+                case .Error:
+                    color = "0;31"
+                case .Fatal:
+                    color = "0;35"
+            }
+        } else {
+            color = "0"
+        }
 
-    /// Current log file name, remember to set logTarget to `.File` for this to work
-    public static var logFileName: Path? = nil {
+        self._fwrite(stream, "\u{1b}[\(color)m")
+    }
+}
+
+/// Simple standard error logger, colorizes output if run on a terminal
+public class StdErrLogger: LoggerProcotol {
+
+    public func log(_ level: Log.LogLevel, _ msg: [Any], file: String?, line: Int?, function: String?) {
+        let date = Date.now()
+
+        let tty = isatty(fileno(stderr)) != 0
+
+        if tty { self.colorize(stderr, level) }
+        if let file = file, line = line {
+            self._fwrite(stderr, "\(date.isoDateString!) [\(level)] \(file):\(line): ")
+        } else {
+            self._fwrite(stderr, "\(date.isoDateString!) [\(level)]: ")
+        }
+
+        for item in msg {
+            self._fwrite(stderr, String(item) + " ")
+        }
+        if tty { self.colorize(stderr, nil) }
+        self._fwrite(stderr, "\n")
+        fflush(stderr)
+    }
+}
+
+/// Simple standard output logger, colorizes output if run on a terminal
+public class StdOutLogger: LoggerProcotol {
+
+    public func log(_ level: Log.LogLevel, _ msg: [Any], file: String?, line: Int?, function: String?) {
+        let date = Date.now()
+
+        let tty = isatty(fileno(stdout)) != 0
+
+        if tty { self.colorize(stdout, level) }
+        if let file = file, line = line {
+            self._fwrite(stdout, "\(date.isoDateString!) [\(level)] \(file):\(line): ")
+        } else {
+            self._fwrite(stdout, "\(date.isoDateString!) [\(level)]: ")
+        }
+
+        for item in msg {
+            self._fwrite(stdout, String(item) + " ")
+        }
+        if tty { self.colorize(stdout, nil) }
+        self._fwrite(stdout, "\n")
+        fflush(stdout)
+    }
+}
+
+/// Simple file logger, throws `fatalError` when the file cannot be opened
+public class FileLogger: LoggerProcotol {
+    /// File handle to log file
+    private var logFile: File? = nil
+
+    /// Current log file name
+    public var logFileName: Path? = nil {
         didSet {
             self.logFile = nil
             if let filename = self.logFileName {
@@ -54,61 +134,18 @@ public class Log {
         }
     }
 
-    /// File handle to log file
-    private static var logFile: File? = nil
-
-    /// Log a debug message
+    /// Initialize with filename
     ///
-    /// - Parameter msg: message or object to log, works like in print
-    public class func debug(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        guard Log.logLevel.rawValue <= LogLevel.Debug.rawValue else {
-            return
-        }
-        self.log("DEBUG", msg, file: file, line: line, function: function)
+    /// - parameter filename: the file to write to
+    /// - throws: `SysError` when the file cannot be opened
+    public init(filename: Path) throws {
+        self.logFileName = filename
+        self.logFile = try File(path: filename, mode: .AppendOnly)
     }
 
-    /// Log an informal message
-    ///
-    /// - Parameter msg: message or object to log, works like in print
-    public class func info(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        guard Log.logLevel.rawValue <= LogLevel.Info.rawValue else {
-            return
-        }
-        self.log("INFO ", msg, file: file, line: line, function: function)
-    }
-
-    /// Log a warning message
-    ///
-    /// - Parameter msg: message or object to log, works like in print
-    public class func warn(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        guard Log.logLevel.rawValue <= LogLevel.Warn.rawValue else {
-            return
-        }
-        self.log("WARN ", msg, file: file, line: line, function: function)
-    }
-
-    /// Log an error message
-    ///
-    /// - Parameter msg: message or object to log, works like in print
-    public class func error(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        guard Log.logLevel.rawValue <= LogLevel.Error.rawValue else {
-            return
-        }
-        self.log("ERROR", msg, file: file, line: line, function: function)
-    }
-
-    /// Log a fatal message, program usually quits after these
-    ///
-    /// - Parameter msg: message or object to log, works like in print
-    public class func fatal(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
-        guard Log.logLevel.rawValue <= LogLevel.Fatal.rawValue else {
-            return
-        }
-        self.log("FATAL", msg, file: file, line: line, function: function)
-    }
 
     /// Close and re-open log file (usually bound to a HUP UNIX Signal)
-    public class func reopenLog() {
+    public func reopenLog() {
         if let filename = self.logFileName {
             do {
                 self.logFile = try File(path: filename, mode: .AppendOnly)
@@ -118,14 +155,13 @@ public class Log {
         }
     }
 
-    // MARK: - Private
-    private class func log(_ level: String, _ msg: [Any], file: String, line: Int, function: String) {
+    public func log(_ level: Log.LogLevel, _ msg: [Any], file: String?, line: Int?, function: String?) {
         let date = Date.now()
 
-        if let logFile = self.logFile where self.logTarget == .File {
+        if let logFile = self.logFile {
             do {
                 try date.isoDateString!.write(to: logFile)
-                if self.logFileAndLine {
+                if let file = file, line = line {
                     try " [\(level)] \(file):\(line): ".write(to: logFile)
                 } else {
                     try " [\(level)]: ".write(to: logFile)
@@ -136,40 +172,110 @@ public class Log {
                 try "\n".write(to: logFile)
                 logFile.flush()
             } catch {
-                self.logTarget = .StdErr
-                self._fwrite(stderr, "\(date.isoDateString!) [FATAL]: Could not write to logfile \(logFileName), reverting to STDERR!")
-                self.log(level, msg, file: file, line: line, function: function)
+                fatalError("Could not open log file '\(logFileName)': \(error)")
             }
         } else {
-            if let logFileName = self.logFileName where self.logTarget == .File {
+            if let logFileName = self.logFileName {
                 do {
                     self.logFile = try File(path: logFileName, mode: .AppendOnly)
                     self.log(level, msg, file: file, line: line, function: function)
                     return
                 } catch {
-                    self._fwrite(stderr, "\(date.isoDateString!) [FATAL]: Could not open logfile \(logFileName)!")
-                    fflush(stderr)
+                    fatalError("Could not open log file '\(logFileName)': \(error)")
                 }
             }
-
-            let out = (self.logTarget == .StdOut) ? stdout : stderr
-            if self.logFileAndLine {
-            self._fwrite(out, "\(date.isoDateString!) [\(level)] \(file):\(line): ")
-            } else {
-            self._fwrite(out, "\(date.isoDateString!) [\(level)]: ")
-            }
-
-            for item in msg {
-                self._fwrite(out, String(item) + " ")
-            }
-            self._fwrite(out, "\n")
-            fflush(out)
         }
     }
 
-    private class func _fwrite(_ stream: UnsafeMutablePointer<FILE>, _ data: String) {
-        let buf = [CChar].fromString(data)
-        fwrite(buf, buf.count - 1, 1, stream)
+}
+
+/// Basic Logging class, the underlying logger may be reconfigured
+public class Log {
+    public static var logger: LoggerProcotol = StdErrLogger()
+
+    /// Log level
+    public enum LogLevel: Int {
+        case Debug = 0
+        case Info  = 1
+        case Warn  = 2
+        case Error = 3
+        case Fatal = 4
+    }
+
+    /// Active log level
+    public static var logLevel: LogLevel = .Debug
+
+    /// Log file and line too?
+    public static var logFileAndLine: Bool = false
+
+    /// Log a debug message
+    ///
+    /// - Parameter msg: message or object to log, works like in print
+    public class func debug(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        guard Log.logLevel.rawValue <= LogLevel.Debug.rawValue else {
+            return
+        }
+        if self.logFileAndLine {
+            self.logger.log(.Debug, msg, file: file, line: line, function: function)
+        } else {
+            self.logger.log(.Debug, msg)
+        }
+    }
+
+    /// Log an informal message
+    ///
+    /// - Parameter msg: message or object to log, works like in print
+    public class func info(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        guard Log.logLevel.rawValue <= LogLevel.Info.rawValue else {
+            return
+        }
+        if self.logFileAndLine {
+            self.logger.log(.Info, msg, file: file, line: line, function: function)
+        } else {
+            self.logger.log(.Info, msg)
+        }
+    }
+
+    /// Log a warning message
+    ///
+    /// - Parameter msg: message or object to log, works like in print
+    public class func warn(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        guard Log.logLevel.rawValue <= LogLevel.Warn.rawValue else {
+            return
+        }
+        if self.logFileAndLine {
+            self.logger.log(.Warn, msg, file: file, line: line, function: function)
+        } else {
+            self.logger.log(.Warn, msg)
+        }
+    }
+
+    /// Log an error message
+    ///
+    /// - Parameter msg: message or object to log, works like in print
+    public class func error(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        guard Log.logLevel.rawValue <= LogLevel.Error.rawValue else {
+            return
+        }
+        if self.logFileAndLine {
+            self.logger.log(.Error, msg, file: file, line: line, function: function)
+        } else {
+            self.logger.log(.Error, msg)
+        }
+    }
+
+    /// Log a fatal message, program usually quits after these
+    ///
+    /// - Parameter msg: message or object to log, works like in print
+    public class func fatal(_ msg: Any..., file: String = #file, line: Int = #line, function: String = #function) {
+        guard Log.logLevel.rawValue <= LogLevel.Fatal.rawValue else {
+            return
+        }
+        if self.logFileAndLine {
+            self.logger.log(.Fatal, msg, file: file, line: line, function: function)
+        } else {
+            self.logger.log(.Fatal, msg)
+        }
     }
 
     /// Only use class functions please

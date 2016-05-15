@@ -19,42 +19,41 @@ class LoggerTests: XCTestCase {
 
     func testLogStdErr() {
         Log.logLevel = .Debug
-        Log.logTarget = .StdErr
         Log.logFileAndLine = true
+        Log.logger = StdErrLogger()
 
-        Log.debug("debug log", Log.logTarget)
-        Log.info("info log", Log.logTarget)
-        Log.warn("warn log", Log.logTarget)
-        Log.error("error log", Log.logTarget)
-        Log.fatal("fatal log", Log.logTarget)
+        Log.debug("debug log", "stderr")
+        Log.info("info log", "stderr")
+        Log.warn("warn log", "stderr")
+        Log.error("error log", "stderr")
+        Log.fatal("fatal log", "stderr")
     }
 
     func testLogStdOut() {
         Log.logLevel = .Debug
-        Log.logTarget = .StdOut
         Log.logFileAndLine = true
+        Log.logger = StdOutLogger()
 
-        Log.debug("debug log", Log.logTarget)
-        Log.info("info log", Log.logTarget)
-        Log.warn("warn log", Log.logTarget)
-        Log.error("error log", Log.logTarget)
-        Log.fatal("fatal log", Log.logTarget)
+        Log.debug("debug log", "stdout")
+        Log.info("info log", "stdout")
+        Log.warn("warn log", "stdout")
+        Log.error("error log", "stdout")
+        Log.fatal("fatal log", "stdout")
     }
 
     func testLogFile() {
         do {
             Log.logLevel = .Debug
-            Log.logFileName = try FS.temporaryDirectory() + "logfile.log"
-            Log.logTarget = .File
             Log.logFileAndLine = true
+            Log.logger = try FileLogger(filename: try FS.temporaryDirectory() + "logfile.log")
 
-            Log.debug("debug log", Log.logTarget)
-            Log.info("info log", Log.logTarget)
-            Log.warn("warn log", Log.logTarget)
-            Log.error("error log", Log.logTarget)
-            Log.fatal("fatal log", Log.logTarget)
+            Log.debug("debug log", "file")
+            Log.info("info log", "file")
+            Log.warn("warn log", "file")
+            Log.error("error log", "file")
+            Log.fatal("fatal log", "file")
 
-            let file = try File(path: Log.logFileName!, mode: .ReadOnly)
+            let file = try File(path: (Log.logger as! FileLogger).logFileName!, mode: .ReadOnly)
             let content = ["debug", "info", "warn", "error", "fatal"]
             for idx in 0..<5 {
                 let line = try file.readLine()!
