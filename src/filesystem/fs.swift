@@ -58,7 +58,7 @@ public class FS {
             let _ = try File(path: path, mode: .WriteOnly)
         } else {
             if utimes(path.description, nil) < 0 {
-                throw errnoToError(errno: errno)
+                throw SysError(errno: errno, path)
             }
         }
     }
@@ -72,19 +72,19 @@ public class FS {
     /// - Parameter recursive: optional, set to true to recursively remove directories
     public class func removeItem(path: Path, recursive: Bool = false) throws {
         if !FS.fileExists(path: path) {
-            throw SysError.NoSuchEntity
+            throw SysError.NoSuchEntity(path)
         }
         if FS.isDirectory(path: path) {
             if recursive {
                 try FS._rmdir_recursive(path: path)
             } else {
                 if rmdir(path.description) != 0 {
-                    throw errnoToError(errno: errno)
+                    throw SysError(errno: errno, path)
                 }
             }
         } else {
             if unlink(path.description) != 0 {
-                throw errnoToError(errno: errno)
+                throw SysError(errno: errno, path)
             }
         }
     }
@@ -97,18 +97,18 @@ public class FS {
     public class func createDirectory(path: Path, intermediate: Bool = false) throws {
         if !intermediate {
             if mkdir(path.description, 511) != 0 {
-                throw errnoToError(errno: errno)
+                throw SysError(errno: errno, path)
             }
         } else {
             for idx in 0..<path.components.count {
                 let subPath = Path(components: Array(path.components[0...idx]), absolute: path.isAbsolute)
                 if !FS.fileExists(path: subPath) {
                     if mkdir(subPath.description, 511) != 0 {
-                        throw errnoToError(errno: errno)
+                        throw SysError(errno: errno, subPath)
                     }
                 } else {
                     if !FS.isDirectory(path: subPath) {
-                        throw SysError.NotADirectory
+                        throw SysError.NotADirectory(subPath)
                     }
                 }
             }
@@ -123,7 +123,7 @@ public class FS {
         var sbuf = stat()
         let result = stat(path.description, &sbuf)
         if result < 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
         return FileInfo(path: path, statBuf: sbuf)
     }
@@ -144,7 +144,7 @@ public class FS {
         // TODO: Test
         let info = try self.getInfo(path: path)
         if chown(path.description, newOwner, info.group) < 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
     }
 
@@ -163,7 +163,7 @@ public class FS {
     public class func setGroup(path: Path, newGroup: gid_t) throws {
         let info = try self.getInfo(path: path)
         if chown(path.description, info.owner, newGroup) < 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
     }
 
@@ -174,7 +174,7 @@ public class FS {
     /// - Parameter group: Group ID of new owner
     public class func setOwnerAndGroup(path: Path, owner: uid_t, group: gid_t) throws {
         if chown(path.description, owner, group) < 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
     }
 
@@ -200,7 +200,7 @@ public class FS {
     /// - Parameter mode: attributes to set
     public class func setAttributes(path: Path, mode: FileMode) throws {
         if chmod(path.description, mode.rawValue) < 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
     }
 
@@ -215,7 +215,7 @@ public class FS {
         let err = getgrgid_r(id, &grpBuf, &buffer, 1024, &result)
 
         if err != 0 {
-            throw errnoToError(errno: err)
+            throw SysError(errno: err)
         }
         if result != nil {
             return String(validatingUTF8: grpBuf.gr_name)
@@ -235,7 +235,7 @@ public class FS {
         let err = getgrnam_r(name, &grpBuf, &buffer, 1024, &result)
 
         if err != 0 {
-            throw errnoToError(errno: err)
+            throw SysError(errno: err)
         }
 
         if result != nil {
@@ -256,7 +256,7 @@ public class FS {
         let err = getpwuid_r(id, &pwBuf, &buffer, 1024, &result)
 
         if err != 0 {
-            throw errnoToError(errno: err)
+            throw SysError(errno: err)
         }
         if result != nil {
             return String(validatingUTF8: pwBuf.pw_name)
@@ -276,7 +276,7 @@ public class FS {
         let err = getpwnam_r(name, &pwBuf, &buffer, 1024, &result)
 
         if err != 0 {
-            throw errnoToError(errno: err)
+            throw SysError(errno: err)
         }
 
         if result != nil {
@@ -292,7 +292,7 @@ public class FS {
     public class func getWorkingDirectory() throws -> Path {
         var buffer = [Int8](repeating: 0, count: 1025)
         if getcwd(&buffer, 1024) == nil {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno)
         }
         if let dir = String(validatingUTF8: buffer) {
             return Path(dir)
@@ -306,7 +306,7 @@ public class FS {
     /// - Parameter path: path to change current directory to
     public class func changeWorkingDirectory(path: Path) throws {
         if chdir(path.description) != 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
     }
 
@@ -316,7 +316,7 @@ public class FS {
     /// - Parameter to: destination path
     public class func symlinkItem(from: Path, to: Path) throws {
         if symlink(from.description, to.description) != 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, to, from)
         }
     }
 
@@ -333,7 +333,7 @@ public class FS {
     /// - Parameter includeHidden: optional, include hidden files, defaults to false
     public class func iterateItems(path: Path, recursive: Bool = false, includeHidden: Bool = false) throws -> AnyIterator<FileInfo> {
         guard let d = opendir(path.description) else {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
         var deStack = [(Dir_t, dirent, Path)]()
         deStack.append((d, dirent(), path))
@@ -408,8 +408,8 @@ public class FS {
         // TODO: Test
         let result = rename(from.description, to.description)
         if result < 0 {
-            let error = errnoToError(errno: errno)
-            if error == .CrossDeviceLink && !atomic {
+            let error = SysError(errno: errno, to, from)
+            if case .CrossDeviceLink = error where !atomic {
                 try FS.copyItem(from: from, to: to, recursive: true)
                 try FS.removeItem(path: from, recursive: true)
             } else {
@@ -428,7 +428,7 @@ public class FS {
         // TODO: Test
         let isDir = FS.isDirectory(path: from)
         if !recursive && isDir {
-            throw SysError.IsDirectory
+            throw SysError.IsDirectory(from)
         }
         if isDir {
             try FS._copy_recursive(from: from, to: to)
@@ -448,7 +448,7 @@ public class FS {
         var buf = Array(p.description.utf8)
         buf.append(0)
         if mkdtemp(UnsafeMutablePointer(buf)) == nil {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, p)
         }
         if let dirname = String(validatingUTF8: UnsafeMutablePointer(buf)) {
             return Path(dirname)
@@ -472,7 +472,7 @@ public class FS {
             switch file.type {
                 case .FIFO:
                     if mkfifo(destinationPath.description, file.mode.rawValue) < 0 {
-                        throw errnoToError(errno: errno)
+                        throw SysError(errno: errno, destinationPath)
                     }
                     try FS.setAttributes(path: destinationPath, mode: file.mode)
                 case .Directory:
@@ -506,7 +506,7 @@ public class FS {
     /// - Parameter path: path to remove
     private class func _rmdir_recursive(path: Path) throws {
         guard let d = opendir(path.description) else {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
         defer {
             closedir(d)
@@ -515,8 +515,9 @@ public class FS {
         var de = dirent()
         var result:UnsafeMutablePointer<dirent>? = nil
         repeat {
-            guard readdir_r(d, &de, &result) == 0 else {
-                throw errnoToError(errno: errno)
+            let status = readdir_r(d, &de, &result)
+            guard status == 0 else {
+                throw SysError(errno: status, path)
             }
             if result == nil {
                 break
@@ -540,13 +541,13 @@ public class FS {
                     try FS._rmdir_recursive(path: subPath)
                 } else {
                     if unlink(subPath.description) != 0 {
-                        throw errnoToError(errno: errno)
+                        throw SysError(errno: errno, subPath)
                     }
                 }
             }
         } while true
         if rmdir(path.description) != 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
     }
 }
