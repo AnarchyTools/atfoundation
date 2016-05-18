@@ -152,7 +152,14 @@ public class Log {
                 }
             }
 
-            let out = (self.logTarget == .StdOut) ? stdout : stderr
+            #if os(Linux)
+            let os_stdout = stdout!
+            let os_stderr = stderr!
+            #else
+            let os_stdout = stdout
+            let os_stderr = stderr
+            #endif
+            let out = (self.logTarget == .StdOut) ? os_stdout : os_stderr
             if self.logFileAndLine {
             self._fwrite(out, "\(date.isoDateString!) [\(level)] \(file):\(line): ")
             } else {

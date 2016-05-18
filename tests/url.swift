@@ -27,7 +27,7 @@ class URLTests: XCTestCase {
     }
 
     func testURLParse1() {
-        let url = URL(string: "http://google.com/")
+        let url = atfoundation.URL(string: "http://google.com/")
         XCTAssert(url.schema == "http")
         XCTAssert(url.domain == "google.com", url.domain)
         XCTAssert(url.path.description == "/")
@@ -36,7 +36,7 @@ class URLTests: XCTestCase {
     }
 
     func testURLParse2() {
-        let url = URL(string: "https://user:password@example.com/path/here?parameter=value%20here#fragment")
+        let url = atfoundation.URL(string: "https://user:password@example.com/path/here?parameter=value%20here#fragment")
         XCTAssert(url.schema == "https")
         XCTAssert(url.domain == "example.com", url.domain)
         XCTAssert(url.fragment == "fragment", "\(url.fragment)")
