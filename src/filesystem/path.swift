@@ -164,9 +164,12 @@ public struct Path {
     ///            that's not available
     public static func homeDirectory() -> Path? {
         let home = getenv("HOME")
-        if let s = String(validatingUTF8: home) {
-            return Path(s)
+        if let h = home {
+            if let s = String(validatingUTF8: h) {
+                return Path(s)
+            }
         }
+
         return nil
     }
 
