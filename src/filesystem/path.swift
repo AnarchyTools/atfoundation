@@ -182,6 +182,18 @@ public struct Path {
     }
 }
 
+public func ==(lhs: Path, rhs: Path) -> Bool {
+    if lhs.components.count != rhs.components.count || lhs.isAbsolute != rhs.isAbsolute {
+        return false
+    }
+    for i in 0..<lhs.components.count {
+        if lhs.components[i] != rhs.components[i] {
+            return false
+        }
+    }
+    return true
+}
+
 public func +(lhs: Path, rhs: String) -> Path {
     return lhs.join(Path(rhs))
 }

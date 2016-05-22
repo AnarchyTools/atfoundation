@@ -89,7 +89,7 @@ public class File {
         self.closeWhenDeallocated = false
         self.fp = fopen(path.description, openMode)
         if self.fp == nil {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, path)
         }
         self.closeWhenDeallocated = true
     }
@@ -111,7 +111,7 @@ public class File {
 
         self.fp = fdopen(fd, openMode)
         if self.fp == nil {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno, fd)
         }
     }
 
@@ -178,7 +178,7 @@ public class File {
         let read = fread(UnsafeMutablePointer(buffer), 1, size, self.fp)
         if read == 0 {
             if feof(self.fp) == 0 {
-                throw errnoToError(errno: errno)
+                throw SysError(errno: errno)
             } else {
                 throw SysError.EndOfFile
             }
@@ -221,7 +221,7 @@ public class File {
         let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
         if read == nil {
             if feof(self.fp) == 0 {
-                throw errnoToError(errno: errno)
+                throw SysError(errno: errno)
             } else {
                 throw SysError.EndOfFile
             }
@@ -236,7 +236,7 @@ public class File {
         let bytes = string.utf8.count
         let written = fwrite(string, 1, bytes, self.fp)
         if bytes != written {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno)
         }
     }
 
@@ -246,7 +246,7 @@ public class File {
     public func writeLine(string: String) throws {
         let bytes = fputs(string + "\n", self.fp)
         if bytes < 0 {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno)
         }
     }
 
@@ -257,7 +257,7 @@ public class File {
         let bytes = data.count
         let written = fwrite(data, 1, bytes, self.fp)
         if bytes != written {
-            throw errnoToError(errno: errno)
+            throw SysError(errno: errno)
         }
     }
 
@@ -272,16 +272,18 @@ public class File {
     ///                   is bigger than the current size remaining
     ///                   size is prefilled with zeroes.
     public func truncate(size: Int) throws {
-        var e: SysError? = nil
-        repeat {
+        var e: SysError
+        while true {
             fflush(self.fp)
             if ftruncate(fileno(self.fp), off_t(size)) != 0 {
-                e = errnoToError(errno: errno)
-                if e! != .Interrupted {
-                    throw e!
+                e = SysError(errno: errno)
+                if case .Interrupted = e {
+                    continue
                 }
+                throw e
             }
-        } while e == .Interrupted
+            break
+        }
         fflush(self.fp)
     }
 

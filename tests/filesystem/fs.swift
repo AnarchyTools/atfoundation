@@ -203,7 +203,15 @@ class FSTests: XCTestCase {
 
     func testLoadNonexistentFile() {
         let p = Path("doesnotexist.file")
-        let _ = try? File(path: p, mode: .ReadOnly)
+        do {
+            let _ = try File(path: p, mode: .ReadOnly)
+            XCTFail("Should have thrown an error")
+        } catch SysError.NoSuchEntity(let path) {
+            XCTAssertNotNil(path)
+            XCTAssert(p == path!)
+        } catch {
+            XCTFail("Wrong error thrown: \(error)")
+        }
     }
 
 }
