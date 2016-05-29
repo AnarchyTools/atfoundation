@@ -54,7 +54,7 @@ class URLTests: XCTestCase {
 }
 
 extension URLTests {
-    static var allTests : [(String, URLTests -> () throws -> Void)] {
+    static var allTests : [(String, (URLTests) -> () throws -> Void)] {
         return [
             ("testURLEncode", testURLEncode),
             ("testURLDecode", testURLDecode),
