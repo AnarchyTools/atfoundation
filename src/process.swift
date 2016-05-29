@@ -19,15 +19,47 @@
 #endif
 
 public class SubProcess {
+	public static var defaultEnvironmentVariables = [
+		// minimum default
+		"HOME", "PATH", "MANPATH", "TMPDIR",
+
+		// shell editors
+		"PAGER", "EDITOR", "VISUAL", "DISPLAY",
+
+		// proxies
+		"ftp_proxy", "http_proxy",
+
+		// terminal type
+		"TERM",
+
+		// locale config
+		"TZ", "LANG", "LANGUAGE",
+		"LC_CTYPE", "LC_NUMERIC", "LC_TIME", "LC_COLLATE", "LC_MONETARY", "LC_MESSAGES",
+		"LC_PAPER", "LC_NAME", "LC_ADDRESS", "LC_TELEPHONE", "LC_MEASUREMENT", "LC_IDENTIFICATION", "LC_ALL",
+
+		// compiler stuff
+		"CC", "CXX", "CPP", "LD_LIBRARY_PATH", "DYLD_LIBRARY_PATH", "LIBRARY_PATH",
+
+		// ssh session stuff
+		"SSH_CLIENT", "SSH_TTY", "SSH_CONNECTION"
+	]
 	public var executable: Path
 	public var arguments: [String]
-	public var environment: [String]
+	public var environment = [String:String]()
 	public var workingDirectory = Path(".")
 
-	public init(executable: Path, arguments: String...) {
+	// public init(shell: String, environment: [String:String]? = nil) {
+
+	// }
+
+	public init(executable: Path, environment: [String:String]? = nil, arguments: String...) {
 		self.executable = executable
 		self.arguments = arguments
-		self.environment = Process.environment
+		if let e = environment {
+			self.environment = e
+		} else {
+			self.environment = SubProcess.defaultEnvironment
+		}
 	}
 
 	public func run(stdin: InputStream? = nil) throws -> Int32 {
@@ -50,16 +82,27 @@ public class SubProcess {
 	}
 
 
-	private func spawn(actions: posix_spawn_file_actions_t, attr: posix_spawnattr_t) -> pid_t {
-		var pid = pid_t()
-		var argv = self.arguments
-		argv.insert(self.executable.description, at: 0)
+	// private func spawn(actions: posix_spawn_file_actions_t, attr: posix_spawnattr_t) -> pid_t {
+	// 	var pid = pid_t()
+	// 	var argv = self.arguments
+	// 	argv.insert(self.executable.description, at: 0)
 
-		// let result = posix_spawnp(&pid, self.executable.description, &actions, &attr, argv, self.environment);
-		// if result != 0 {
-		// 	throw SysError(result)
-		// }
-		return pid
+	// 	// let result = posix_spawnp(&pid, self.executable.description, &actions, &attr, argv, self.environment);
+	// 	// if result != 0 {
+	// 	// 	throw SysError(result)
+	// 	// }
+	// 	return pid
+	// }
+
+	public static var defaultEnvironment: [String:String] {
+		var environment = [String:String]()
+		for variable in SubProcess.defaultEnvironmentVariables {
+			let value = getenv(variable)
+			if value != nil {
+				environment[variable] = String(validatingUTF8: value!)
+			}
+		}
+		return environment
 	}
 
 	public class func shellEscape(argument: String) -> String {
