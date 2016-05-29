@@ -210,7 +210,7 @@ class PathTests: XCTestCase {
 }
 
 extension PathTests {
-    static var allTests : [(String, PathTests -> () throws -> Void)] {
+    static var allTests : [(String, (PathTests) -> () throws -> Void)] {
         return [
             ("testInitNoDelimiter", testInitNoDelimiter),
             ("testInitWithDelimiter", testInitWithDelimiter),
