@@ -26,5 +26,7 @@ XCTMain([
     testCase(DateTests.allTests),
     testCase(LoggerTests.allTests),
     testCase(FSTests.allTests),
-    testCase(URLTests.allTests)
+    testCase(URLTests.allTests),
+    testCase(MemoryStreamTests.allTests),
+    testCase(ThreadTests.allTests)
 ])
