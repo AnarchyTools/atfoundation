@@ -82,7 +82,7 @@ final public class Thread {
     public func wait() -> Any? {
         if self.detached {
             var returnValue = UnsafeMutablePointer<Void>(nil)
-            pthread_join(self.threadID!, &returnValue)
+            pthread_join(self.threadID, &returnValue)
             if let returnValue = returnValue {
                 let result = unsafeBitCast(returnValue, to: Any.self)
                 return result
