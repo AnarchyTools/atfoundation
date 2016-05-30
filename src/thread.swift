@@ -22,24 +22,27 @@
 final public class Thread {
     private static let mainThreadID = pthread_self()
 
-    private let threadMain: (Void -> Any?)
+    private let threadMain: ((Void) -> Any?)
     private let detached: Bool
-    private var threadID: pthread_t? = nil
+    private var threadID = pthread_t(nil)
 
     typealias ThreadMainFunction = @convention(c) (UnsafeMutablePointer<Void>!) -> UnsafeMutablePointer<Void>!
 
     /// Initialize and run a thread
     ///
     /// - parameter block: block to run in a new thread, the return value of the block can be aquired with `wait()`
-    public init(_ block: (Void -> Any?)) {
+    public init(_ block: ((Void) -> Any?)) {
         self.threadMain = block
         self.detached = false
 
         var attr = pthread_attr_t()
         pthread_attr_init(&attr)
         defer { pthread_attr_destroy(&attr) }
+#if os(Linux)
+        pthread_attr_setdetachstate(&attr, Int32(detached ? PTHREAD_CREATE_DETACHED : PTHREAD_CREATE_JOINABLE))
+#else
         pthread_attr_setdetachstate(&attr, detached ? PTHREAD_CREATE_DETACHED : PTHREAD_CREATE_JOINABLE)
-
+#endif
         pthread_create(&self.threadID, &attr, { arg in
             let thread = unsafeBitCast(arg, to: Thread.self)
             let result = thread.threadMain()
@@ -50,7 +53,7 @@ final public class Thread {
     /// Initialize and run a detached thread that does not return a value
     ///
     /// - parameter block: block to detach to new thread
-    public init(_ block: (Void -> Void)) {
+    public init(_ block: ((Void) -> Void)) {
         self.threadMain = {
             block()
             return nil
@@ -60,7 +63,11 @@ final public class Thread {
         var attr = pthread_attr_t()
         pthread_attr_init(&attr)
         defer { pthread_attr_destroy(&attr) }
+#if os(Linux)
+        pthread_attr_setdetachstate(&attr, Int32(detached ? PTHREAD_CREATE_DETACHED : PTHREAD_CREATE_JOINABLE))
+#else
         pthread_attr_setdetachstate(&attr, detached ? PTHREAD_CREATE_DETACHED : PTHREAD_CREATE_JOINABLE)
+#endif
 
         pthread_create(&self.threadID, &attr, { arg in
             let thread = unsafeBitCast(arg, to: Thread.self)
@@ -141,7 +148,11 @@ final public class Mutex {
         pthread_mutexattr_init(&attr)
         defer { pthread_mutexattr_destroy(&attr) }
 
+#if os(Linux)
+        pthread_mutexattr_settype(&attr, Int32(recursive ? PTHREAD_MUTEX_RECURSIVE : PTHREAD_MUTEX_ERRORCHECK))
+#else
         pthread_mutexattr_settype(&attr, recursive ? PTHREAD_MUTEX_RECURSIVE : PTHREAD_MUTEX_ERRORCHECK)
+#endif
         pthread_mutex_init(&self.mutexID, &attr)
     }
 
@@ -192,7 +203,7 @@ final public class Mutex {
     /// Run a block with the lock held, this is the prefered method to use
     ///
     /// - parameter cb: block to execute
-    public func whileLocking(_ cb: Void -> Void) throws {
+    public func whileLocking(_ cb: (Void) -> Void) throws {
         try self.lock()
         cb()
         try self.unlock()
@@ -264,7 +275,7 @@ final public class Semaphore {
     /// resources afterwards, this is the prefered function to call.
     ///
     /// - parameter cb: block to execute
-    public func whileLocking(cb: Void -> Void) throws {
+    public func whileLocking(cb: (Void) -> Void) throws {
         try self.wait()
         cb()
         self.post()
