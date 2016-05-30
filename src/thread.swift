@@ -24,7 +24,7 @@ final public class Thread {
 
     private let threadMain: ((Void) -> Any?)
     private let detached: Bool
-    private var threadID = pthread_t(nil)
+    private var threadID = pthread_t(bitPattern: 0)
 
     typealias ThreadMainFunction = @convention(c) (UnsafeMutablePointer<Void>!) -> UnsafeMutablePointer<Void>!
 
@@ -46,8 +46,8 @@ final public class Thread {
         pthread_create(&self.threadID, &attr, { arg in
             let thread = unsafeBitCast(arg, to: Thread.self)
             let result = thread.threadMain()
-            return unsafeBitCast(result, to: UnsafeMutablePointer<Void>!.self)
-        }, nil)
+            return unsafeBitCast(result, to: UnsafeMutablePointer<Void>.self)
+        }, unsafeBitCast(self, to: UnsafeMutablePointer<Void>.self))
     }
 
     /// Initialize and run a detached thread that does not return a value
@@ -83,8 +83,10 @@ final public class Thread {
         if self.detached {
             var returnValue = UnsafeMutablePointer<Void>(nil)
             pthread_join(self.threadID!, &returnValue)
-            let result = unsafeBitCast(returnValue, to: Any.self)
-            return result
+            if let returnValue = returnValue {
+                let result = unsafeBitCast(returnValue, to: Any.self)
+                return result
+            }
         }
         return nil
     }
