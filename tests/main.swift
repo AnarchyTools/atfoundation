@@ -28,5 +28,6 @@ XCTMain([
     testCase(FSTests.allTests),
     testCase(URLTests.allTests),
     testCase(MemoryStreamTests.allTests),
-    testCase(ThreadTests.allTests)
+    testCase(ThreadTests.allTests),
+    testCase(PipeTests.allTests)
 ])
