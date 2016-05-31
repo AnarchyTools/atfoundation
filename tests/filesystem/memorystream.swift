@@ -17,7 +17,7 @@ import XCTest
 @testable import atfoundation
 
 class MemoryStreamTests: XCTestCase {
-	
+
 	func testFromData() {
 		let stream = MemoryStream(data: [0, 1, 2, 3, 4, 5])
 		XCTAssertEqual(stream.size, 6)
@@ -40,7 +40,7 @@ class MemoryStreamTests: XCTestCase {
 			XCTAssertEqual(stream.buffer[2], 0x6c)
 			XCTAssertEqual(stream.buffer[3], 0x6c)
 			XCTAssertEqual(stream.buffer[4], 0x6f)
-		}		
+		}
 	}
 
 	func testReadData() {
@@ -139,7 +139,7 @@ class MemoryStreamTests: XCTestCase {
 			XCTAssertEqual(stream.position, 30)
 		} catch {
 			XCTFail("Error thrown: \(error)")
-		}			
+		}
 	}
 
 	func testWriteStringAppending() {
@@ -153,7 +153,7 @@ class MemoryStreamTests: XCTestCase {
 			XCTAssertEqual(stream.position, 30)
 		} catch {
 			XCTFail("Error thrown: \(error)")
-		}			
+		}
 	}
 
 	func testWriteLineAppending() {
@@ -167,7 +167,7 @@ class MemoryStreamTests: XCTestCase {
 			XCTAssertEqual(stream.position, 31)
 		} catch {
 			XCTFail("Error thrown: \(error)")
-		}			
+		}
 	}
 
 	func testTruncate() {
@@ -175,14 +175,14 @@ class MemoryStreamTests: XCTestCase {
 		do {
 			try stream.truncate(size: 5)
 			XCTAssertEqual(stream.size, 5)
-			
+
 			stream.position = 0
 			let result: String? = try stream.readAll()
 			XCTAssertNotNil(result)
 			XCTAssertEqual(result!, "Hello")
 		} catch {
 			XCTFail("Error thrown: \(error)")
-		}			
+		}
 	}
 
 	func testExtend() {
@@ -190,7 +190,7 @@ class MemoryStreamTests: XCTestCase {
 		do {
 			try stream.truncate(size: 50)
 			XCTAssertEqual(stream.size, 50)
-			
+
 			stream.position = 0
 			let result: [UInt8] = try stream.readAll()
 			XCTAssertNotNil(result)
