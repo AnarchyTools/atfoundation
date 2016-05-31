@@ -50,16 +50,25 @@ public extension InputStream {
     /// - Returns: UInt8 array with bytes
     public func read(size: Int = 4096) throws -> [UInt8] {
         var buffer = [UInt8](repeating: 0, count: size)
-        let read = fread(UnsafeMutablePointer(buffer), 1, size, self.fp)
-        if read == 0 {
-            if feof(self.fp) == 0 {
-                throw SysError(errno: errno)
-            } else {
-                throw SysError.EndOfFile
+        while true {
+            let read = fread(UnsafeMutablePointer(buffer), 1, size, self.fp)
+            if read == 0 {
+                if feof(self.fp) == 0 {
+                    let err = SysError(errno: errno)
+                    if case .TryAgain = err {
+                        continue
+                    }
+                    if case .Interrupted = err {
+                        continue
+                    }
+                } else {
+                    throw SysError.EndOfFile
+                }
             }
-        }
-        if read < size {
-            buffer = Array(buffer[0..<read])
+            if read < size {
+                buffer = Array(buffer[0..<read])
+            }
+            break;
         }
         return buffer
     }
@@ -93,13 +102,22 @@ public extension InputStream {
     /// - Returns: String read from file (newline included) if valid UTF-8 or nil
     public func readLine() throws -> String? {
         let buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
-        let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
-        if read == nil {
-            if feof(self.fp) == 0 {
-                throw SysError(errno: errno)
-            } else {
-                throw SysError.EndOfFile
+        while true {
+            let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
+            if read == nil {
+                if feof(self.fp) == 0 {
+                    let err = SysError(errno: errno)
+                    if case .TryAgain = err {
+                        continue
+                    }
+                    if case .Interrupted = err {
+                        continue
+                    }
+                } else {
+                    throw SysError.EndOfFile
+                }
             }
+            break;
         }
         return String(validatingUTF8: UnsafePointer<CChar>(buffer))
     }
