@@ -1,3 +1,5 @@
 .atllbuild
 bin
 *.sublime-workspace
+atfoundation.xcodeproj
+Info.plist
