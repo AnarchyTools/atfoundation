@@ -297,7 +297,7 @@ public class FS {
         if let dir = String(validatingUTF8: buffer) {
             return Path(dir)
         } else {
-            throw SysError.InvalidArgument
+            throw SysError.UnknownError(file: #file, line: #line, function: #function)
         }
     }
 
@@ -453,7 +453,7 @@ public class FS {
         if let dirname = String(validatingUTF8: UnsafeMutablePointer(buf)) {
             return Path(dirname)
         } else {
-            throw SysError.UnknownError
+            throw SysError.UnknownError(file: #file, line: #line, function: #function)
         }
 
     }
@@ -466,7 +466,7 @@ public class FS {
         let iterator = try FS.iterateItems(path: from, recursive: true, includeHidden: true)
         for file in iterator {
             guard let relpath = file.path.relativeTo(path: from) else {
-                throw SysError.InvalidArgument
+                throw SysError.InvalidArgument(file: #file, line: #line, function: #function)
             }
             let destinationPath = to + relpath
             switch file.type {

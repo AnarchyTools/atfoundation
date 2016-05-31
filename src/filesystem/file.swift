@@ -153,7 +153,7 @@ public class WOFile: SeekableStream, OutputStream {
         if self.closeWhenDeallocated {
             fclose(self.fp)
         }
-    }   
+    }
 }
 
 public class RWFile: SeekableStream, InputStream, OutputStream {
@@ -320,7 +320,7 @@ public class File: SeekableStream, InputStream, OutputStream {
             self.path = Path(filename)
         } else {
             close(fd)
-            throw SysError.UnknownError
+            throw SysError.UnknownError(file: #file, line: #line, function: #function)
         }
     }
 
