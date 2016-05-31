@@ -38,7 +38,7 @@ public extension InputStream {
     ///
     /// - Parameter size: maximum size to read, may return less bytes on EOF
     /// - Returns: String read from file if valid UTF-8 or nil
-    public func read(size: Int) throws -> String? {
+    public func read(size: Int = 4096) throws -> String? {
         var buffer:[UInt8] = try self.read(size: size)
         buffer.append(0)
         return String(validatingUTF8: UnsafePointer<CChar>(buffer))
@@ -48,7 +48,7 @@ public extension InputStream {
     ///
     /// - Parameter size: maximum size to read, may return less bytes on EOF
     /// - Returns: UInt8 array with bytes
-    public func read(size: Int) throws -> [UInt8] {
+    public func read(size: Int = 4096) throws -> [UInt8] {
         var buffer = [UInt8](repeating: 0, count: size)
         let read = fread(UnsafeMutablePointer(buffer), 1, size, self.fp)
         if read == 0 {
