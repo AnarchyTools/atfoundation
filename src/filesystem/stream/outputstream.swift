@@ -31,9 +31,18 @@ public extension OutputStream {
     /// - Parameter string: the string to write
     public func write(string: String) throws {
         let bytes = string.utf8.count
-        let written = fwrite(string, 1, bytes, self.fp)
-        if bytes != written {
-            throw SysError(errno: errno)
+        while true {
+            let written = fwrite(string, 1, bytes, self.fp)
+            if bytes != written {
+                let err = SysError(errno: errno)
+                if case .TryAgain = err {
+                    continue
+                }
+                if case .Interrupted = err{
+                    continue
+                }
+            }
+            break
         }
     }
 
@@ -41,10 +50,20 @@ public extension OutputStream {
     ///
     /// - Parameter string: the string to write
     public func writeLine(string: String) throws {
-        let bytes = fputs(string + "\n", self.fp)
-        if bytes < 0 {
-            throw SysError(errno: errno)
+        while true {
+            let bytes = fputs(string + "\n", self.fp)
+            if bytes < 0 {
+                let err = SysError(errno: errno)
+                if case .TryAgain = err{
+                    continue
+                }
+                if case .Interrupted = err{
+                    continue
+                }
+            }
+            break
         }
+        self.flush()
     }
 
     /// Write data to the file
@@ -52,9 +71,20 @@ public extension OutputStream {
     /// - Parameter data: UInt8 array with bytes to write
     public func write(data: [UInt8]) throws {
         let bytes = data.count
-        let written = fwrite(data, 1, bytes, self.fp)
-        if bytes != written {
-            throw SysError(errno: errno)
+        var written = 0
+        while true {
+            written += fwrite([UInt8](data[written..<bytes]), 1, bytes - written, self.fp)
+            if bytes != written {
+                let err = SysError(errno: errno)
+                if case .TryAgain = err {
+                    continue
+                }
+                if case .Interrupted = err {
+                    continue
+                }
+                throw err
+            }
+            break
         }
     }
 
