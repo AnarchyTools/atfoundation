@@ -37,6 +37,7 @@ extension ThreadTests {
     static var allTests : [(String, (ThreadTests) -> () throws -> Void)] {
         return [
             ("testThreadIDOfMainThread", testThreadIDOfMainThread),
+            ("testThreadIDOfSubThread", testThreadIDOfSubThread)
         ]
     }
 }
