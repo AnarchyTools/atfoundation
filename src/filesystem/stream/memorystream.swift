@@ -21,7 +21,7 @@
 public final class MemoryStream: InputStream, OutputStream, SeekableStream {
     internal var buffer = [UInt8]()
 
-    public let fp: UnsafeMutablePointer<FILE>? = nil
+    public var fp: UnsafeMutablePointer<FILE>? = nil
     public let fd: Int32 = -1
 
     public var position: Int = 0

@@ -20,7 +20,7 @@
 
 public class ROFile: SeekableStream, InputStream {
     /// FILE pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// file path (may be nil if created from file descriptor or file pointer)
     private(set) public var path: Path?
@@ -89,7 +89,7 @@ public class ROFile: SeekableStream, InputStream {
 
 public class WOFile: SeekableStream, OutputStream {
     /// FILE pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// file path (may be nil if created from file descriptor or file pointer)
     private(set) public var path: Path?
@@ -158,7 +158,7 @@ public class WOFile: SeekableStream, OutputStream {
 
 public class RWFile: SeekableStream, InputStream, OutputStream {
     /// FILE pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// file path (may be nil if created from file descriptor or file pointer)
     private(set) public var path: Path?
@@ -228,7 +228,7 @@ public class RWFile: SeekableStream, InputStream, OutputStream {
 /// Posix file abstraction class
 public class File: SeekableStream, InputStream, OutputStream {
     /// FILE pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// file path (may be nil if created from file descriptor or file pointer)
     private(set) public var path: Path?

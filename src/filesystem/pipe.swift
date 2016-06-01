@@ -27,7 +27,7 @@ public func BidirectionalPipe() throws -> (RWPipe, RWPipe) {
 public class WritePipe: OutputStream {
 
     /// File pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// Initialize with a file descriptor
     ///
@@ -81,8 +81,11 @@ public extension ReadEvents {
     public func onReadLine(cb: (String -> Void)) {
         self.readThread = Thread() {
             while true {
+                guard let fp = self.fp else {
+                    return
+                }
                 var fds = pollfd()
-                fds.fd = fileno(self.fp)
+                fds.fd = fileno(fp)
                 fds.events = Int16(POLLIN)
                 if poll(&fds, 1, -1) < 0 {
                     let err = SysError(errno: errno)
@@ -108,7 +111,7 @@ public class ReadPipe: InputStream {
     public var readThread: Thread? = nil
 
     /// File pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// Initialize with a file descriptor
     ///
@@ -135,7 +138,7 @@ public class RWPipe: InputStream, OutputStream {
     public var readThread: Thread? = nil
 
     /// File pointer
-    public let fp: UnsafeMutablePointer<FILE>?
+    public var fp: UnsafeMutablePointer<FILE>?
 
     /// Initialize with a file descriptor
     ///

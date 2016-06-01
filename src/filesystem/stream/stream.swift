@@ -18,8 +18,8 @@
     import Darwin
 #endif
 
-public protocol Stream {
-    var fp: UnsafeMutablePointer<FILE>? { get }
+public protocol Stream: class {
+    var fp: UnsafeMutablePointer<FILE>? { get set }
     var fd: Int32 { get }
 }
 
@@ -30,4 +30,10 @@ public extension Stream {
         return fileno(self.fp)
     }
 
+    public func closeStream() {
+        if let fp = self.fp {
+            fclose(fp)
+            self.fp = nil
+        }
+    }
 }
