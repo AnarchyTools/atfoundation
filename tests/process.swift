@@ -119,7 +119,11 @@ class SubProcessTests: XCTestCase {
                 XCTFail("stderr is not a readable pipe")
                 e.fulfill()
             }
+#if os(Linux)
+            XCTAssertEqual(process.waitForExit(), 2)
+#else
             XCTAssertEqual(process.waitForExit(), 1)
+#endif
         } catch {
             XCTFail("Error thrown: \(error)")
             e.fulfill()
