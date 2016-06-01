@@ -60,12 +60,15 @@ public extension ReadEvents {
             while true {
                 var fds = pollfd()
                 fds.fd = fileno(self.fp)
-                fds.events = Int16(POLLIN)
+                fds.events = Int16(POLLIN) | Int16(POLLERR) | Int16(POLLHUP)
                 if poll(&fds, 1, -1) < 0 {
                     let err = SysError(errno: errno)
                     if case .TryAgain = err {
                         continue
                     }
+                    return
+                }
+                if fds.revents & Int16(POLLIN) == 0 {
                     return
                 }
                 do {
@@ -86,12 +89,15 @@ public extension ReadEvents {
                 }
                 var fds = pollfd()
                 fds.fd = fileno(fp)
-                fds.events = Int16(POLLIN)
+                fds.events = Int16(POLLIN) | Int16(POLLERR) | Int16(POLLHUP)
                 if poll(&fds, 1, -1) < 0 {
                     let err = SysError(errno: errno)
                     if case .TryAgain = err {
                         continue
                     }
+                    return
+                }
+                if fds.revents & Int16(POLLIN) == 0 {
                     return
                 }
                 do {
