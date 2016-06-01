@@ -31,7 +31,7 @@ class PipeTests: XCTestCase {
             }
             let result: String? = try p.read.readLine()
             t.wait()
-            XCTAssertEqual(result, "Test\n")
+            XCTAssertEqual(result, "Test")
         } catch {
             XCTFail("Error thrown: \(error)")
         }
@@ -44,7 +44,7 @@ class PipeTests: XCTestCase {
             let p = try UnidirectionalPipe()
             XCTAssertNotNil(p)
             p.read.onReadLine { line in
-                XCTAssertEqual(line, "Test\n")
+                XCTAssertEqual(line, "Test")
                 e.fulfill()
             }
             try p.write.writeLine(string: "Test")
@@ -62,11 +62,11 @@ class PipeTests: XCTestCase {
             let p = try BidirectionalPipe()
             XCTAssertNotNil(p)
             p.0.onReadLine { line in
-                XCTAssertEqual(line, "Test to 0\n")
+                XCTAssertEqual(line, "Test to 0")
                 e0.fulfill()
             }
             p.1.onReadLine { line in
-                XCTAssertEqual(line, "Test to 1\n")
+                XCTAssertEqual(line, "Test to 1")
                 e1.fulfill()
             }
             try p.0.writeLine(string: "Test to 1")

@@ -99,9 +99,9 @@ public extension InputStream {
 
     /// Read a single line from a file, max 64 KiB
     ///
-    /// - Returns: String read from file (newline included) if valid UTF-8 or nil
+    /// - Returns: String read from file (newline excluded) if valid UTF-8 or nil
     public func readLine() throws -> String? {
-        let buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
+        var buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
         while true {
             let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
             if read == nil {
@@ -118,6 +118,10 @@ public extension InputStream {
                 }
             }
             break;
+        }
+        let len = strlen(UnsafePointer<CChar>(buffer))
+        if buffer[Int(len) - 1] == 0x0a {
+            buffer[Int(len) - 1] = 0
         }
         return String(validatingUTF8: UnsafePointer<CChar>(buffer))
     }
