@@ -48,6 +48,7 @@ class PipeTests: XCTestCase {
                 e.fulfill()
             }
             try p.write.writeLine(string: "Test")
+            p.write.closeStream()
             waitForExpectations(withTimeout: 5, handler: nil)
         } catch {
             XCTFail("Error thrown: \(error)")
@@ -63,10 +64,12 @@ class PipeTests: XCTestCase {
             XCTAssertNotNil(p)
             p.0.onReadLine { line in
                 XCTAssertEqual(line, "Test to 0")
+                p.0.closeStream()
                 e0.fulfill()
             }
             p.1.onReadLine { line in
                 XCTAssertEqual(line, "Test to 1")
+                p.1.closeStream()
                 e1.fulfill()
             }
             try p.0.writeLine(string: "Test to 1")
