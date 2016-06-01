@@ -8,6 +8,8 @@ public func UnidirectionalPipe() throws -> (write: WritePipe, read: ReadPipe) {
     if result != 0 {
         throw SysError(errno: errno)
     }
+    let _ = fcntl(fds[0], F_SETFD, FD_CLOEXEC)
+    let _ = fcntl(fds[1], F_SETFD, FD_CLOEXEC)
     return (write: try WritePipe(fd: fds[1]), read: try ReadPipe(fd: fds[0]))
 }
 
@@ -17,6 +19,8 @@ public func UnidirectionalPipe() throws -> (write: WritePipe, read: ReadPipe) {
 public func BidirectionalPipe() throws -> (RWPipe, RWPipe) {
     var fds = [Int32](repeating: 0, count: 2)
     let result = socketpair(PF_LOCAL, SOCK_STREAM, 0, &fds)
+    let _ = fcntl(fds[0], F_SETFD, FD_CLOEXEC)
+    let _ = fcntl(fds[1], F_SETFD, FD_CLOEXEC)
     if result != 0 {
         throw SysError(errno: errno)
     }
