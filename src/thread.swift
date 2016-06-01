@@ -71,7 +71,7 @@ final public class Thread {
 
         pthread_create(&self.threadID, &attr, { arg in
             let thread = unsafeBitCast(arg, to: Thread.self)
-            thread.threadMain()
+            let _ = thread.threadMain()
             return nil
         }, unsafeBitCast(self, to: UnsafeMutablePointer<Void>.self))
     }

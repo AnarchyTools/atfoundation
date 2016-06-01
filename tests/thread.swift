@@ -27,7 +27,7 @@ class ThreadTests: XCTestCase {
             XCTAssertNotEqual(Thread.threadID, 0)
             e.fulfill()
         }
-        t.wait()
+        let _ = t.wait()
         waitForExpectations(withTimeout: 5, handler: nil)
     }
 

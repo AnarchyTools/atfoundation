@@ -50,12 +50,12 @@ public class WritePipe: OutputStream {
 public protocol ReadEvents: class, InputStream {
     var readThread: Thread? { get set }
 
-    func onReadData(cb: ([UInt8] -> Void))
-    func onReadLine(cb: (String -> Void))
+    func onReadData(cb: ([UInt8]) -> Void)
+    func onReadLine(cb: (String) -> Void)
 }
 
 public extension ReadEvents {
-    public func onReadData(cb: ([UInt8] -> Void)) {
+    public func onReadData(cb: ([UInt8]) -> Void) {
         self.readThread = Thread() {
             while true {
                 var fds = pollfd()
@@ -78,7 +78,7 @@ public extension ReadEvents {
         }
     }
 
-    public func onReadLine(cb: (String -> Void)) {
+    public func onReadLine(cb: (String) -> Void) {
         self.readThread = Thread() {
             while true {
                 guard let fp = self.fp else {

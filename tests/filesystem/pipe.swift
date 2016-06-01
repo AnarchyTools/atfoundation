@@ -30,7 +30,7 @@ class PipeTests: XCTestCase {
                 }
             }
             let result: String? = try p.read.readLine()
-            t.wait()
+            let _ = t.wait()
             XCTAssertEqual(result, "Test")
         } catch {
             XCTFail("Error thrown: \(error)")
