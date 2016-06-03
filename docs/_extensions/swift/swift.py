@@ -108,7 +108,7 @@ class SwiftClass(ObjectDescription):
 
     def before_content(self):
         if self.names:
-            self.env.temp_data['swift:class'] = self.names[0][0]
+            self.env.temp_data['swift:class'] = self.names[0][1]
             self.env.temp_data['swift:class_type'] = self.objtype
             self.clsname_set = True
 
@@ -185,7 +185,7 @@ class SwiftClassmember(ObjectDescription):
     def handle_signature(self, sig, signode):
         container_class_name = self.env.temp_data.get('swift:class')
         container_class_type = self.env.temp_data.get('swift:class_type')
-        static = self.objtype == 'static_method'
+        static = (self.objtype == 'static_method')
 
         # split into method name and rest
         first_anglebracket = sig.find('<')
