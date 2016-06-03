@@ -6,5 +6,15 @@
 			"folder_exclude_patterns": [ ".atllbuild", "bin", "user" ],
 			"file_exclude_patterns": [ ".gitignore", ".gitlab-ci.yml", "Dockerfile", "LICENSE" ]
 		},
-	]
+	],
+    "build_systems":
+    [
+        {
+            "name": "Build docs",
+            "cmd": ["make", "clean", "html" ],
+            "working_dir": "${project_path}/docs",
+            "file_regex": "^(.*):([0-9]*): WARNING:.*",
+            "selector": "text.restructuredtext"
+        }
+    ]
 }
