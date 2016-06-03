@@ -269,10 +269,13 @@ class SwiftClassmember(ObjectDescription):
 
         if return_type:
             signode += addnodes.desc_returns(return_type, return_type)
-            signature += "->" + return_type
+            signature += "-" + return_type
+
+        for char in '<>()[]:, ':
+            signature = signature.replace(char, "-")
 
         if container_class_name:
-            return title, (container_class_name + '.' + signature)
+            return (container_class_name + '.' + title), (container_class_name + '.' + signature)
         return title, signature
 
 
@@ -414,44 +417,14 @@ class SwiftDomain(Domain):
             if fn == docname:
                 del self.data['objects'][fullname]
 
-    def find_obj(self, env, classname, name, searchorder=0):
-        """
-        Find a Swift object for "name", perhaps using the given classname.
-        """
-        # skip parens
-        if name[-2:] == '()':
-            name = name[:-2]
-
-        if not name:
-            return None, None
-
-        objects = self.data['objects']
-
-        newname = None
-        if searchorder == 1:
-            if classname and classname + '.' + name in objects:
-                newname = classname + '.' + name
-            elif name in objects:
-                newname = name
-        else:
-            if name in objects:
-                newname = name
-            elif classname and classname + '.' + name in objects:
-                newname = classname + '.' + name
-        if newname is None:
-            return None, None
-        return newname, objects[newname]
-
     def resolve_xref(self, env, fromdocname, builder,
                      typ, target, node, contnode):
-            clsname = node.get('swift:class')
-            searchorder = node.hasattr('refspecific') and 1 or 0
-            name, obj = self.find_obj(env, clsname, target, searchorder)
-            if not obj:
-                return None
-            else:
-                return make_refnode(builder, fromdocname, obj[0], name,
-                                    contnode, name)
+        for file, entries in env.indexentries.items():
+            for entry in entries:
+                if entry[1] == target:
+                    node = make_refnode(builder, fromdocname, file, entry[2], contnode, target)
+                    return node
+        return None
 
     def get_objects(self):
         for refname, (docname, type) in _iteritems(self.data['objects']):
