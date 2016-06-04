@@ -430,6 +430,6 @@ class SwiftDomain(Domain):
         for refname, (docname, type) in _iteritems(self.data['objects']):
             yield (refname, refname, type, docname, refname, 1)
 
-
 def setup(app):
     app.add_domain(SwiftDomain)
+    app.add_config_value('swift_search_path', '../src', 'env')
