@@ -1,0 +1,4 @@
+File access
++++++++++++
+
+.. autoswiftclass:: File

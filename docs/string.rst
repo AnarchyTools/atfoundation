@@ -14,3 +14,5 @@ Swift strings are very powerful with their complete unicode support, but as they
     string/replace.rst
     string/whitespace.rst
     string/array.rst
+
+

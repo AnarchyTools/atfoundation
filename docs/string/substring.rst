@@ -13,3 +13,5 @@ The sub-string functions work like you will expect from other languages but use 
     .. swift:method:: subString(toIndex: String.Index) -> String
 
     .. swift:method:: subString(fromIndex: String.Index) -> String
+
+
