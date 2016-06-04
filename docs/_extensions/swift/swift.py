@@ -9,6 +9,7 @@
     :license: BSD, see LICENSE for details.
 """
 
+import re
 
 from docutils import nodes
 from docutils.parsers.rst import directives
@@ -35,10 +36,10 @@ class SwiftObjectDescription(ObjectDescription):
 
     def add_target_and_index(self, name_cls_add, sig, signode):
         fullname, signature, add_to_index = name_cls_add
-        if not add_to_index:
+        if 'noindex' in self.options or not add_to_index:
             return
 
-        for char in '<>()[]:, ':
+        for char in '<>()[]:, ?!':
             signature = signature.replace(char, "-")
 
         # note target
@@ -62,7 +63,7 @@ class SwiftClass(SwiftObjectDescription):
         container_class_name = self.env.temp_data.get('swift:class')
 
         # split on : -> first part is class name, second part is superclass list
-        parts = [x.strip() for x in sig.split(':')]
+        parts = [x.strip() for x in sig.split(':', maxsplit=1)]
 
         # if the class name contains a < then there is a generic type attachment
         if '<' in parts[0]:
@@ -71,6 +72,9 @@ class SwiftClass(SwiftObjectDescription):
         else:
             class_name = parts[0]
             generic_type = None
+
+        if class_name.count('.'):
+            class_name = class_name.split('.')[-1]
 
         # if we have more than one part this class has super classes / protocols
         super_classes = None
@@ -177,7 +181,6 @@ class SwiftClassmember(SwiftObjectDescription):
     def handle_signature(self, sig, signode):
         container_class_name = self.env.temp_data.get('swift:class')
         container_class_type = self.env.temp_data.get('swift:class_type')
-        print(container_class_name, container_class_type)
 
         # split into method name and rest
         first_anglebracket = sig.find('<')
@@ -270,9 +273,6 @@ class SwiftClassmember(SwiftObjectDescription):
 
 
 class SwiftEnumCase(SwiftObjectDescription):
-    option_spec = {
-        'noindex': directives.flag,
-    }
 
     def handle_signature(self, sig, signode):
         container_class_name = self.env.temp_data.get('swift:class')
@@ -310,13 +310,58 @@ class SwiftEnumCase(SwiftObjectDescription):
         return enum_case, enum_case, True
 
 
-class SwiftClassIvar(SwiftObjectDescription):
-    option_spec = {
-        'noindex': directives.flag,
-    }
+var_sig = re.compile(r'^\s*(?P<name>[a-zA-Z_][a-zA-Z0-9_]*\b)(\s*:\s*(?P<type>[a-zA-Z_[(][a-zA-Z0-9_<>[\]()?!:, \t-]*))?(\s*=\s*(?P<value>[^{]*))?')
 
-    # TODO: Class ivars
-    pass
+class SwiftClassIvar(SwiftObjectDescription):
+
+    doc_field_types = [
+        Field('defaultvalue', label=l_('Default'), has_arg=False,
+              names=('defaults', 'default')),
+    ]
+
+    def handle_signature(self, sig, signode):
+        container_class_name = self.env.temp_data.get('swift:class')
+        container_class_type = self.env.temp_data.get('swift:class_type')
+
+        match = var_sig.match(sig)
+        if not match:
+            self.env.warn(
+                self.env.docname,
+                'invalid variable/constant documentation string "%s", ' % sig,
+                self.lineno)
+            return
+
+        match = match.groupdict()
+
+        if self.objtype == 'static_var':
+            signode += addnodes.desc_addname("static var", "static var ")
+        elif self.objtype == 'static_let':
+            signode += addnodes.desc_addname("static let", "static let ")
+        elif self.objtype == 'var':
+            signode += addnodes.desc_addname("var", "var ")
+        elif self.objtype == 'let':
+            signode += addnodes.desc_addname("let", "let ")
+
+        name = match['name'].strip()
+        signature = name
+        signode += addnodes.desc_name(name, name)
+        if match['type']:
+            typ = match['type'].strip()
+            signature += '-' + typ
+            signode += addnodes.desc_type(typ, " : " + typ)
+        if match['value'] and len(match['value']) > 0:
+            value = match['value'].strip()
+            signode += addnodes.desc_addname(value, " = " + value)
+        elif match['value']:
+            signode += addnodes.desc_addname('{ ... }', ' = { ... }')
+
+        signature += "-" + self.objtype
+
+        if container_class_name:
+            name =  container_class_name + '.' + name
+            signature = container_class_name + '.' + signature
+        return name, signature, True
+
 
 class SwiftXRefRole(XRefRole):
     def process_link(self, env, refnode, has_explicit_title, title, target):
@@ -352,10 +397,10 @@ class SwiftModuleIndex(Index):
         current_list = []
         current_key = None
         for entry in entries:
-            if entry[3][0] != current_key:
+            if entry[3][0].upper() != current_key:
                 if len(current_list) > 0:
                     content.append((current_key, current_list))
-                current_key = entry[3][0]
+                current_key = entry[3][0].upper()
                 current_list = []
             current_list.append(entry)
         content.append((current_key, current_list))
@@ -419,6 +464,8 @@ class SwiftDomain(Domain):
         'default_impl': SwiftXRefRole(),
         'let':          SwiftXRefRole(),
         'var':          SwiftXRefRole(),
+        'static_let':   SwiftXRefRole(),
+        'static_var':   SwiftXRefRole(),
     }
     initial_data = {
         'objects': {},  # fullname -> docname, objtype
@@ -445,13 +492,10 @@ class SwiftDomain(Domain):
             yield (refname, refname, type, docname, refname, 1)
 
 def setup(app):
-    from .autodoc import SwiftClassAutoDocumenter
+    from .autodoc import SwiftClassAutoDocumenter, SwiftStructAutoDocumenter, SwiftEnumAutoDocumenter
     app.add_autodocumenter(SwiftClassAutoDocumenter)
-    # TODO: Struct documenter
-    # app.add_autodocumenter(SwiftStructAutoDocumenter)
-
-    # TODO: Enum documenter
-    # app.add_autodocumenter(SwiftEnumAutoDocumenter)
+    app.add_autodocumenter(SwiftStructAutoDocumenter)
+    app.add_autodocumenter(SwiftEnumAutoDocumenter)
 
     # TODO: Extension documenter
     # app.add_autodocumenter(SwiftExtensionAutoDocumenter)
@@ -460,4 +504,4 @@ def setup(app):
     # app.add_autodocumenter(SwiftMemberAutoDocumenter)
 
     app.add_domain(SwiftDomain)
-    app.add_config_value('swift_search_path', '../src', 'env')
+    app.add_config_value('swift_search_path', ['../src'], 'env')
