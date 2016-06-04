@@ -9,7 +9,6 @@
     :license: BSD, see LICENSE for details.
 """
 
-import re
 
 from docutils import nodes
 from docutils.parsers.rst import directives
@@ -23,15 +22,41 @@ from sphinx.util.nodes import make_refnode
 from sphinx.util.compat import Directive
 from sphinx.util.docfields import Field, GroupedField, TypedField
 
+from sphinx.ext.autodoc import Documenter, bool_option
 
 def _iteritems(d):
     for k in d:
         yield k, d[k]
 
-class SwiftClass(ObjectDescription):
+class SwiftObjectDescription(ObjectDescription):
     option_spec = {
         'noindex': directives.flag,
     }
+
+    def add_target_and_index(self, name_cls_add, sig, signode):
+        fullname, signature, add_to_index = name_cls_add
+        if not add_to_index:
+            return
+
+        for char in '<>()[]:, ':
+            signature = signature.replace(char, "-")
+
+        # note target
+        if fullname not in self.state.document.ids:
+            signode['ids'].append(signature)
+            self.state.document.note_explicit_target(signode)
+            self.env.domaindata['swift']['objects'][fullname] = (self.env.docname, self.objtype, signature)
+        else:
+            objects = self.env.domaindata['swift']['objects']
+            self.env.warn(
+                self.env.docname,
+                'duplicate object description of %s, ' % fullname +
+                'other instance in ' +
+                self.env.doc2path(objects[fullname][0]),
+                self.lineno)
+
+
+class SwiftClass(SwiftObjectDescription):
 
     def handle_signature(self, sig, signode):
         container_class_name = self.env.temp_data.get('swift:class')
@@ -73,38 +98,8 @@ class SwiftClass(ObjectDescription):
             add_to_index = False
 
         if container_class_name:
-            return add_to_index, (container_class_name + '.' + class_name)
-        return add_to_index, class_name
-
-    def add_target_and_index(self, name_cls, sig, signode):
-        add_to_index, name = name_cls
-        if not add_to_index:
-            return
-
-        fullname = self.objtype + ' ' + name
-        # note target
-        if fullname not in self.state.document.ids:
-            signode['names'].append(fullname)
-            signode['ids'].append(fullname)
-            signode['first'] = (not self.names)
-            self.state.document.note_explicit_target(signode)
-            objects = self.env.domaindata['swift']['objects']
-            if fullname in objects:
-                self.env.warn(
-                    self.env.docname,
-                    'duplicate object description of %s, ' % fullname +
-                    'other instance in ' +
-                    self.env.doc2path(objects[fullname][0]),
-                    self.lineno)
-            objects[fullname] = (self.env.docname, self.objtype)
-
-        self.indexnode['entries'].append((
-            'single',
-            fullname,
-            fullname,
-            fullname,
-            name_cls[0]
-        ))
+            class_name = container_class_name + '.' + class_name
+        return self.objtype + ' ' + class_name, class_name, add_to_index
 
     def before_content(self):
         if self.names:
@@ -118,10 +113,7 @@ class SwiftClass(ObjectDescription):
             self.env.temp_data['swift:class_type'] = None
 
 
-class SwiftClassmember(ObjectDescription):
-    option_spec = {
-        'noindex': directives.flag,
-    }
+class SwiftClassmember(SwiftObjectDescription):
 
     doc_field_types = [
         TypedField('parameter', label=l_('Parameters'),
@@ -185,7 +177,7 @@ class SwiftClassmember(ObjectDescription):
     def handle_signature(self, sig, signode):
         container_class_name = self.env.temp_data.get('swift:class')
         container_class_type = self.env.temp_data.get('swift:class_type')
-        static = (self.objtype == 'static_method')
+        print(container_class_name, container_class_type)
 
         # split into method name and rest
         first_anglebracket = sig.find('<')
@@ -195,6 +187,12 @@ class SwiftClassmember(ObjectDescription):
         else:
             split_point = first_paren
         method_name = sig[0:split_point]
+
+        # find method specialization
+        angle_bracket = method_name.find('<')
+        if angle_bracket >= 0:
+            method_specialization = method_name[angle_bracket + 1: -1]
+            method_name = method_name[:angle_bracket]
 
         rest = sig[split_point:]
 
@@ -221,20 +219,15 @@ class SwiftClassmember(ObjectDescription):
         if arrow >= 0:
             return_type = rest[arrow + 2:].strip()
 
-        angle_bracket = method_name.find('<')
-        if angle_bracket >= 0:
-            method_specialization = method_name[angle_bracket + 1: -1]
-            method_name = method_name[:angle_bracket]
-
+        # build signature and add nodes
         signature = ''
-        if static:
-            if container_class_type == 'class':
-                signode += addnodes.desc_addname("class", "class func ")
-                signature += 'class_'
-            else:
-                signode += addnodes.desc_addname("static", "static func ")
-                signature += 'static_'
-        else:
+        if self.objtype == 'static_method':
+            signode += addnodes.desc_addname("static", "static func ")
+            signature += 'static_'
+        elif self.objtype == 'class_method':
+            signode += addnodes.desc_addname("class", "class func ")
+            signature += 'class_'
+        elif self.objtype != 'init':
             signode += addnodes.desc_addname("func", "func ")
 
         if self.objtype == 'init':
@@ -271,62 +264,59 @@ class SwiftClassmember(ObjectDescription):
             signode += addnodes.desc_returns(return_type, return_type)
             signature += "-" + return_type
 
-        for char in '<>()[]:, ':
-            signature = signature.replace(char, "-")
+        if container_class_name:
+            return (container_class_name + '.' + title), (container_class_name + '.' + signature), True
+        return title, signature, True
+
+
+class SwiftEnumCase(SwiftObjectDescription):
+    option_spec = {
+        'noindex': directives.flag,
+    }
+
+    def handle_signature(self, sig, signode):
+        container_class_name = self.env.temp_data.get('swift:class')
+        enum_case = None
+        assoc_value = None
+        raw_value = None
+
+        # split on ( -> first part is case name
+        parts = [x.strip() for x in sig.split('(', maxsplit=1)]
+        enum_case = parts[0].strip()
+        if len(parts) > 1:
+            parts = parts[1].rsplit('=', maxsplit=1)
+            assoc_value = parts[0].strip()
+            if len(parts) > 1:
+                raw_value = parts[1].strip()
+            if assoc_value == "":
+                assoc_value = None
+            else:
+                assoc_value = "(" + assoc_value
+        else:
+            parts = [x.strip() for x in sig.split('=', maxsplit=1)]
+            enum_case = parts[0].strip()
+            if len(parts) > 1:
+                raw_value = parts[1].strip()
+
+        # Add class name
+        signode += addnodes.desc_name(enum_case, enum_case)
+        if assoc_value:
+            signode += addnodes.desc_type(assoc_value, assoc_value)
+        if raw_value:
+            signode += addnodes.desc_addname(raw_value, " = " + raw_value)
 
         if container_class_name:
-            return (container_class_name + '.' + title), (container_class_name + '.' + signature)
-        return title, signature
+            enum_case =  container_class_name + '.' + enum_case
+        return enum_case, enum_case, True
 
 
-    def add_target_and_index(self, name_cls, sig, signode):
-        fullname, signature = name_cls
-        # note target
-        if fullname not in self.state.document.ids:
-            signode['names'].append(fullname)
-            signode['ids'].append(signature)
-            signode['first'] = (not self.names)
-            self.state.document.note_explicit_target(signode)
-            objects = self.env.domaindata['swift']['objects']
-            if fullname in objects:
-                self.env.warn(
-                    self.env.docname,
-                    'duplicate object description of %s, ' % fullname +
-                    'other instance in ' +
-                    self.env.doc2path(objects[fullname][0]),
-                    self.lineno)
-            objects[fullname] = (self.env.docname, self.objtype)
-
-        self.indexnode['entries'].append((
-            'single',
-            fullname,
-            signature,
-            None,
-            fullname[0].upper()
-        ))
-
-
-class SwiftEnumCase(ObjectDescription):
+class SwiftClassIvar(SwiftObjectDescription):
     option_spec = {
         'noindex': directives.flag,
     }
 
+    # TODO: Class ivars
     pass
-
-class SwiftClassIvar(ObjectDescription):
-    option_spec = {
-        'noindex': directives.flag,
-    }
-
-    pass
-
-class SwiftModulelevel(ObjectDescription):
-    option_spec = {
-        'noindex': directives.flag,
-    }
-
-    pass
-
 
 class SwiftXRefRole(XRefRole):
     def process_link(self, env, refnode, has_explicit_title, title, target):
@@ -343,10 +333,32 @@ class SwiftModuleIndex(Index):
     shortname = l_('module')
 
     def generate(self, docnames=None):
-        content = {}
-        collapse = 1
+        content = []
+        collapse = 0
 
-        # TODO: generate list of classes
+        entries = []
+        for refname, (docname, type, signature) in _iteritems(self.domain.data['objects']):
+            entries.append((
+                refname,
+                0,
+                docname,
+                signature,
+                '',
+                '',
+                ''
+            ))
+
+        entries = sorted(entries, key=lambda x: x[3][0])
+        current_list = []
+        current_key = None
+        for entry in entries:
+            if entry[3][0] != current_key:
+                if len(current_list) > 0:
+                    content.append((current_key, current_list))
+                current_key = entry[3][0]
+                current_list = []
+            current_list.append(entry)
+        content.append((current_key, current_list))
 
         return content, collapse
 
@@ -357,7 +369,8 @@ class SwiftDomain(Domain):
     object_types = {
         'function':        ObjType(l_('function'),            'function',     'obj'),
         'method':          ObjType(l_('method'),              'method',       'obj'),
-        'static_method':   ObjType(l_('static/class method'), 'static',       'obj'),
+        'class_method':    ObjType(l_('class method'),        'class_method', 'obj'),
+        'static_method':   ObjType(l_('static method'),       'static_method','obj'),
         'class':           ObjType(l_('class'),               'class',        'obj'),
         'enum':            ObjType(l_('enum'),                'enum',         'obj'),
         'enum_case':       ObjType(l_('enum case'),           'enum_case',    'obj'),
@@ -373,8 +386,9 @@ class SwiftDomain(Domain):
     }
 
     directives = {
-        'function':        SwiftModulelevel,
+        'function':        SwiftClassmember,
         'method':          SwiftClassmember,
+        'class_method':    SwiftClassmember,
         'static_method':   SwiftClassmember,
         'class':           SwiftClass,
         'enum':            SwiftClass,
@@ -398,7 +412,8 @@ class SwiftDomain(Domain):
         'enum_case':    SwiftXRefRole(),
         'struct':       SwiftXRefRole(),
         'init':         SwiftXRefRole(),
-        'staticmethod': SwiftXRefRole(),
+        'static_method':SwiftXRefRole(),
+        'class_method': SwiftXRefRole(),
         'protocol':     SwiftXRefRole(),
         'extension':    SwiftXRefRole(),
         'default_impl': SwiftXRefRole(),
@@ -413,23 +428,36 @@ class SwiftDomain(Domain):
     ]
 
     def clear_doc(self, docname):
-        for fullname, (fn, _) in list(self.data['objects'].items()):
+        for fullname, (fn, _, _) in list(self.data['objects'].items()):
             if fn == docname:
                 del self.data['objects'][fullname]
 
     def resolve_xref(self, env, fromdocname, builder,
                      typ, target, node, contnode):
-        for file, entries in env.indexentries.items():
-            for entry in entries:
-                if entry[1] == target:
-                    node = make_refnode(builder, fromdocname, file, entry[2], contnode, target)
-                    return node
+        for refname, (docname, type, signature) in _iteritems(self.data['objects']):
+            if refname == target:
+                node = make_refnode(builder, fromdocname, docname, signature, contnode, target)
+                return node
         return None
 
     def get_objects(self):
-        for refname, (docname, type) in _iteritems(self.data['objects']):
+        for refname, (docname, type, signature) in _iteritems(self.data['objects']):
             yield (refname, refname, type, docname, refname, 1)
 
 def setup(app):
+    from .autodoc import SwiftClassAutoDocumenter
+    app.add_autodocumenter(SwiftClassAutoDocumenter)
+    # TODO: Struct documenter
+    # app.add_autodocumenter(SwiftStructAutoDocumenter)
+
+    # TODO: Enum documenter
+    # app.add_autodocumenter(SwiftEnumAutoDocumenter)
+
+    # TODO: Extension documenter
+    # app.add_autodocumenter(SwiftExtensionAutoDocumenter)
+
+    # TODO: Single member documenter
+    # app.add_autodocumenter(SwiftMemberAutoDocumenter)
+
     app.add_domain(SwiftDomain)
     app.add_config_value('swift_search_path', '../src', 'env')
