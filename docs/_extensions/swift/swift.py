@@ -73,6 +73,21 @@ class SwiftClass(SwiftObjectDescription):
             class_name = parts[0]
             generic_type = None
 
+        # did we catch a 'where' ?
+        type_constraint = None
+        class_parts = None
+        if ' ' in class_name:
+            class_parts = class_name.split(' ')
+        elif '\t' in class_name:
+            class_parts = class_name.split('\t')
+        if class_parts:
+            # if a part starts with `where` then we have a type constraint
+            for index, p in enumerate(class_parts):
+                if p == 'where':
+                    type_constraint = " ".join(class_parts[index:]) + ": " + parts.pop()
+                    class_name = " ".join(class_parts[:index])
+                    break
+
         if class_name.count('.'):
             class_name = class_name.split('.')[-1]
 
@@ -82,7 +97,6 @@ class SwiftClass(SwiftObjectDescription):
             super_classes = [x.strip() for x in parts[1].split(',')]
 
             # if a part starts with `where` then we have a type constraint
-            type_constraint = None
             for index, sup in enumerate(super_classes):
                 if sup == 'where':
                     type_constraint = " ".join(super_classes[index:])
@@ -95,7 +109,17 @@ class SwiftClass(SwiftObjectDescription):
 
         # if we had super classes add annotation
         if super_classes:
-            signode += addnodes.desc_type(', '.join(super_classes), " : " + (', '.join(super_classes)))
+            children = []
+            for c in super_classes:
+                prefix = ', ' if c != super_classes[0] else ''
+                # ref = addnodes.pending_xref(c, reftype='protocol', refdomain='swift', reftarget=c, refwarn=True)
+                ref = nodes.Text(prefix + c)
+                children.append(ref)
+            signode += addnodes.desc_type('', ' : ', *children)
+
+        # add type constraint
+        if type_constraint:
+            signode += addnodes.desc_type(type_constraint, ' ' + type_constraint)
 
         add_to_index = True
         if self.objtype == 'extension' and not super_classes:
@@ -211,7 +235,11 @@ class SwiftClassmember(SwiftObjectDescription):
                 parameter_list = rest[1:i]
                 rest = rest[i + 1:]
                 break
-        parameters = self._parse_parameter_list(parameter_list)
+
+        if len(parameter_list) > 0:
+            parameters = self._parse_parameter_list(parameter_list)
+        else:
+            parameters = []
 
         # check if it throws
         throws = rest.find('throws') >= 0
@@ -226,10 +254,8 @@ class SwiftClassmember(SwiftObjectDescription):
         signature = ''
         if self.objtype == 'static_method':
             signode += addnodes.desc_addname("static", "static func ")
-            signature += 'static_'
         elif self.objtype == 'class_method':
             signode += addnodes.desc_addname("class", "class func ")
-            signature += 'class_'
         elif self.objtype != 'init':
             signode += addnodes.desc_addname("func", "func ")
 
@@ -266,6 +292,14 @@ class SwiftClassmember(SwiftObjectDescription):
         if return_type:
             signode += addnodes.desc_returns(return_type, return_type)
             signature += "-" + return_type
+
+        if container_class_type == 'protocol':
+            signature += "-protocol"
+
+        if self.objtype == 'static_method':
+            signature += '-static'
+        elif self.objtype == 'class_method':
+            signature += '-class'
 
         if container_class_name:
             return (container_class_name + '.' + title), (container_class_name + '.' + signature), True
@@ -364,9 +398,9 @@ class SwiftClassIvar(SwiftObjectDescription):
 
 
 class SwiftXRefRole(XRefRole):
+
     def process_link(self, env, refnode, has_explicit_title, title, target):
         return title, target
-
 
 class SwiftModuleIndex(Index):
     """
@@ -377,18 +411,28 @@ class SwiftModuleIndex(Index):
     localname = l_('Swift Module Index')
     shortname = l_('module')
 
+    @staticmethod
+    def indexsorter(a):
+        type_order = ['class', 'struct', 'enum', 'protocol', 'extension']
+
+        for i, t in enumerate(type_order):
+            if a[0].startswith(t):
+                return '{:04d}{}'.format(i, a[0])
+        return a[0]
+
     def generate(self, docnames=None):
         content = []
         collapse = 0
 
         entries = []
-        for refname, (docname, type, signature) in _iteritems(self.domain.data['objects']):
+        for refname, (docname, typ, signature) in _iteritems(self.domain.data['objects']):
+            info = typ.replace("_", " ")
             entries.append((
                 refname,
                 0,
                 docname,
                 signature,
-                '',
+                info,
                 '',
                 ''
             ))
@@ -405,7 +449,12 @@ class SwiftModuleIndex(Index):
             current_list.append(entry)
         content.append((current_key, current_list))
 
-        return content, collapse
+        result = []
+        for key, entries in content:
+            e = sorted(entries, key=self.indexsorter)
+            result.append((key, e))
+
+        return result, collapse
 
 class SwiftDomain(Domain):
     """Swift language domain."""
@@ -465,7 +514,7 @@ class SwiftDomain(Domain):
         'let':          SwiftXRefRole(),
         'var':          SwiftXRefRole(),
         'static_let':   SwiftXRefRole(),
-        'static_var':   SwiftXRefRole(),
+        'static_var':   SwiftXRefRole()
     }
     initial_data = {
         'objects': {},  # fullname -> docname, objtype
@@ -492,16 +541,10 @@ class SwiftDomain(Domain):
             yield (refname, refname, type, docname, refname, 1)
 
 def setup(app):
-    from .autodoc import SwiftClassAutoDocumenter, SwiftStructAutoDocumenter, SwiftEnumAutoDocumenter
-    app.add_autodocumenter(SwiftClassAutoDocumenter)
-    app.add_autodocumenter(SwiftStructAutoDocumenter)
-    app.add_autodocumenter(SwiftEnumAutoDocumenter)
-
-    # TODO: Extension documenter
-    # app.add_autodocumenter(SwiftExtensionAutoDocumenter)
-
-    # TODO: Single member documenter
-    # app.add_autodocumenter(SwiftMemberAutoDocumenter)
+    from .autodoc import SwiftAutoDocumenter, build_index
+    app.add_autodocumenter(SwiftAutoDocumenter)
 
     app.add_domain(SwiftDomain)
     app.add_config_value('swift_search_path', ['../src'], 'env')
+    app.add_config_value('autodoc_default_flags', [], True)
+    build_index(app)
