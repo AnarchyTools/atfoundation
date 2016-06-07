@@ -1,0 +1,361 @@
+/*
+ * basic.css
+ * ~~~~~~~~~
+ *
+ * Sphinx stylesheet -- basic theme.
+ *
+ * :copyright: Copyright 2007-2016 by the Sphinx team, see AUTHORS.
+ * :license: BSD, see LICENSE for details.
+ *
+ */
+
+/* -- body ----- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fira Sans';
+    font-weight: 300;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu Condensed', Helvetica, Arial, sans-serif;
+}
+
+code, pre {
+    font-family: 'Fira Mono', Consolas, Monaco, 'Courier New';
+}
+
+.main_content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-center;
+    height: 100%;
+}
+
+.main_content main {
+    width: 80%;
+    overflow: scroll;
+    height: 100%;
+    padding: 20px;
+}
+
+.main_content > aside {
+    width: 20%;
+    min-width: 250px;
+    height: 100%;
+    padding: 20px;
+}
+
+
+/* nav */
+
+aside h3 {
+    margin: -5px 0 0 0;
+    padding: 0;
+}
+
+aside section ul {
+    list-style-type: none;
+    padding: 0 0 0 20px;
+    margin-bottom: 20px;
+}
+
+aside section > ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+aside section ul > li.current > a {
+    padding: 0 .25rem;
+    margin: 0 -.25rem;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+nav {
+    width: 100%;
+    font-size: 90%;
+}
+
+nav h3 {
+    display: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul.parent {
+    float: left;
+}
+
+nav ul.rel {
+    float: right;
+}
+
+nav li {
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+/* generic */
+
+a, a:visited {
+    color: #081CBF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* page content */
+
+.align-left {
+    float: left;
+    margin: 10px 20px 10px 0;
+}
+
+.align-right {
+    float: left;
+    margin: 10px 0 10px 20px;
+}
+
+a.headerlink {
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+}
+
+.section h1:hover a.headerlink {
+    opacity: 1;
+}
+
+code {
+    padding: 0 .25rem;
+    margin: 0 .2rem;
+    font-size: 80%;
+    white-space: nowrap;
+    background: #F8F8F8;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+code.xref {
+    background: transparent;
+    border: none;
+}
+
+div > .highlight {
+    padding: .4rem .5rem .2rem .5rem;
+    margin: 0 .2rem;
+    font-size: 90%;
+    background: #F8F8F8;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    border-left: 4px solid #E1E1E1;
+}
+
+.highlight-swift > div {
+    border-left: 4px solid #f25c22;
+}
+
+.highlight-clojure > div {
+    border-left: 4px solid #081CBF;
+}
+
+/* autodoc */
+
+dl.extension > dt,
+dl.protocol > dt,
+dl.class > dt,
+dl.struct > dt,
+dl.enum > dt {
+    padding: 2px 0 0 10px;
+    font-size: 90%;
+    background: #F8F8F8;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    border-left: 4px solid #f25c22;
+}
+
+dd > table {
+    margin-top: 20px;
+}
+
+dl.extension dd dl,
+dl.protocol dd dl,
+dl.class dd dl,
+dl.struct dd dl,
+dl.enum dd dl {
+    padding: 2px 0 0 10px;
+
+    font-size: 90%;
+    background: #FDFDFD;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+
+code.descclassname, code.descname {
+    font-weight: 800;
+    font-size: 100%;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+code.descname {
+    padding-right: 2px;
+}
+
+.property:before {
+    content: " ";
+}
+
+table.field-list {
+    margin-bottom: 5px;
+}
+
+table.field-list th {
+    text-align: left;
+    padding: 0 10px 0 0;
+    vertical-align: top;
+}
+
+table.field-list td {
+    padding: 0;
+    vertical-align: top;
+}
+
+td.field-body ul,
+td.field-body p {
+    margin: 0;
+}
+
+td.field-body ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+td.field-body ul li strong {
+    font-style: italic;
+}
+
+.section {
+    padding-top: 10px;
+}
+
+/* index */
+
+ul.index {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.index > li span {
+    display: block;
+    padding: 2px 0 0 10px;
+    background: #FDFDFD;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+    border-left: 4px solid #f25c22;
+    margin: 20px 0;
+}
+
+ul.index ul {
+    list-style-type: none;
+    padding: 0 0 0 20px;
+}
+
+ul.index ul li code {
+    border: none;
+    background: transparent;
+    margin-right: 0;
+}
+
+ul.index ul li em {
+    font-size: 80%;
+}
+
+/* admonition */
+
+.admonition {
+    background: #FDFDFD;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.admonition p {
+    margin: 0;
+    padding: 3px 5px;
+}
+
+.admonition-title {
+    background: #F8F8F8;
+    font-weight: 600;
+}
+
+.admonition.note {
+    border: 2px solid #E1E1E1;
+}
+
+.admonition.note p, .admonition.warning p {
+    padding-left: 25px;
+}
+
+.admonition.note .admonition-title:before {
+    content: " ⓘ ";
+    display: inline-block;
+    width: 20px;
+    margin-left: -20px;
+    font-weight: 600;
+}
+
+.admonition.warning {
+    border: 2px solid #f25c22;
+}
+
+.admonition.warning .admonition-title {
+    color: #f25c22;
+    background: rgba(242,92,34,0.1)
+}
+
+.admonition.warning .admonition-title:before {
+    content: " ⚠ ";
+    display: inline-block;
+    width: 20px;
+    margin-left: -20px;
+    font-weight: 600;
+    color: #f25c22;
+}
+
+.deprecated p {
+    margin: 0;
+}
+
+.deprecated {
+    border: 2px solid #081CBF;
+    margin: 0;
+    padding: 3px 5px;
+    background: #FDFDFD;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background: rgba(8,28,191,0.1)
+}
+
+
+.deprecated .versionmodified:before {
+    content: " ⤾ ";
+    display: inline-block;
+    width: 20px;
+    font-weight: 600;
+    color: #081CBF;
+}
