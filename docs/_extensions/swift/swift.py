@@ -104,7 +104,7 @@ class SwiftClass(SwiftObjectDescription):
                     break
 
         # Add class name
-        signode += addnodes.desc_addname(self.objtype, self.objtype + ' ')
+        signode += addnodes.desc_addname(self.objtype, self.objtype)
         signode += addnodes.desc_name(class_name, class_name)
 
         # if we had super classes add annotation
@@ -253,11 +253,11 @@ class SwiftClassmember(SwiftObjectDescription):
         # build signature and add nodes
         signature = ''
         if self.objtype == 'static_method':
-            signode += addnodes.desc_addname("static", "static func ")
+            signode += addnodes.desc_addname("static", "static func")
         elif self.objtype == 'class_method':
-            signode += addnodes.desc_addname("class", "class func ")
+            signode += addnodes.desc_addname("class", "class func")
         elif self.objtype != 'init':
-            signode += addnodes.desc_addname("func", "func ")
+            signode += addnodes.desc_addname("func", "func")
 
         if self.objtype == 'init':
             signode += addnodes.desc_name('init', 'init')
@@ -368,13 +368,13 @@ class SwiftClassIvar(SwiftObjectDescription):
         match = match.groupdict()
 
         if self.objtype == 'static_var':
-            signode += addnodes.desc_addname("static var", "static var ")
+            signode += addnodes.desc_addname("static var", "static var")
         elif self.objtype == 'static_let':
-            signode += addnodes.desc_addname("static let", "static let ")
+            signode += addnodes.desc_addname("static let", "static let")
         elif self.objtype == 'var':
-            signode += addnodes.desc_addname("var", "var ")
+            signode += addnodes.desc_addname("var", "var")
         elif self.objtype == 'let':
-            signode += addnodes.desc_addname("let", "let ")
+            signode += addnodes.desc_addname("let", "let")
 
         name = match['name'].strip()
         signature = name
@@ -409,7 +409,7 @@ class SwiftModuleIndex(Index):
 
     name = 'modindex'
     localname = l_('Swift Module Index')
-    shortname = l_('module')
+    shortname = l_('Index')
 
     @staticmethod
     def indexsorter(a):
