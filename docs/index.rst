@@ -3,9 +3,9 @@ atfoundation
 ============
 
 .. image:: _static/logo.png
-   :scale: 50%
-   :alt: AnarchyTools logo
-   :align: left
+    :scale: 50%
+    :alt: AnarchyTools logo
+    :align: left
 
 *atfoundation* is a relatively small replacement for Apple's *Foundation* extension to the Swift standard library.
 
@@ -24,62 +24,62 @@ If you're already using `AnarchyTools <http://anarchytools.org>`_ simply add *at
 
 .. code-block:: clojure
 
-    (package
+     (package
 
-      ...
+       ...
 
-      :external-packages [
-        {
-          :url "https://github.com/AnarchyTools/atfoundation.git"
-          :version [ "1.0.0" ]
+        :external-packages [
+          {
+             :url "https://github.com/AnarchyTools/atfoundation.git"
+             :version [ "1.0.0" ]
+          }
+        ]
+
+       ...
+
+        :tasks {
+          :default {
+                :tool "atllbuild"
+
+               ...
+
+                :link-with ["atfoundation.a"]
+                :dependencies ["atfoundation.atfoundation"]
+          }
         }
-      ]
-
-      ...
-
-      :tasks {
-        :default {
-            :tool "atllbuild"
-
-            ...
-
-            :link-with ["atfoundation.a"]
-            :dependencies ["atfoundation.atfoundation"]
-        }
-      }
-    )
+     )
 
 and import it in your source files:
 
 .. code-block:: swift
 
-    import atfoundation
+     import atfoundation
 
 Remove the c standard library dance, if you have something like:
 
 .. code-block:: swift
 
-    #if os(Linux)
-        import Glibc
-    #else
-        import Darwin
-    #endif
+     #if os(Linux)
+          import Glibc
+     #else
+          import Darwin
+     #endif
 
 just remove that as *atfoundation* implicitly imports that for you.
 
-Implemented functionality
-+++++++++++++++++++++++++
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Table of Contents
-   :name: mastertoc
+    :name: mastertoc
+    :hidden:
 
-   string
-   date
-   filesystem
-   logger
-   net
-   process
-   threading
-
+    string
+    filesystem
+    date
+    logger
+    net
+    process
+    thread
+    adler32
+    charset
+    syserror
+    tools

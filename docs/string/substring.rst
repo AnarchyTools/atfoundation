@@ -1,17 +1,29 @@
-Sub-Strings
-+++++++++++
+=====================
+Sub-string extraction
+=====================
 
-The sub-string functions work like you will expect from other languages but use the ``String.Index`` construct as known by other string functionality.
 
 .. swift:extension:: String
 
-    .. swift:method:: subString(range: Range<String.Index>) -> String
+   .. swift:method:: subString(range: Range<String.Index>) -> String
 
-       :parameter range: Sub-string range
-       :returns: new string that contains only the sub-string
+    Create substring from string
 
-    .. swift:method:: subString(toIndex: String.Index) -> String
+    :parameter range: range of the substring, will be clamped to ``self.endIndex``
+    :returns: substring or ``nil`` if start index out of range
 
-    .. swift:method:: subString(fromIndex: String.Index) -> String
+   .. swift:method:: subString(toIndex index: String.Index) -> String
+
+    Create substring from start to index
+
+    :parameter index: end index, excluded
+    :returns: substring
+
+   .. swift:method:: subString(fromIndex index: String.Index) -> String
+
+    Create substring from index to end
+
+    :parameter index: start index, included
+    :returns: substring or ``nil`` if start index out of range
 
 
