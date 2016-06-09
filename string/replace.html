@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Replacing sub-strings &mdash; atfoundation 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="atfoundation 1.0.0 documentation" href="../index.html" />
+    <link rel="up" title="String extensions" href="../string.html" />
+    <link rel="next" title="Splitting strings into parts" href="split.html" />
+    <link rel="prev" title="Searching for sub-strings and characters" href="search.html" /> 
+  </head>
+  <body>
+
+
+
+<div class="main_content">
+<main>
+    <nav>
+      <h3>Navigation</h3>
+      <ul class="parent">
+          <li>
+            <a href="../string.html">String extensions</a>
+          </li>
+      </ul>
+      <ul class="rel">
+        <li>
+          <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+        </li>
+        <li>
+          <a href="split.html" title="Splitting strings into parts">next</a>
+        </li>
+        <li>
+          <a href="search.html" title="Searching for sub-strings and characters">previous</a>
+        </li>
+      </ul>
+    </nav>  
+    
+  <div class="section" id="replacing-sub-strings">
+<h1>Replacing sub-strings<a class="headerlink" href="#replacing-sub-strings" title="Permalink to this headline">¶</a></h1>
+<dl class="extension">
+<dt>
+<code class="descclassname">extension</code><code class="descname">String</code></dt>
+<dd><dl class="method">
+<dt id="String.replacing-range-replacement---String">
+<code class="descclassname">func</code><code class="descname">replacing</code><span class="sig-paren">(</span><em>range: Range&lt;String.Index&gt;</em>, <em>replacement: String</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#String.replacing-range-replacement---String" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return new string with <code class="docutils literal"><span class="pre">range</span></code> replaced by <code class="docutils literal"><span class="pre">replacement</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>range</strong> &#8211; range to replace</li>
+<li><strong>replacement</strong> &#8211; replacement</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">new string with substituted range</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="String.replacing-searchTerm-replacement---String">
+<code class="descclassname">func</code><code class="descname">replacing</code><span class="sig-paren">(</span><em>searchTerm: String</em>, <em>replacement: String</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#String.replacing-searchTerm-replacement---String" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for a substring and replace with other string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>searchTerm</strong> &#8211; substring to search</li>
+<li><strong>replacement</strong> &#8211; replacement to substitute</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">new string with applied substitutions</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="String.replace-range-replacement--">
+<code class="descclassname">func</code><code class="descname">replace</code><span class="sig-paren">(</span><em>range: Range&lt;String.Index&gt;</em>, <em>replacement: String</em><span class="sig-paren">)</span><a class="headerlink" href="#String.replace-range-replacement--" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace <code class="docutils literal"><span class="pre">range</span></code> in string with substitute, modifies self</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>range</strong> &#8211; range to replace</li>
+<li><strong>replacement</strong> &#8211; substitute</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="String.replace-searchTerm-replacement--">
+<code class="descclassname">func</code><code class="descname">replace</code><span class="sig-paren">(</span><em>searchTerm: String</em>, <em>replacement: String</em><span class="sig-paren">)</span><a class="headerlink" href="#String.replace-searchTerm-replacement--" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace substring in string, modifies self</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>searchTerm</strong> &#8211; string to replace</li>
+<li><strong>replacement</strong> &#8211; substitute</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</main>
+      <aside>
+          <section>
+<h3>Table Of Contents</h3>
+
+<ul class="parent">
+  <li>
+    <a href="../index.html">Intro</a>
+  </li>
+</ul>
+
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../string.html">String extensions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="substring.html">Sub-string extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="search.html">Searching for sub-strings and characters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Replacing sub-strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="split.html">Splitting strings into parts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="whitespace.html">Trimming whitespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string.html">Misc string extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/path.html">Path construction and deconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/fs.html">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/file.html">File access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/fileinfo.html">File information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/pipe.html">Communication pipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/stream.html">Stream protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/inputstream.html">Input (readable) streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/outputstream.html">Output streams (writable)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/seekablestream.html">Seekable stream protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/memorystream.html">In-memory stream (R/W)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../date.html">Date handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../date/date.html">Simple date handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../date/timeinterval.html">Time interval</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../logger.html">Customizable logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../net.html">Networking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../net/url.html">URL parsing and construction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../process.html">Sub-Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thread.html">Threading primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adler32.html">Adler32 Checksum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../charset.html">Charset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syserror.html">POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Misc. Tools</a></li>
+</ul>
+
+
+<ul class="parent">
+  <li>
+    <a href="../swift-modindex.html">Index</a>
+  </li>
+</ul>
+          </section>
+      </aside>
+</div>
+    <footer>
+        &copy; Copyright 2016, Johannes Schriewer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+    </footer>
+  </body>
+</html>

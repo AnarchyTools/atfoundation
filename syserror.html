@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>POSIX System errors (errno) &mdash; atfoundation 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="atfoundation 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Misc. Tools" href="tools.html" />
+    <link rel="prev" title="Charset" href="charset.html" /> 
+  </head>
+  <body>
+
+
+
+<div class="main_content">
+<main>
+    <nav>
+      <h3>Navigation</h3>
+      <ul class="parent">
+          <li>
+            <a href="index.html">atfoundation 1.0.0 documentation</a>
+          </li>
+      </ul>
+      <ul class="rel">
+        <li>
+          <a href="swift-modindex.html" title="Swift Module Index">Index</a>
+        </li>
+        <li>
+          <a href="tools.html" title="Misc. Tools">next</a>
+        </li>
+        <li>
+          <a href="charset.html" title="Charset">previous</a>
+        </li>
+      </ul>
+    </nav>  
+    
+  <div class="section" id="posix-system-errors-errno">
+<h1>POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)<a class="headerlink" href="#posix-system-errors-errno" title="Permalink to this headline">¶</a></h1>
+<dl class="enum">
+<dt id="SysError">
+<code class="descclassname">enum</code><code class="descname">SysError</code> : ErrorProtocol<a class="headerlink" href="#SysError" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="enum_case">
+<dt id="SysError.OperationNotPermitted">
+<code class="descname">OperationNotPermitted</code><a class="headerlink" href="#SysError.OperationNotPermitted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoSuchEntity">
+<code class="descname">NoSuchEntity</code>(Path?)<a class="headerlink" href="#SysError.NoSuchEntity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoSuchProcess">
+<code class="descname">NoSuchProcess</code><a class="headerlink" href="#SysError.NoSuchProcess" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.Interrupted">
+<code class="descname">Interrupted</code><a class="headerlink" href="#SysError.Interrupted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.IOError">
+<code class="descname">IOError</code><a class="headerlink" href="#SysError.IOError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoSuchDeviceOrAddress">
+<code class="descname">NoSuchDeviceOrAddress</code><a class="headerlink" href="#SysError.NoSuchDeviceOrAddress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ArgumentListTooLong">
+<code class="descname">ArgumentListTooLong</code><a class="headerlink" href="#SysError.ArgumentListTooLong" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ExecFormatError">
+<code class="descname">ExecFormatError</code><a class="headerlink" href="#SysError.ExecFormatError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.BadFileDescriptor">
+<code class="descname">BadFileDescriptor</code><a class="headerlink" href="#SysError.BadFileDescriptor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoChildProcess">
+<code class="descname">NoChildProcess</code><a class="headerlink" href="#SysError.NoChildProcess" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.TryAgain">
+<code class="descname">TryAgain</code><a class="headerlink" href="#SysError.TryAgain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.OutOfMemory">
+<code class="descname">OutOfMemory</code><a class="headerlink" href="#SysError.OutOfMemory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.AccessDenied">
+<code class="descname">AccessDenied</code>(Path?)<a class="headerlink" href="#SysError.AccessDenied" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.BadAddress">
+<code class="descname">BadAddress</code><a class="headerlink" href="#SysError.BadAddress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.BlockDeviceRequired">
+<code class="descname">BlockDeviceRequired</code>(Path?)<a class="headerlink" href="#SysError.BlockDeviceRequired" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.DeviceOrResourceBusy">
+<code class="descname">DeviceOrResourceBusy</code><a class="headerlink" href="#SysError.DeviceOrResourceBusy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.FileExists">
+<code class="descname">FileExists</code>(Path?)<a class="headerlink" href="#SysError.FileExists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.CrossDeviceLink">
+<code class="descname">CrossDeviceLink</code>(dest: Path?, src: Path?)<a class="headerlink" href="#SysError.CrossDeviceLink" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoSuchDevice">
+<code class="descname">NoSuchDevice</code>(Path?)<a class="headerlink" href="#SysError.NoSuchDevice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NotADirectory">
+<code class="descname">NotADirectory</code>(Path?)<a class="headerlink" href="#SysError.NotADirectory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.IsDirectory">
+<code class="descname">IsDirectory</code>(Path?)<a class="headerlink" href="#SysError.IsDirectory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.InvalidArgument">
+<code class="descname">InvalidArgument</code>(file: String, line: Int, function: String)<a class="headerlink" href="#SysError.InvalidArgument" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.SystemFileDescriptorsExhausted">
+<code class="descname">SystemFileDescriptorsExhausted</code><a class="headerlink" href="#SysError.SystemFileDescriptorsExhausted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.FileDescriptorsExhausted">
+<code class="descname">FileDescriptorsExhausted</code><a class="headerlink" href="#SysError.FileDescriptorsExhausted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NotATTY">
+<code class="descname">NotATTY</code><a class="headerlink" href="#SysError.NotATTY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.TextFileBusy">
+<code class="descname">TextFileBusy</code><a class="headerlink" href="#SysError.TextFileBusy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.FileTooLarge">
+<code class="descname">FileTooLarge</code><a class="headerlink" href="#SysError.FileTooLarge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoSpaceLeftOnDevice">
+<code class="descname">NoSpaceLeftOnDevice</code><a class="headerlink" href="#SysError.NoSpaceLeftOnDevice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.IllegalSeek">
+<code class="descname">IllegalSeek</code><a class="headerlink" href="#SysError.IllegalSeek" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ReadOnlyFilesystem">
+<code class="descname">ReadOnlyFilesystem</code><a class="headerlink" href="#SysError.ReadOnlyFilesystem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.TooManyLinks">
+<code class="descname">TooManyLinks</code><a class="headerlink" href="#SysError.TooManyLinks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.BrokenPipe">
+<code class="descname">BrokenPipe</code><a class="headerlink" href="#SysError.BrokenPipe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.MathArgumentOutOfDomainOfFunction">
+<code class="descname">MathArgumentOutOfDomainOfFunction</code><a class="headerlink" href="#SysError.MathArgumentOutOfDomainOfFunction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.MathResultOutOfRange">
+<code class="descname">MathResultOutOfRange</code><a class="headerlink" href="#SysError.MathResultOutOfRange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.Deadlock">
+<code class="descname">Deadlock</code><a class="headerlink" href="#SysError.Deadlock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NameTooLong">
+<code class="descname">NameTooLong</code>(Path?)<a class="headerlink" href="#SysError.NameTooLong" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoLockAvailable">
+<code class="descname">NoLockAvailable</code><a class="headerlink" href="#SysError.NoLockAvailable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.InvalidSystemCall">
+<code class="descname">InvalidSystemCall</code>(file: String, line: Int, function: String)<a class="headerlink" href="#SysError.InvalidSystemCall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.DirectoryNotEmpty">
+<code class="descname">DirectoryNotEmpty</code>(Path?)<a class="headerlink" href="#SysError.DirectoryNotEmpty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.SymlinkLoop">
+<code class="descname">SymlinkLoop</code><a class="headerlink" href="#SysError.SymlinkLoop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.AddressInUse">
+<code class="descname">AddressInUse</code><a class="headerlink" href="#SysError.AddressInUse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.AddressNotAvailable">
+<code class="descname">AddressNotAvailable</code><a class="headerlink" href="#SysError.AddressNotAvailable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NetworkDown">
+<code class="descname">NetworkDown</code><a class="headerlink" href="#SysError.NetworkDown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NetworkUnreachable">
+<code class="descname">NetworkUnreachable</code><a class="headerlink" href="#SysError.NetworkUnreachable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NetworkReset">
+<code class="descname">NetworkReset</code><a class="headerlink" href="#SysError.NetworkReset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ConnectionAborted">
+<code class="descname">ConnectionAborted</code><a class="headerlink" href="#SysError.ConnectionAborted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ConnectionResetByPeer">
+<code class="descname">ConnectionResetByPeer</code><a class="headerlink" href="#SysError.ConnectionResetByPeer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.BufferSpaceExhausted">
+<code class="descname">BufferSpaceExhausted</code><a class="headerlink" href="#SysError.BufferSpaceExhausted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.AlreadyConnected">
+<code class="descname">AlreadyConnected</code><a class="headerlink" href="#SysError.AlreadyConnected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NotConnected">
+<code class="descname">NotConnected</code><a class="headerlink" href="#SysError.NotConnected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.AlreadyShutDown">
+<code class="descname">AlreadyShutDown</code><a class="headerlink" href="#SysError.AlreadyShutDown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ConnectionTimedOut">
+<code class="descname">ConnectionTimedOut</code><a class="headerlink" href="#SysError.ConnectionTimedOut" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.ConnectionRefused">
+<code class="descname">ConnectionRefused</code><a class="headerlink" href="#SysError.ConnectionRefused" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.HostIsDown">
+<code class="descname">HostIsDown</code><a class="headerlink" href="#SysError.HostIsDown" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.NoRouteToHost">
+<code class="descname">NoRouteToHost</code><a class="headerlink" href="#SysError.NoRouteToHost" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.QuotaExceeded">
+<code class="descname">QuotaExceeded</code><a class="headerlink" href="#SysError.QuotaExceeded" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.EndOfFile">
+<code class="descname">EndOfFile</code><a class="headerlink" href="#SysError.EndOfFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="enum_case">
+<dt id="SysError.UnknownError">
+<code class="descname">UnknownError</code>(file: String, line: Int, function: String)<a class="headerlink" href="#SysError.UnknownError" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="init">
+<dt id="SysError.init-errno-_-file-line-function--">
+<code class="descname">init</code><span class="sig-paren">(</span><em>errno: Int32</em>, <em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#SysError.init-errno-_-file-line-function--" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+</main>
+      <aside>
+          <section>
+<h3>Table Of Contents</h3>
+
+<ul class="parent">
+  <li>
+    <a href="index.html">Intro</a>
+  </li>
+</ul>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="string.html">String extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="string/substring.html">Sub-string extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string/search.html">Searching for sub-strings and characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string/replace.html">Replacing sub-strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string/split.html">Splitting strings into parts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string/whitespace.html">Trimming whitespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string/string.html">Misc string extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filesystem.html">Filesystem abstraction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/path.html">Path construction and deconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/fs.html">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/file.html">File access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/fileinfo.html">File information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/pipe.html">Communication pipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/stream/stream.html">Stream protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/stream/inputstream.html">Input (readable) streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/stream/outputstream.html">Output streams (writable)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/stream/seekablestream.html">Seekable stream protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filesystem/stream/memorystream.html">In-memory stream (R/W)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="date.html">Date handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="date/date.html">Simple date handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="date/timeinterval.html">Time interval</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="logger.html">Customizable logger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="net.html">Networking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="net/url.html">URL parsing and construction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="process.html">Sub-Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thread.html">Threading primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adler32.html">Adler32 Checksum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="charset.html">Charset</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Misc. Tools</a></li>
+</ul>
+
+
+<ul class="parent">
+  <li>
+    <a href="swift-modindex.html">Index</a>
+  </li>
+</ul>
+          </section>
+      </aside>
+</div>
+    <footer>
+        &copy; Copyright 2016, Johannes Schriewer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+    </footer>
+  </body>
+</html>

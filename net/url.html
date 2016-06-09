@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>URL parsing and construction &mdash; atfoundation 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="atfoundation 1.0.0 documentation" href="../index.html" />
+    <link rel="up" title="Networking" href="../net.html" />
+    <link rel="next" title="Sub-Processes" href="../process.html" />
+    <link rel="prev" title="Networking" href="../net.html" /> 
+  </head>
+  <body>
+
+
+
+<div class="main_content">
+<main>
+    <nav>
+      <h3>Navigation</h3>
+      <ul class="parent">
+          <li>
+            <a href="../net.html">Networking</a>
+          </li>
+      </ul>
+      <ul class="rel">
+        <li>
+          <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+        </li>
+        <li>
+          <a href="../process.html" title="Sub-Processes">next</a>
+        </li>
+        <li>
+          <a href="../net.html" title="Networking">previous</a>
+        </li>
+      </ul>
+    </nav>  
+    
+  <div class="section" id="url-parsing-and-construction">
+<h1>URL parsing and construction<a class="headerlink" href="#url-parsing-and-construction" title="Permalink to this headline">¶</a></h1>
+<dl class="struct">
+<dt id="URL">
+<code class="descclassname">struct</code><code class="descname">URL</code><a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="var">
+<dt id="URL.schema-String--var">
+<code class="descclassname">var</code><code class="descname">schema</code> : String?<a class="headerlink" href="#URL.schema-String--var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.domain-String-var">
+<code class="descclassname">var</code><code class="descname">domain</code> : String<a class="headerlink" href="#URL.domain-String-var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.path-Path-var">
+<code class="descclassname">var</code><code class="descname">path</code> : Path<a class="headerlink" href="#URL.path-Path-var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.port-Int-var">
+<code class="descclassname">var</code><code class="descname">port</code> : Int<a class="headerlink" href="#URL.port-Int-var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.parameters-var">
+<code class="descclassname">var</code><code class="descname">parameters</code><code class="descclassname"> = [(name: String, value: String?)]()</code><a class="headerlink" href="#URL.parameters-var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.fragment-String--var">
+<code class="descclassname">var</code><code class="descname">fragment</code> : String?<a class="headerlink" href="#URL.fragment-String--var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.user-String--var">
+<code class="descclassname">var</code><code class="descname">user</code> : String?<a class="headerlink" href="#URL.user-String--var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="URL.password-String--var">
+<code class="descclassname">var</code><code class="descname">password</code> : String?<a class="headerlink" href="#URL.password-String--var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="init">
+<dt id="URL.init-string--">
+<code class="descname">init</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><a class="headerlink" href="#URL.init-string--" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="extension">
+<dt>
+<code class="descclassname">extension</code><code class="descname">String</code></dt>
+<dd><dl class="var">
+<dt id="String.urlEncoded-String-var">
+<code class="descclassname">var</code><code class="descname">urlEncoded</code> : String<a class="headerlink" href="#String.urlEncoded-String-var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="var">
+<dt id="String.urlDecoded-String--var">
+<code class="descclassname">var</code><code class="descname">urlDecoded</code> : String?<a class="headerlink" href="#String.urlDecoded-String--var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="extension">
+<dt id="URL">
+<code class="descclassname">extension</code><code class="descname">URL</code> : CustomStringConvertible<a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="extension">
+<dt id="URL">
+<code class="descclassname">extension</code><code class="descname">URL</code> : Hashable<a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+</main>
+      <aside>
+          <section>
+<h3>Table Of Contents</h3>
+
+<ul class="parent">
+  <li>
+    <a href="../index.html">Intro</a>
+  </li>
+</ul>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../string.html">String extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../string/substring.html">Sub-string extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/search.html">Searching for sub-strings and characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/replace.html">Replacing sub-strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/split.html">Splitting strings into parts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/whitespace.html">Trimming whitespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/string.html">Misc string extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/path.html">Path construction and deconstruction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/fs.html">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/file.html">File access</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/fileinfo.html">File information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/pipe.html">Communication pipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/stream.html">Stream protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/inputstream.html">Input (readable) streams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/outputstream.html">Output streams (writable)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/seekablestream.html">Seekable stream protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../filesystem/stream/memorystream.html">In-memory stream (R/W)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../date.html">Date handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../date/date.html">Simple date handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../date/timeinterval.html">Time interval</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../logger.html">Customizable logger</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../net.html">Networking</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">URL parsing and construction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../process.html">Sub-Processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thread.html">Threading primitives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adler32.html">Adler32 Checksum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../charset.html">Charset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syserror.html">POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools.html">Misc. Tools</a></li>
+</ul>
+
+
+<ul class="parent">
+  <li>
+    <a href="../swift-modindex.html">Index</a>
+  </li>
+</ul>
+          </section>
+      </aside>
+</div>
+    <footer>
+        &copy; Copyright 2016, Johannes Schriewer.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+    </footer>
+  </body>
+</html>
