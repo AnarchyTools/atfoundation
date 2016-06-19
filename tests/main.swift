@@ -33,4 +33,5 @@ XCTMain([
     testCase(SubProcessTests.allTests),
     testCase(Base64Tests.allTests),
     testCase(QuotedPrintableTests.allTests),
+    testCase(IPAddressTests.allTests),
 ])
