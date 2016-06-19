@@ -5,7 +5,7 @@ Random number generators
 
 .. swift:protocol:: RandomNumberGenerator
 
-Random number generators
+   Random number generators
 
    .. swift:method:: bytes(count: Int) -> [UInt8]
    
@@ -34,8 +34,8 @@ Random number generators
 
 .. swift:class:: Random : RandomNumberGenerator
 
-- Default CSPRNG for linux uses /dev/urandom, so it needs a file descriptor
-- Default CSPRNG for OSX uses arc4random
+   CSPRNG for linux uses /dev/urandom, so it needs a file descriptor,
+   CSPRNG for OSX uses arc4random
 
    .. swift:class_method:: bytes(count: Int) -> [UInt8]
    

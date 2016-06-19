@@ -5,7 +5,7 @@ UUID values
 
 .. swift:struct:: UUID4 : Equatable
 
-UUID4 (Random class)
+   UUID4 (Random class)
 
    .. swift:init:: init()
    
