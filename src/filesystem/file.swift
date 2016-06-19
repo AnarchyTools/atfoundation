@@ -230,7 +230,7 @@ public class File: SeekableStream, InputStream, OutputStream {
     /// FILE pointer
     public var fp: UnsafeMutablePointer<FILE>?
 
-    /// file path (may be nil if created from file descriptor or file pointer)
+    /// file path (may be `nil` if created from file descriptor or file pointer)
     private(set) public var path: Path?
 
     /// take ownership of the file descriptor/pointer

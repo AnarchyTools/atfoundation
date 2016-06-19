@@ -3,3 +3,5 @@ bin
 *.sublime-workspace
 atfoundation.xcodeproj
 Info.plist
+docs/_build
+__pycache__
