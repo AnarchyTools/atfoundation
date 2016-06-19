@@ -30,7 +30,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -54,23 +54,23 @@
   <div class="section" id="customizable-logger">
 <h1>Customizable logger<a class="headerlink" href="#customizable-logger" title="Permalink to this headline">¶</a></h1>
 <dl class="protocol">
-<dt id="LoggerProcotol">
-<code class="descclassname">protocol</code><code class="descname">LoggerProcotol</code><a class="headerlink" href="#LoggerProcotol" title="Permalink to this definition">¶</a></dt>
+<dt id="protocol LoggerProcotol">
+<code class="descclassname">protocol </code><code class="descname">LoggerProcotol</code><a class="headerlink" href="#protocol LoggerProcotol" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="LoggerProcotol.logFileAndLine-Bool-var">
-<code class="descclassname">var</code><code class="descname">logFileAndLine</code> : Bool<a class="headerlink" href="#LoggerProcotol.logFileAndLine-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="LoggerProcotol.logFileAndLine">
+<code class="descclassname">var </code><code class="descname">logFileAndLine</code> : Bool<a class="headerlink" href="#LoggerProcotol.logFileAndLine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file and line too?</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="LoggerProcotol.logDate-Bool-var">
-<code class="descclassname">var</code><code class="descname">logDate</code> : Bool<a class="headerlink" href="#LoggerProcotol.logDate-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="LoggerProcotol.logDate">
+<code class="descclassname">var </code><code class="descname">logDate</code> : Bool<a class="headerlink" href="#LoggerProcotol.logDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log current date, useful for permanent logfiles</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="LoggerProcotol.log-_-_-date-file-line-function---protocol">
-<code class="descclassname">func</code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#LoggerProcotol.log-_-_-date-file-line-function---protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="LoggerProcotol.log(_:_:date:file:line:function:)">
+<code class="descclassname">func </code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#LoggerProcotol.log(_:_:date:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Primary function to log something</p>
 </dd></dl>
 
@@ -78,10 +78,10 @@
 
 <dl class="extension">
 <dt>
-<code class="descclassname">extension</code><code class="descname">LoggerProcotol</code></dt>
+<code class="descclassname">extension </code><code class="descname">LoggerProcotol</code></dt>
 <dd><dl class="method">
-<dt id="LoggerProcotol.log-_-_--">
-<code class="descclassname">func</code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em><span class="sig-paren">)</span><a class="headerlink" href="#LoggerProcotol.log-_-_--" title="Permalink to this definition">¶</a></dt>
+<dt id="LoggerProcotol.log(_:_:)">
+<code class="descclassname">func </code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em><span class="sig-paren">)</span><a class="headerlink" href="#LoggerProcotol.log(_:_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience override if you don&#8217;t want to log the file and line info</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -98,8 +98,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="LoggerProcotol.log-_-_-file-line-function--">
-<code class="descclassname">func</code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#LoggerProcotol.log-_-_-file-line-function--" title="Permalink to this definition">¶</a></dt>
+<dt id="LoggerProcotol.log(_:_:file:line:function:)">
+<code class="descclassname">func </code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#LoggerProcotol.log(_:_:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convenience override if you don&#8217;t want to provide an explicit date</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -121,73 +121,73 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="StdErrLogger">
-<code class="descclassname">class</code><code class="descname">StdErrLogger</code> : LoggerProcotol<a class="headerlink" href="#StdErrLogger" title="Permalink to this definition">¶</a></dt>
+<dt id="class StdErrLogger">
+<code class="descclassname">class </code><code class="descname">StdErrLogger</code> : LoggerProcotol<a class="headerlink" href="#class StdErrLogger" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="StdErrLogger.logFileAndLine-Bool-var">
-<code class="descclassname">var</code><code class="descname">logFileAndLine</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdErrLogger.logFileAndLine-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="StdErrLogger.logFileAndLine">
+<code class="descclassname">var </code><code class="descname">logFileAndLine</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdErrLogger.logFileAndLine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file and line too?</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="StdErrLogger.logDate-Bool-var">
-<code class="descclassname">var</code><code class="descname">logDate</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdErrLogger.logDate-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="StdErrLogger.logDate">
+<code class="descclassname">var </code><code class="descname">logDate</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdErrLogger.logDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log current date, useful for permanent logfiles</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="StdErrLogger.log-_-_-date-file-line-function--">
-<code class="descclassname">func</code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#StdErrLogger.log-_-_-date-file-line-function--" title="Permalink to this definition">¶</a></dt>
+<dt id="StdErrLogger.log(_:_:date:file:line:function:)">
+<code class="descclassname">func </code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#StdErrLogger.log(_:_:date:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="StdOutLogger">
-<code class="descclassname">class</code><code class="descname">StdOutLogger</code> : LoggerProcotol<a class="headerlink" href="#StdOutLogger" title="Permalink to this definition">¶</a></dt>
+<dt id="class StdOutLogger">
+<code class="descclassname">class </code><code class="descname">StdOutLogger</code> : LoggerProcotol<a class="headerlink" href="#class StdOutLogger" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="StdOutLogger.logFileAndLine-Bool-var">
-<code class="descclassname">var</code><code class="descname">logFileAndLine</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdOutLogger.logFileAndLine-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="StdOutLogger.logFileAndLine">
+<code class="descclassname">var </code><code class="descname">logFileAndLine</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdOutLogger.logFileAndLine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file and line too?</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="StdOutLogger.logDate-Bool-var">
-<code class="descclassname">var</code><code class="descname">logDate</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdOutLogger.logDate-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="StdOutLogger.logDate">
+<code class="descclassname">var </code><code class="descname">logDate</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#StdOutLogger.logDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log current date, useful for permanent logfiles</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="StdOutLogger.log-_-_-date-file-line-function--">
-<code class="descclassname">func</code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#StdOutLogger.log-_-_-date-file-line-function--" title="Permalink to this definition">¶</a></dt>
+<dt id="StdOutLogger.log(_:_:date:file:line:function:)">
+<code class="descclassname">func </code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#StdOutLogger.log(_:_:date:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="FileLogger">
-<code class="descclassname">class</code><code class="descname">FileLogger</code> : LoggerProcotol<a class="headerlink" href="#FileLogger" title="Permalink to this definition">¶</a></dt>
+<dt id="class FileLogger">
+<code class="descclassname">class </code><code class="descname">FileLogger</code> : LoggerProcotol<a class="headerlink" href="#class FileLogger" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="FileLogger.logFileAndLine-Bool-var">
-<code class="descclassname">var</code><code class="descname">logFileAndLine</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#FileLogger.logFileAndLine-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileLogger.logFileAndLine">
+<code class="descclassname">var </code><code class="descname">logFileAndLine</code> : Bool<code class="descclassname"> = false</code><a class="headerlink" href="#FileLogger.logFileAndLine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log file and line too?</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileLogger.logDate-Bool-var">
-<code class="descclassname">var</code><code class="descname">logDate</code> : Bool<code class="descclassname"> = true</code><a class="headerlink" href="#FileLogger.logDate-Bool-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileLogger.logDate">
+<code class="descclassname">var </code><code class="descname">logDate</code> : Bool<code class="descclassname"> = true</code><a class="headerlink" href="#FileLogger.logDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log current date, useful for permanent logfiles</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileLogger.logFileName-Path--var">
-<code class="descclassname">var</code><code class="descname">logFileName</code> : Path?<code class="descclassname"> = nil</code><a class="headerlink" href="#FileLogger.logFileName-Path--var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileLogger.logFileName">
+<code class="descclassname">var </code><code class="descname">logFileName</code> : Path?<code class="descclassname"> = nil</code><a class="headerlink" href="#FileLogger.logFileName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current log file name</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="FileLogger.init-filename--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>filename: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FileLogger.init-filename--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="FileLogger.init(filename:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>filename: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FileLogger.init(filename:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with filename</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -206,35 +206,35 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="FileLogger.reopenLog--">
-<code class="descclassname">func</code><code class="descname">reopenLog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FileLogger.reopenLog--" title="Permalink to this definition">¶</a></dt>
+<dt id="FileLogger.reopenLog()">
+<code class="descclassname">func </code><code class="descname">reopenLog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#FileLogger.reopenLog()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close and re-open log file (usually bound to a HUP UNIX Signal)</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="FileLogger.log-_-_-date-file-line-function--">
-<code class="descclassname">func</code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#FileLogger.log-_-_-date-file-line-function--" title="Permalink to this definition">¶</a></dt>
+<dt id="FileLogger.log(_:_:date:file:line:function:)">
+<code class="descclassname">func </code><code class="descname">log</code><span class="sig-paren">(</span><em>_: Log.LogLevel</em>, <em>_: [Any]</em>, <em>date: Date?</em>, <em>file: String?</em>, <em>line: Int?</em>, <em>function: String?</em><span class="sig-paren">)</span><a class="headerlink" href="#FileLogger.log(_:_:date:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Log">
-<code class="descclassname">class</code><code class="descname">Log</code><a class="headerlink" href="#Log" title="Permalink to this definition">¶</a></dt>
+<dt id="class Log">
+<code class="descclassname">class </code><code class="descname">Log</code><a class="headerlink" href="#class Log" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="static_var">
-<dt id="Log.logger-LoggerProcotol-static_var">
-<code class="descclassname">static var</code><code class="descname">logger</code> : LoggerProcotol<code class="descclassname"> = StdErrLogger()</code><a class="headerlink" href="#Log.logger-LoggerProcotol-static_var" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.logger">
+<code class="descclassname">static var </code><code class="descname">logger</code> : LoggerProcotol<code class="descclassname"> = StdErrLogger()</code><a class="headerlink" href="#Log.logger" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_var">
-<dt id="Log.logLevel-LogLevel-static_var">
-<code class="descclassname">static var</code><code class="descname">logLevel</code> : LogLevel<code class="descclassname"> = .Debug</code><a class="headerlink" href="#Log.logLevel-LogLevel-static_var" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.logLevel">
+<code class="descclassname">static var </code><code class="descname">logLevel</code> : LogLevel<code class="descclassname"> = .Debug</code><a class="headerlink" href="#Log.logLevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Active log level</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="Log.debug-_-file-line-function---class">
-<code class="descclassname">class func</code><code class="descname">debug</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.debug-_-file-line-function---class" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.debug(_:file:line:function:)">
+<code class="descclassname">class func </code><code class="descname">debug</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.debug(_:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log a debug message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -250,8 +250,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="Log.info-_-file-line-function---class">
-<code class="descclassname">class func</code><code class="descname">info</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.info-_-file-line-function---class" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.info(_:file:line:function:)">
+<code class="descclassname">class func </code><code class="descname">info</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.info(_:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log an informal message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -267,8 +267,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="Log.warn-_-file-line-function---class">
-<code class="descclassname">class func</code><code class="descname">warn</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.warn-_-file-line-function---class" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.warn(_:file:line:function:)">
+<code class="descclassname">class func </code><code class="descname">warn</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.warn(_:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log a warning message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -284,8 +284,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="Log.error-_-file-line-function---class">
-<code class="descclassname">class func</code><code class="descname">error</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.error-_-file-line-function---class" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.error(_:file:line:function:)">
+<code class="descclassname">class func </code><code class="descname">error</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.error(_:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log an error message</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -301,8 +301,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="Log.fatal-_-file-line-function---class">
-<code class="descclassname">class func</code><code class="descname">fatal</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.fatal-_-file-line-function---class" title="Permalink to this definition">¶</a></dt>
+<dt id="Log.fatal(_:file:line:function:)">
+<code class="descclassname">class func </code><code class="descname">fatal</code><span class="sig-paren">(</span><em>_: Any...</em>, <em>file: String = #file</em>, <em>line: Int = #line</em>, <em>function: String = #function</em><span class="sig-paren">)</span><a class="headerlink" href="#Log.fatal(_:file:line:function:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Log a fatal message, program usually quits after these</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -318,8 +318,8 @@
 </dd></dl>
 
 <dl class="enum">
-<dt id="Log.LogLevel">
-<code class="descclassname">enum</code><code class="descname">LogLevel</code> : Int<a class="headerlink" href="#Log.LogLevel" title="Permalink to this definition">¶</a></dt>
+<dt id="enum Log.LogLevel">
+<code class="descclassname">enum </code><code class="descname">LogLevel</code> : Int<a class="headerlink" href="#enum Log.LogLevel" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="enum_case">
 <dt id="Log.LogLevel.Debug">
 <code class="descname">Debug</code><code class="descclassname"> = 0</code><a class="headerlink" href="#Log.LogLevel.Debug" title="Permalink to this definition">¶</a></dt>
@@ -391,7 +391,7 @@
 <li class="toctree-l2"><a class="reference internal" href="date/timeinterval.html">Time interval</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Customizable logger</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Customizable logger</a></li>
 <li class="toctree-l1"><a class="reference internal" href="net.html">Networking</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="net/url.html">URL parsing and construction</a></li>
 </ul>
@@ -407,15 +407,36 @@
 
 <ul class="parent">
   <li>
-    <a href="swift-modindex.html">Index</a>
+    <a href="swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="net.html" title="Networking">next</a>
+  </li>
+  <li>
+    <a href="date/timeinterval.html" title="Time interval">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

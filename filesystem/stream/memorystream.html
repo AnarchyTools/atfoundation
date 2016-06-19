@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,108 +55,108 @@
   <div class="section" id="in-memory-stream-r-w">
 <h1>In-memory stream (R/W)<a class="headerlink" href="#in-memory-stream-r-w" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="MemoryStream">
-<code class="descclassname">class</code><code class="descname">MemoryStream</code> : InputStream, OutputStream, SeekableStream<a class="headerlink" href="#MemoryStream" title="Permalink to this definition">¶</a></dt>
+<dt id="class MemoryStream">
+<code class="descclassname">class </code><code class="descname">MemoryStream</code> : InputStream, OutputStream, SeekableStream<a class="headerlink" href="#class MemoryStream" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="MemoryStream.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<code class="descclassname"> = nil</code><a class="headerlink" href="#MemoryStream.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<code class="descclassname"> = nil</code><a class="headerlink" href="#MemoryStream.fp" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="let">
-<dt id="MemoryStream.fd-Int32-let">
-<code class="descclassname">let</code><code class="descname">fd</code> : Int32<code class="descclassname"> = -1</code><a class="headerlink" href="#MemoryStream.fd-Int32-let" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.fd">
+<code class="descclassname">let </code><code class="descname">fd</code> : Int32<code class="descclassname"> = -1</code><a class="headerlink" href="#MemoryStream.fd" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="MemoryStream.position-Int-var">
-<code class="descclassname">var</code><code class="descname">position</code> : Int<code class="descclassname"> = 0</code><a class="headerlink" href="#MemoryStream.position-Int-var" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.position">
+<code class="descclassname">var </code><code class="descname">position</code> : Int<code class="descclassname"> = 0</code><a class="headerlink" href="#MemoryStream.position" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="MemoryStream.size-Int-var">
-<code class="descclassname">var</code><code class="descname">size</code> : Int<a class="headerlink" href="#MemoryStream.size-Int-var" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.size">
+<code class="descclassname">var </code><code class="descname">size</code> : Int<a class="headerlink" href="#MemoryStream.size" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="init">
-<dt id="MemoryStream.init-string--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init-string--" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.init(string:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init(string:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="init">
-<dt id="MemoryStream.init-data--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>data: [UInt8]</em><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init-data--" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.init(data:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>data: [UInt8]</em><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init(data:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="init">
-<dt id="MemoryStream.init--">
-<code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init--" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.init()">
+<code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="init">
-<dt id="MemoryStream.init-capacity--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>capacity: Int</em><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init-capacity--" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.init(capacity:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>capacity: Int</em><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.init(capacity:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.truncate-size--throws">
-<code class="descclassname">func</code><code class="descname">truncate</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.truncate-size--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.truncate(size:)">
+<code class="descclassname">func </code><code class="descname">truncate</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.truncate(size:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.read-size--throws-String-">
-<code class="descclassname">func</code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#MemoryStream.read-size--throws-String-" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.read(size:)">
+<code class="descclassname">func </code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#MemoryStream.read(size:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.read-size--throws--UInt8-">
-<code class="descclassname">func</code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]<a class="headerlink" href="#MemoryStream.read-size--throws--UInt8-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]</dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.readAll--throws-String-">
-<code class="descclassname">func</code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#MemoryStream.readAll--throws-String-" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.readAll()">
+<code class="descclassname">func </code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#MemoryStream.readAll()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.readAll--throws--UInt8-">
-<code class="descclassname">func</code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]<a class="headerlink" href="#MemoryStream.readAll--throws--UInt8-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]</dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.readLine--throws-String-">
-<code class="descclassname">func</code><code class="descname">readLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#MemoryStream.readLine--throws-String-" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.readLine()">
+<code class="descclassname">func </code><code class="descname">readLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#MemoryStream.readLine()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.pipe-to--throws">
-<code class="descclassname">func</code><code class="descname">pipe</code><span class="sig-paren">(</span><em>to: OutputStream</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.pipe-to--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.pipe(to:)">
+<code class="descclassname">func </code><code class="descname">pipe</code><span class="sig-paren">(</span><em>to: OutputStream</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.pipe(to:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.write-string--throws">
-<code class="descclassname">func</code><code class="descname">write</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.write-string--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.write(string:)">
+<code class="descclassname">func </code><code class="descname">write</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.write(string:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.writeLine-string--throws">
-<code class="descclassname">func</code><code class="descname">writeLine</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.writeLine-string--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.writeLine(string:)">
+<code class="descclassname">func </code><code class="descname">writeLine</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.writeLine(string:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.write-data--throws">
-<code class="descclassname">func</code><code class="descname">write</code><span class="sig-paren">(</span><em>data: [UInt8]</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.write-data--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.write(data:)">
+<code class="descclassname">func </code><code class="descname">write</code><span class="sig-paren">(</span><em>data: [UInt8]</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#MemoryStream.write(data:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="MemoryStream.flush--">
-<code class="descclassname">func</code><code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.flush--" title="Permalink to this definition">¶</a></dt>
+<dt id="MemoryStream.flush()">
+<code class="descclassname">func </code><code class="descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#MemoryStream.flush()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
-<dt id="MemoryStream">
-<code class="descclassname">extension</code><code class="descname">MemoryStream</code> : Hashable<a class="headerlink" href="#MemoryStream" title="Permalink to this definition">¶</a></dt>
+<dt id="extension MemoryStream">
+<code class="descclassname">extension </code><code class="descname">MemoryStream</code> : Hashable<a class="headerlink" href="#extension MemoryStream" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -193,7 +193,7 @@
 <li class="toctree-l2"><a class="reference internal" href="inputstream.html">Input (readable) streams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="outputstream.html">Output streams (writable)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="seekablestream.html">Seekable stream protocol</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">In-memory stream (R/W)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">In-memory stream (R/W)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../date.html">Date handling</a><ul>
@@ -217,15 +217,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../../swift-modindex.html">Index</a>
+    <a href="../../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="../../date.html" title="Date handling">next</a>
+  </li>
+  <li>
+    <a href="seekablestream.html" title="Seekable stream protocol">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

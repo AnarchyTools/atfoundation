@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,11 +55,11 @@
   <div class="section" id="file-management">
 <h1>File management<a class="headerlink" href="#file-management" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="FS">
-<code class="descclassname">class</code><code class="descname">FS</code><a class="headerlink" href="#FS" title="Permalink to this definition">¶</a></dt>
+<dt id="class FS">
+<code class="descclassname">class </code><code class="descname">FS</code><a class="headerlink" href="#class FS" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="class_method">
-<dt id="FS.fileExists-path---Bool-class">
-<code class="descclassname">class func</code><code class="descname">fileExists</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#FS.fileExists-path---Bool-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.fileExists(path:)">
+<code class="descclassname">class func </code><code class="descname">fileExists</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#FS.fileExists(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a file exists and return true if it does</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -78,8 +78,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.isDirectory-path---Bool-class">
-<code class="descclassname">class func</code><code class="descname">isDirectory</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#FS.isDirectory-path---Bool-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.isDirectory(path:)">
+<code class="descclassname">class func </code><code class="descname">isDirectory</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#FS.isDirectory(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a path is a directory and return true if it is</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -98,8 +98,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.touchItem-path--throws-class">
-<code class="descclassname">class func</code><code class="descname">touchItem</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.touchItem-path--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.touchItem(path:)">
+<code class="descclassname">class func </code><code class="descname">touchItem</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.touchItem(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update modification time for existing item or create empty file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -115,8 +115,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.removeItem-path-recursive--throws-class">
-<code class="descclassname">class func</code><code class="descname">removeItem</code><span class="sig-paren">(</span><em>path: Path</em>, <em>recursive: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.removeItem-path-recursive--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.removeItem(path:recursive:)">
+<code class="descclassname">class func </code><code class="descname">removeItem</code><span class="sig-paren">(</span><em>path: Path</em>, <em>recursive: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.removeItem(path:recursive:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove item from file system</p>
 <p>If <code class="docutils literal"><span class="pre">path</span></code> is a non-empty directory and <code class="docutils literal"><span class="pre">recursive</span></code> is false
 an error will be thrown!</p>
@@ -135,8 +135,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.createDirectory-path-intermediate--throws-class">
-<code class="descclassname">class func</code><code class="descname">createDirectory</code><span class="sig-paren">(</span><em>path: Path</em>, <em>intermediate: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.createDirectory-path-intermediate--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.createDirectory(path:intermediate:)">
+<code class="descclassname">class func </code><code class="descname">createDirectory</code><span class="sig-paren">(</span><em>path: Path</em>, <em>intermediate: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.createDirectory(path:intermediate:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -153,8 +153,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.getInfo-path--throws-FileInfo-class">
-<code class="descclassname">class func</code><code class="descname">getInfo</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; FileInfo<a class="headerlink" href="#FS.getInfo-path--throws-FileInfo-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.getInfo(path:)">
+<code class="descclassname">class func </code><code class="descname">getInfo</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; FileInfo<a class="headerlink" href="#FS.getInfo(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get file information for a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -173,8 +173,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.getOwner-path--throws-uid_t-class">
-<code class="descclassname">class func</code><code class="descname">getOwner</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; uid_t<a class="headerlink" href="#FS.getOwner-path--throws-uid_t-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.getOwner(path:)">
+<code class="descclassname">class func </code><code class="descname">getOwner</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; uid_t<a class="headerlink" href="#FS.getOwner(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get file/directory owner</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -193,8 +193,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.setOwner-path-newOwner--throws-class">
-<code class="descclassname">class func</code><code class="descname">setOwner</code><span class="sig-paren">(</span><em>path: Path</em>, <em>newOwner: uid_t</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setOwner-path-newOwner--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.setOwner(path:newOwner:)">
+<code class="descclassname">class func </code><code class="descname">setOwner</code><span class="sig-paren">(</span><em>path: Path</em>, <em>newOwner: uid_t</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setOwner(path:newOwner:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set file/directory owner</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -211,8 +211,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.getGroup-path--throws-gid_t-class">
-<code class="descclassname">class func</code><code class="descname">getGroup</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; gid_t<a class="headerlink" href="#FS.getGroup-path--throws-gid_t-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.getGroup(path:)">
+<code class="descclassname">class func </code><code class="descname">getGroup</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; gid_t<a class="headerlink" href="#FS.getGroup(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get file/directory group</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -231,8 +231,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.setGroup-path-newGroup--throws-class">
-<code class="descclassname">class func</code><code class="descname">setGroup</code><span class="sig-paren">(</span><em>path: Path</em>, <em>newGroup: gid_t</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setGroup-path-newGroup--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.setGroup(path:newGroup:)">
+<code class="descclassname">class func </code><code class="descname">setGroup</code><span class="sig-paren">(</span><em>path: Path</em>, <em>newGroup: gid_t</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setGroup(path:newGroup:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set file/directory group</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -249,8 +249,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.setOwnerAndGroup-path-owner-group--throws-class">
-<code class="descclassname">class func</code><code class="descname">setOwnerAndGroup</code><span class="sig-paren">(</span><em>path: Path</em>, <em>owner: uid_t</em>, <em>group: gid_t</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setOwnerAndGroup-path-owner-group--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.setOwnerAndGroup(path:owner:group:)">
+<code class="descclassname">class func </code><code class="descname">setOwnerAndGroup</code><span class="sig-paren">(</span><em>path: Path</em>, <em>owner: uid_t</em>, <em>group: gid_t</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setOwnerAndGroup(path:owner:group:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set file/directory owner</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -268,8 +268,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.getSize-path--throws-UInt64-class">
-<code class="descclassname">class func</code><code class="descname">getSize</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; UInt64<a class="headerlink" href="#FS.getSize-path--throws-UInt64-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.getSize(path:)">
+<code class="descclassname">class func </code><code class="descname">getSize</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; UInt64<a class="headerlink" href="#FS.getSize(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get file/directory size</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -288,8 +288,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.getAttributes-path--throws-FileMode-class">
-<code class="descclassname">class func</code><code class="descname">getAttributes</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; FileMode<a class="headerlink" href="#FS.getAttributes-path--throws-FileMode-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.getAttributes(path:)">
+<code class="descclassname">class func </code><code class="descname">getAttributes</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; FileMode<a class="headerlink" href="#FS.getAttributes(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get file/directory mode</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -308,8 +308,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.setAttributes-path-mode--throws-class">
-<code class="descclassname">class func</code><code class="descname">setAttributes</code><span class="sig-paren">(</span><em>path: Path</em>, <em>mode: FileMode</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setAttributes-path-mode--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.setAttributes(path:mode:)">
+<code class="descclassname">class func </code><code class="descname">setAttributes</code><span class="sig-paren">(</span><em>path: Path</em>, <em>mode: FileMode</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.setAttributes(path:mode:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change attributes of a filesystem object</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -326,8 +326,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.resolveGroup-id--throws-String--class">
-<code class="descclassname">class func</code><code class="descname">resolveGroup</code><span class="sig-paren">(</span><em>id: gid_t</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#FS.resolveGroup-id--throws-String--class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.resolveGroup(id:)">
+<code class="descclassname">class func </code><code class="descname">resolveGroup</code><span class="sig-paren">(</span><em>id: gid_t</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#FS.resolveGroup(id:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch a group name for a group id</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -346,8 +346,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.resolveGroup-name--throws-gid_t--class">
-<code class="descclassname">class func</code><code class="descname">resolveGroup</code><span class="sig-paren">(</span><em>name: String</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; gid_t?<a class="headerlink" href="#FS.resolveGroup-name--throws-gid_t--class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.resolveGroup(name:)">
+<code class="descclassname">class func </code><code class="descname">resolveGroup</code><span class="sig-paren">(</span><em>name: String</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; gid_t?<a class="headerlink" href="#FS.resolveGroup(name:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch a group id for a group name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -366,8 +366,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.resolveUser-id--throws-String--class">
-<code class="descclassname">class func</code><code class="descname">resolveUser</code><span class="sig-paren">(</span><em>id: uid_t</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#FS.resolveUser-id--throws-String--class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.resolveUser(id:)">
+<code class="descclassname">class func </code><code class="descname">resolveUser</code><span class="sig-paren">(</span><em>id: uid_t</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#FS.resolveUser(id:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch a user name for a user id</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -386,8 +386,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.resolveUser-name--throws-uid_t--class">
-<code class="descclassname">class func</code><code class="descname">resolveUser</code><span class="sig-paren">(</span><em>name: String</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; uid_t?<a class="headerlink" href="#FS.resolveUser-name--throws-uid_t--class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.resolveUser(name:)">
+<code class="descclassname">class func </code><code class="descname">resolveUser</code><span class="sig-paren">(</span><em>name: String</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; uid_t?<a class="headerlink" href="#FS.resolveUser(name:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch a user id for a user name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -406,8 +406,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.getWorkingDirectory--throws-Path-class">
-<code class="descclassname">class func</code><code class="descname">getWorkingDirectory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Path<a class="headerlink" href="#FS.getWorkingDirectory--throws-Path-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.getWorkingDirectory()">
+<code class="descclassname">class func </code><code class="descname">getWorkingDirectory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Path<a class="headerlink" href="#FS.getWorkingDirectory()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get working directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -420,8 +420,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.changeWorkingDirectory-path--throws-class">
-<code class="descclassname">class func</code><code class="descname">changeWorkingDirectory</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.changeWorkingDirectory-path--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.changeWorkingDirectory(path:)">
+<code class="descclassname">class func </code><code class="descname">changeWorkingDirectory</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.changeWorkingDirectory(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Change working directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -437,8 +437,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.symlinkItem-from-to--throws-class">
-<code class="descclassname">class func</code><code class="descname">symlinkItem</code><span class="sig-paren">(</span><em>from: Path</em>, <em>to: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.symlinkItem-from-to--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.symlinkItem(from:to:)">
+<code class="descclassname">class func </code><code class="descname">symlinkItem</code><span class="sig-paren">(</span><em>from: Path</em>, <em>to: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.symlinkItem(from:to:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a symlink from one path to another</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -455,8 +455,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.iterateItems-path-recursive-includeHidden--throws-AnyIterator-FileInfo--class">
-<code class="descclassname">class func</code><code class="descname">iterateItems</code><span class="sig-paren">(</span><em>path: Path</em>, <em>recursive: Bool = false</em>, <em>includeHidden: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; AnyIterator&lt;FileInfo&gt;<a class="headerlink" href="#FS.iterateItems-path-recursive-includeHidden--throws-AnyIterator-FileInfo--class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.iterateItems(path:recursive:includeHidden:)">
+<code class="descclassname">class func </code><code class="descname">iterateItems</code><span class="sig-paren">(</span><em>path: Path</em>, <em>recursive: Bool = false</em>, <em>includeHidden: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; AnyIterator&lt;FileInfo&gt;<a class="headerlink" href="#FS.iterateItems(path:recursive:includeHidden:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Iterate over all entries in a directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -474,8 +474,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.moveItem-from-to-atomic--throws-class">
-<code class="descclassname">class func</code><code class="descname">moveItem</code><span class="sig-paren">(</span><em>from: Path</em>, <em>to: Path</em>, <em>atomic: Bool = true</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.moveItem-from-to-atomic--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.moveItem(from:to:atomic:)">
+<code class="descclassname">class func </code><code class="descname">moveItem</code><span class="sig-paren">(</span><em>from: Path</em>, <em>to: Path</em>, <em>atomic: Bool = true</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.moveItem(from:to:atomic:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move a filesystem item from one place to another</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -493,8 +493,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.copyItem-from-to-recursive--throws-class">
-<code class="descclassname">class func</code><code class="descname">copyItem</code><span class="sig-paren">(</span><em>from: Path</em>, <em>to: Path</em>, <em>recursive: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.copyItem-from-to-recursive--throws-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.copyItem(from:to:recursive:)">
+<code class="descclassname">class func </code><code class="descname">copyItem</code><span class="sig-paren">(</span><em>from: Path</em>, <em>to: Path</em>, <em>recursive: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#FS.copyItem(from:to:recursive:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy a filesystem item from one place to another</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -512,8 +512,8 @@ an error will be thrown!</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="FS.temporaryDirectory-prefix--throws-Path-class">
-<code class="descclassname">class func</code><code class="descname">temporaryDirectory</code><span class="sig-paren">(</span><em>prefix: String = &quot;tempdir&quot;</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Path<a class="headerlink" href="#FS.temporaryDirectory-prefix--throws-Path-class" title="Permalink to this definition">¶</a></dt>
+<dt id="FS.temporaryDirectory(prefix:)">
+<code class="descclassname">class func </code><code class="descname">temporaryDirectory</code><span class="sig-paren">(</span><em>prefix: String = &quot;tempdir&quot;</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Path<a class="headerlink" href="#FS.temporaryDirectory(prefix:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and return a unique temporary directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -559,7 +559,7 @@ an error will be thrown!</p>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="path.html">Path construction and deconstruction</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">File management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">File management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file.html">File access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fileinfo.html">File information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipe.html">Communication pipes</a></li>
@@ -591,15 +591,36 @@ an error will be thrown!</p>
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="file.html" title="File access">next</a>
+  </li>
+  <li>
+    <a href="path.html" title="Path construction and deconstruction">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

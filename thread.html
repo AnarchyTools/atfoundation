@@ -30,7 +30,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -54,11 +54,11 @@
   <div class="section" id="threading-primitives">
 <h1>Threading primitives<a class="headerlink" href="#threading-primitives" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="Thread">
-<code class="descclassname">class</code><code class="descname">Thread</code><a class="headerlink" href="#Thread" title="Permalink to this definition">¶</a></dt>
+<dt id="class Thread">
+<code class="descclassname">class </code><code class="descname">Thread</code><a class="headerlink" href="#class Thread" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="init">
-<dt id="Thread.init-_--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>_: ((Void) -&gt; Any?)</em><span class="sig-paren">)</span><a class="headerlink" href="#Thread.init-_--" title="Permalink to this definition">¶</a></dt>
+<dt id="Thread.init(_:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>_: ((Void) -&gt; Any?)</em><span class="sig-paren">)</span><a class="headerlink" href="#Thread.init(_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize and run a thread</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -74,8 +74,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="Thread.init-_--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>_: ((Void) -&gt; Void)</em><span class="sig-paren">)</span><a class="headerlink" href="#Thread.init-_--" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descname">init</code><span class="sig-paren">(</span><em>_: ((Void) -&gt; Void)</em><span class="sig-paren">)</span></dt>
 <dd><p>Initialize and run a detached thread that does not return a value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -91,8 +91,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="Thread.wait---Any-">
-<code class="descclassname">func</code><code class="descname">wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Any?<a class="headerlink" href="#Thread.wait---Any-" title="Permalink to this definition">¶</a></dt>
+<dt id="Thread.wait()">
+<code class="descclassname">func </code><code class="descname">wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Any?<a class="headerlink" href="#Thread.wait()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait for the result of a non-detached thread</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -105,25 +105,25 @@
 </dd></dl>
 
 <dl class="static_var">
-<dt id="Thread.threadID-UInt64-static_var">
-<code class="descclassname">static var</code><code class="descname">threadID</code> : UInt64<a class="headerlink" href="#Thread.threadID-UInt64-static_var" title="Permalink to this definition">¶</a></dt>
+<dt id="Thread.threadID">
+<code class="descclassname">static var </code><code class="descname">threadID</code> : UInt64<a class="headerlink" href="#Thread.threadID" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fetch current thread ID, returns zero for main thread</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Barrier">
-<code class="descclassname">class</code><code class="descname">Barrier</code><a class="headerlink" href="#Barrier" title="Permalink to this definition">¶</a></dt>
+<dt id="class Barrier">
+<code class="descclassname">class </code><code class="descname">Barrier</code><a class="headerlink" href="#class Barrier" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="init">
-<dt id="Barrier.init--">
-<code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Barrier.init--" title="Permalink to this definition">¶</a></dt>
+<dt id="Barrier.init()">
+<code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Barrier.init()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new barrier</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Barrier.wait-timeout--">
-<code class="descclassname">func</code><code class="descname">wait</code><span class="sig-paren">(</span><em>timeout: Int? = nil</em><span class="sig-paren">)</span><a class="headerlink" href="#Barrier.wait-timeout--" title="Permalink to this definition">¶</a></dt>
+<dt id="Barrier.wait(timeout:)">
+<code class="descclassname">func </code><code class="descname">wait</code><span class="sig-paren">(</span><em>timeout: Int? = nil</em><span class="sig-paren">)</span><a class="headerlink" href="#Barrier.wait(timeout:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait for a signal (stop at the barrier)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -139,19 +139,19 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="Barrier.signal--">
-<code class="descclassname">func</code><code class="descname">signal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Barrier.signal--" title="Permalink to this definition">¶</a></dt>
+<dt id="Barrier.signal()">
+<code class="descclassname">func </code><code class="descname">signal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Barrier.signal()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Signal the barrier, all threads blocked on that barrier will resume execution</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="Mutex">
-<code class="descclassname">class</code><code class="descname">Mutex</code><a class="headerlink" href="#Mutex" title="Permalink to this definition">¶</a></dt>
+<dt id="class Mutex">
+<code class="descclassname">class </code><code class="descname">Mutex</code><a class="headerlink" href="#class Mutex" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="init">
-<dt id="Mutex.init-recursive--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>recursive: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Mutex.init-recursive--" title="Permalink to this definition">¶</a></dt>
+<dt id="Mutex.init(recursive:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>recursive: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Mutex.init(recursive:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize new lock</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -167,8 +167,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="Mutex.lock--throws">
-<code class="descclassname">func</code><code class="descname">lock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Mutex.lock--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="Mutex.lock()">
+<code class="descclassname">func </code><code class="descname">lock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Mutex.lock()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lock the mutex, may throw an error on resource exhaustion or
 multiple locking from the same thread when not recursive
 Usually you could use <code class="docutils literal"><span class="pre">try!</span></code> to execute this as every error
@@ -177,8 +177,8 @@ error.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Mutex.unlock--throws">
-<code class="descclassname">func</code><code class="descname">unlock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Mutex.unlock--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="Mutex.unlock()">
+<code class="descclassname">func </code><code class="descname">unlock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Mutex.unlock()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unlock a locked mutex, may throw errors if the mutex was not locked
 Usually you could use <code class="docutils literal"><span class="pre">try!</span></code> to execute this as every error
 this throws is either system resource exhaustion or a programming
@@ -186,8 +186,8 @@ error.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Mutex.tryLock--throws-Bool">
-<code class="descclassname">func</code><code class="descname">tryLock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Bool<a class="headerlink" href="#Mutex.tryLock--throws-Bool" title="Permalink to this definition">¶</a></dt>
+<dt id="Mutex.tryLock()">
+<code class="descclassname">func </code><code class="descname">tryLock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Bool<a class="headerlink" href="#Mutex.tryLock()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Try locking the mutex, returns false if the lock is already held
 somewhere. If it returns true the locking succeeded.
 Usually you could use <code class="docutils literal"><span class="pre">try!</span></code> to execute this as every error
@@ -196,8 +196,8 @@ error.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Mutex.whileLocking-_--throws">
-<code class="descclassname">func</code><code class="descname">whileLocking</code><span class="sig-paren">(</span><em>_: (Void) -&gt; Void</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Mutex.whileLocking-_--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="Mutex.whileLocking(_:)">
+<code class="descclassname">func </code><code class="descname">whileLocking</code><span class="sig-paren">(</span><em>_: (Void) -&gt; Void</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Mutex.whileLocking(_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a block with the lock held, this is the prefered method to use</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -215,17 +215,17 @@ error.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="Semaphore">
-<code class="descclassname">class</code><code class="descname">Semaphore</code><a class="headerlink" href="#Semaphore" title="Permalink to this definition">¶</a></dt>
+<dt id="class Semaphore">
+<code class="descclassname">class </code><code class="descname">Semaphore</code><a class="headerlink" href="#class Semaphore" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="let">
-<dt id="Semaphore.name-String-let">
-<code class="descclassname">let</code><code class="descname">name</code> : String<a class="headerlink" href="#Semaphore.name-String-let" title="Permalink to this definition">¶</a></dt>
+<dt id="Semaphore.name">
+<code class="descclassname">let </code><code class="descname">name</code> : String<a class="headerlink" href="#Semaphore.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of the semaphore</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="Semaphore.init-name-count--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>name: String</em>, <em>count: UInt32</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Semaphore.init-name-count--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="Semaphore.init(name:count:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>name: String</em>, <em>count: UInt32</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Semaphore.init(name:count:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a semaphore</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -242,8 +242,8 @@ error.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Semaphore.wait--throws">
-<code class="descclassname">func</code><code class="descname">wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Semaphore.wait--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="Semaphore.wait()">
+<code class="descclassname">func </code><code class="descname">wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Semaphore.wait()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait for a semaphore. This decrements the resource limit,
 if the limit reaches zero the thread will wait for a <code class="docutils literal"><span class="pre">post()</span></code>
 from another thread.
@@ -253,8 +253,8 @@ error.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Semaphore.tryWait--throws-Bool">
-<code class="descclassname">func</code><code class="descname">tryWait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Bool<a class="headerlink" href="#Semaphore.tryWait--throws-Bool" title="Permalink to this definition">¶</a></dt>
+<dt id="Semaphore.tryWait()">
+<code class="descclassname">func </code><code class="descname">tryWait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Bool<a class="headerlink" href="#Semaphore.tryWait()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test if resources are available</p>
 <p>Usually you could use <code class="docutils literal"><span class="pre">try!</span></code> to execute this as every error
 this throws is either system resource exhaustion or a programming
@@ -270,14 +270,14 @@ error.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Semaphore.post--">
-<code class="descclassname">func</code><code class="descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Semaphore.post--" title="Permalink to this definition">¶</a></dt>
+<dt id="Semaphore.post()">
+<code class="descclassname">func </code><code class="descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Semaphore.post()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Release a resource to the semaphore</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Semaphore.whileLocking-cb--throws">
-<code class="descclassname">func</code><code class="descname">whileLocking</code><span class="sig-paren">(</span><em>cb: (Void) -&gt; Void</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Semaphore.whileLocking-cb--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="Semaphore.whileLocking(cb:)">
+<code class="descclassname">func </code><code class="descname">whileLocking</code><span class="sig-paren">(</span><em>cb: (Void) -&gt; Void</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#Semaphore.whileLocking(cb:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute a block aquiring resources from the semaphore and return the
 resources afterwards, this is the prefered function to call.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -343,7 +343,7 @@ resources afterwards, this is the prefered function to call.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="process.html">Sub-Processes</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Threading primitives</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Threading primitives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adler32.html">Adler32 Checksum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="charset.html">Charset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="syserror.html">POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)</a></li>
@@ -353,15 +353,36 @@ resources afterwards, this is the prefered function to call.</p>
 
 <ul class="parent">
   <li>
-    <a href="swift-modindex.html">Index</a>
+    <a href="swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="adler32.html" title="Adler32 Checksum">next</a>
+  </li>
+  <li>
+    <a href="process.html" title="Sub-Processes">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

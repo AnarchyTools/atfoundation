@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -56,10 +56,10 @@
 <h1>Searching for sub-strings and characters<a class="headerlink" href="#searching-for-sub-strings-and-characters" title="Permalink to this headline">¶</a></h1>
 <dl class="extension">
 <dt>
-<code class="descclassname">extension</code><code class="descname">String</code></dt>
+<code class="descclassname">extension </code><code class="descname">String</code></dt>
 <dd><dl class="method">
-<dt id="String.position-character-index-reverse---String.Index-">
-<code class="descclassname">func</code><code class="descname">position</code><span class="sig-paren">(</span><em>character: Character</em>, <em>index: String.Index? = nil</em>, <em>reverse: Bool = false</em><span class="sig-paren">)</span> &rarr; String.Index?<a class="headerlink" href="#String.position-character-index-reverse---String.Index-" title="Permalink to this definition">¶</a></dt>
+<dt id="String.position(character:index:reverse:)">
+<code class="descclassname">func </code><code class="descname">position</code><span class="sig-paren">(</span><em>character: Character</em>, <em>index: String.Index? = nil</em>, <em>reverse: Bool = false</em><span class="sig-paren">)</span> &rarr; String.Index?<a class="headerlink" href="#String.position(character:index:reverse:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for a character in a string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -80,8 +80,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.positions-character----String.Index-">
-<code class="descclassname">func</code><code class="descname">positions</code><span class="sig-paren">(</span><em>character: Character</em><span class="sig-paren">)</span> &rarr; [String.Index]<a class="headerlink" href="#String.positions-character----String.Index-" title="Permalink to this definition">¶</a></dt>
+<dt id="String.positions(character:)">
+<code class="descclassname">func </code><code class="descname">positions</code><span class="sig-paren">(</span><em>character: Character</em><span class="sig-paren">)</span> &rarr; [String.Index]<a class="headerlink" href="#String.positions(character:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return array with string indices of found character positions</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -100,8 +100,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.position-string-index-reverse---String.Index-">
-<code class="descclassname">func</code><code class="descname">position</code><span class="sig-paren">(</span><em>string: String</em>, <em>index: String.Index? = nil</em>, <em>reverse: Bool = false</em><span class="sig-paren">)</span> &rarr; String.Index?<a class="headerlink" href="#String.position-string-index-reverse---String.Index-" title="Permalink to this definition">¶</a></dt>
+<dt id="String.position(string:index:reverse:)">
+<code class="descclassname">func </code><code class="descname">position</code><span class="sig-paren">(</span><em>string: String</em>, <em>index: String.Index? = nil</em>, <em>reverse: Bool = false</em><span class="sig-paren">)</span> &rarr; String.Index?<a class="headerlink" href="#String.position(string:index:reverse:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for a substring</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -122,8 +122,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.positions-string----String.Index-">
-<code class="descclassname">func</code><code class="descname">positions</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span> &rarr; [String.Index]<a class="headerlink" href="#String.positions-string----String.Index-" title="Permalink to this definition">¶</a></dt>
+<dt id="String.positions(string:)">
+<code class="descclassname">func </code><code class="descname">positions</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span> &rarr; [String.Index]<a class="headerlink" href="#String.positions(string:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return array with string indices of found substring positions</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -142,8 +142,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.contains-string---Bool">
-<code class="descclassname">func</code><code class="descname">contains</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.contains-string---Bool" title="Permalink to this definition">¶</a></dt>
+<dt id="String.contains(string:)">
+<code class="descclassname">func </code><code class="descname">contains</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.contains(string:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for a substring</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -162,8 +162,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.contains-character---Bool">
-<code class="descclassname">func</code><code class="descname">contains</code><span class="sig-paren">(</span><em>character: Character</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.contains-character---Bool" title="Permalink to this definition">¶</a></dt>
+<dt id="String.contains(character:)">
+<code class="descclassname">func </code><code class="descname">contains</code><span class="sig-paren">(</span><em>character: Character</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.contains(character:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for a character</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -182,8 +182,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.hasPrefix-_---Bool">
-<code class="descclassname">func</code><code class="descname">hasPrefix</code><span class="sig-paren">(</span><em>_: String</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.hasPrefix-_---Bool" title="Permalink to this definition">¶</a></dt>
+<dt id="String.hasPrefix(_:)">
+<code class="descclassname">func </code><code class="descname">hasPrefix</code><span class="sig-paren">(</span><em>_: String</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.hasPrefix(_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a string has a prefix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -202,8 +202,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.hasSuffix-_---Bool">
-<code class="descclassname">func</code><code class="descname">hasSuffix</code><span class="sig-paren">(</span><em>_: String</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.hasSuffix-_---Bool" title="Permalink to this definition">¶</a></dt>
+<dt id="String.hasSuffix(_:)">
+<code class="descclassname">func </code><code class="descname">hasSuffix</code><span class="sig-paren">(</span><em>_: String</em><span class="sig-paren">)</span> &rarr; Bool<a class="headerlink" href="#String.hasSuffix(_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a string has a suffix</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -240,7 +240,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../string.html">String extensions</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="substring.html">Sub-string extraction</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Searching for sub-strings and characters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Searching for sub-strings and characters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="replace.html">Replacing sub-strings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="split.html">Splitting strings into parts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="whitespace.html">Trimming whitespace</a></li>
@@ -281,15 +281,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="replace.html" title="Replacing sub-strings">next</a>
+  </li>
+  <li>
+    <a href="substring.html" title="Sub-string extraction">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

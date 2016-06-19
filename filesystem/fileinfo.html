@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,123 +55,123 @@
   <div class="section" id="file-information">
 <h1>File information<a class="headerlink" href="#file-information" title="Permalink to this headline">¶</a></h1>
 <dl class="struct">
-<dt id="FileMode">
-<code class="descclassname">struct</code><code class="descname">FileMode</code> : OptionSet<a class="headerlink" href="#FileMode" title="Permalink to this definition">¶</a></dt>
+<dt id="struct FileMode">
+<code class="descclassname">struct </code><code class="descname">FileMode</code> : OptionSet<a class="headerlink" href="#struct FileMode" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="let">
-<dt id="FileMode.rawValue-Mode_t-let">
-<code class="descclassname">let</code><code class="descname">rawValue</code> : Mode_t<a class="headerlink" href="#FileMode.rawValue-Mode_t-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.rawValue">
+<code class="descclassname">let </code><code class="descname">rawValue</code> : Mode_t<a class="headerlink" href="#FileMode.rawValue" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.Inaccessible-static_let">
-<code class="descclassname">static let</code><code class="descname">Inaccessible</code><code class="descclassname"> = FileMode(rawValue: 0)</code><a class="headerlink" href="#FileMode.Inaccessible-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.Inaccessible">
+<code class="descclassname">static let </code><code class="descname">Inaccessible</code><code class="descclassname"> = FileMode(rawValue: 0)</code><a class="headerlink" href="#FileMode.Inaccessible" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ExecOthers-static_let">
-<code class="descclassname">static let</code><code class="descname">ExecOthers</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 0)</code><a class="headerlink" href="#FileMode.ExecOthers-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ExecOthers">
+<code class="descclassname">static let </code><code class="descname">ExecOthers</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 0)</code><a class="headerlink" href="#FileMode.ExecOthers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.WriteOthers-static_let">
-<code class="descclassname">static let</code><code class="descname">WriteOthers</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 1)</code><a class="headerlink" href="#FileMode.WriteOthers-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.WriteOthers">
+<code class="descclassname">static let </code><code class="descname">WriteOthers</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 1)</code><a class="headerlink" href="#FileMode.WriteOthers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ReadOthers-static_let">
-<code class="descclassname">static let</code><code class="descname">ReadOthers</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 2)</code><a class="headerlink" href="#FileMode.ReadOthers-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ReadOthers">
+<code class="descclassname">static let </code><code class="descname">ReadOthers</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 2)</code><a class="headerlink" href="#FileMode.ReadOthers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.RWOthers-static_let">
-<code class="descclassname">static let</code><code class="descname">RWOthers</code><code class="descclassname"> = ReadOthers + WriteOthers</code><a class="headerlink" href="#FileMode.RWOthers-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.RWOthers">
+<code class="descclassname">static let </code><code class="descname">RWOthers</code><code class="descclassname"> = ReadOthers + WriteOthers</code><a class="headerlink" href="#FileMode.RWOthers" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ExecGroup-static_let">
-<code class="descclassname">static let</code><code class="descname">ExecGroup</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 3)</code><a class="headerlink" href="#FileMode.ExecGroup-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ExecGroup">
+<code class="descclassname">static let </code><code class="descname">ExecGroup</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 3)</code><a class="headerlink" href="#FileMode.ExecGroup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.WriteGroup-static_let">
-<code class="descclassname">static let</code><code class="descname">WriteGroup</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 4)</code><a class="headerlink" href="#FileMode.WriteGroup-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.WriteGroup">
+<code class="descclassname">static let </code><code class="descname">WriteGroup</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 4)</code><a class="headerlink" href="#FileMode.WriteGroup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ReadGroup-static_let">
-<code class="descclassname">static let</code><code class="descname">ReadGroup</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 5)</code><a class="headerlink" href="#FileMode.ReadGroup-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ReadGroup">
+<code class="descclassname">static let </code><code class="descname">ReadGroup</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 5)</code><a class="headerlink" href="#FileMode.ReadGroup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.RWGroup-static_let">
-<code class="descclassname">static let</code><code class="descname">RWGroup</code><code class="descclassname"> = ReadGroup + WriteGroup</code><a class="headerlink" href="#FileMode.RWGroup-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.RWGroup">
+<code class="descclassname">static let </code><code class="descname">RWGroup</code><code class="descclassname"> = ReadGroup + WriteGroup</code><a class="headerlink" href="#FileMode.RWGroup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ExecOwner-static_let">
-<code class="descclassname">static let</code><code class="descname">ExecOwner</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 6)</code><a class="headerlink" href="#FileMode.ExecOwner-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ExecOwner">
+<code class="descclassname">static let </code><code class="descname">ExecOwner</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 6)</code><a class="headerlink" href="#FileMode.ExecOwner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.WriteOwner-static_let">
-<code class="descclassname">static let</code><code class="descname">WriteOwner</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 7)</code><a class="headerlink" href="#FileMode.WriteOwner-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.WriteOwner">
+<code class="descclassname">static let </code><code class="descname">WriteOwner</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 7)</code><a class="headerlink" href="#FileMode.WriteOwner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ReadOwner-static_let">
-<code class="descclassname">static let</code><code class="descname">ReadOwner</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 8)</code><a class="headerlink" href="#FileMode.ReadOwner-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ReadOwner">
+<code class="descclassname">static let </code><code class="descname">ReadOwner</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 8)</code><a class="headerlink" href="#FileMode.ReadOwner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.RWOwner-static_let">
-<code class="descclassname">static let</code><code class="descname">RWOwner</code><code class="descclassname"> = ReadOwner + WriteOwner</code><a class="headerlink" href="#FileMode.RWOwner-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.RWOwner">
+<code class="descclassname">static let </code><code class="descname">RWOwner</code><code class="descclassname"> = ReadOwner + WriteOwner</code><a class="headerlink" href="#FileMode.RWOwner" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ExecAll-static_let">
-<code class="descclassname">static let</code><code class="descname">ExecAll</code><code class="descclassname"> = ExecOthers  + ExecGroup  + ExecOwner</code><a class="headerlink" href="#FileMode.ExecAll-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ExecAll">
+<code class="descclassname">static let </code><code class="descname">ExecAll</code><code class="descclassname"> = ExecOthers  + ExecGroup  + ExecOwner</code><a class="headerlink" href="#FileMode.ExecAll" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.WriteAll-static_let">
-<code class="descclassname">static let</code><code class="descname">WriteAll</code><code class="descclassname"> = WriteOthers + WriteGroup + WriteOwner</code><a class="headerlink" href="#FileMode.WriteAll-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.WriteAll">
+<code class="descclassname">static let </code><code class="descname">WriteAll</code><code class="descclassname"> = WriteOthers + WriteGroup + WriteOwner</code><a class="headerlink" href="#FileMode.WriteAll" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.ReadAll-static_let">
-<code class="descclassname">static let</code><code class="descname">ReadAll</code><code class="descclassname"> = ReadOthers  + ReadGroup  + ReadOwner</code><a class="headerlink" href="#FileMode.ReadAll-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.ReadAll">
+<code class="descclassname">static let </code><code class="descname">ReadAll</code><code class="descclassname"> = ReadOthers  + ReadGroup  + ReadOwner</code><a class="headerlink" href="#FileMode.ReadAll" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.StickyBit-static_let">
-<code class="descclassname">static let</code><code class="descname">StickyBit</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 9)</code><a class="headerlink" href="#FileMode.StickyBit-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.StickyBit">
+<code class="descclassname">static let </code><code class="descname">StickyBit</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 9)</code><a class="headerlink" href="#FileMode.StickyBit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.SetGID-static_let">
-<code class="descclassname">static let</code><code class="descname">SetGID</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 10)</code><a class="headerlink" href="#FileMode.SetGID-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.SetGID">
+<code class="descclassname">static let </code><code class="descname">SetGID</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 10)</code><a class="headerlink" href="#FileMode.SetGID" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="static_let">
-<dt id="FileMode.SetUID-static_let">
-<code class="descclassname">static let</code><code class="descname">SetUID</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 11)</code><a class="headerlink" href="#FileMode.SetUID-static_let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.SetUID">
+<code class="descclassname">static let </code><code class="descname">SetUID</code><code class="descclassname"> = FileMode(rawValue: 1 &lt;&lt; 11)</code><a class="headerlink" href="#FileMode.SetUID" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="init">
-<dt id="FileMode.init-rawValue--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>rawValue: Mode_t</em><span class="sig-paren">)</span><a class="headerlink" href="#FileMode.init-rawValue--" title="Permalink to this definition">¶</a></dt>
+<dt id="FileMode.init(rawValue:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>rawValue: Mode_t</em><span class="sig-paren">)</span><a class="headerlink" href="#FileMode.init(rawValue:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
-<dt id="FileMode">
-<code class="descclassname">extension</code><code class="descname">FileMode</code> : CustomStringConvertible<a class="headerlink" href="#FileMode" title="Permalink to this definition">¶</a></dt>
+<dt id="extension FileMode">
+<code class="descclassname">extension </code><code class="descname">FileMode</code> : CustomStringConvertible<a class="headerlink" href="#extension FileMode" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="enum">
-<dt id="FileType">
-<code class="descclassname">enum</code><code class="descname">FileType</code> : Mode_t<a class="headerlink" href="#FileType" title="Permalink to this definition">¶</a></dt>
+<dt id="enum FileType">
+<code class="descclassname">enum </code><code class="descname">FileType</code> : Mode_t<a class="headerlink" href="#enum FileType" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="enum_case">
 <dt id="FileType.Invalid">
 <code class="descname">Invalid</code><code class="descclassname"> = 0</code><a class="headerlink" href="#FileType.Invalid" title="Permalink to this definition">¶</a></dt>
@@ -220,95 +220,95 @@
 </dd></dl>
 
 <dl class="struct">
-<dt id="FileInfo">
-<code class="descclassname">struct</code><code class="descname">FileInfo</code><a class="headerlink" href="#FileInfo" title="Permalink to this definition">¶</a></dt>
+<dt id="struct FileInfo">
+<code class="descclassname">struct </code><code class="descname">FileInfo</code><a class="headerlink" href="#struct FileInfo" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="let">
-<dt id="FileInfo.path-Path-let">
-<code class="descclassname">let</code><code class="descname">path</code> : Path<a class="headerlink" href="#FileInfo.path-Path-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.path">
+<code class="descclassname">let </code><code class="descname">path</code> : Path<a class="headerlink" href="#FileInfo.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>path to the file</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.owner-uid_t-let">
-<code class="descclassname">let</code><code class="descname">owner</code> : uid_t<a class="headerlink" href="#FileInfo.owner-uid_t-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.owner">
+<code class="descclassname">let </code><code class="descname">owner</code> : uid_t<a class="headerlink" href="#FileInfo.owner" title="Permalink to this definition">¶</a></dt>
 <dd><p>owner id</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileInfo.ownerName-String-var">
-<code class="descclassname">var</code><code class="descname">ownerName</code> : String<a class="headerlink" href="#FileInfo.ownerName-String-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.ownerName">
+<code class="descclassname">var </code><code class="descname">ownerName</code> : String<a class="headerlink" href="#FileInfo.ownerName" title="Permalink to this definition">¶</a></dt>
 <dd><p>owner name, if unresolvable defaults to stringified owner id</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.group-gid_t-let">
-<code class="descclassname">let</code><code class="descname">group</code> : gid_t<a class="headerlink" href="#FileInfo.group-gid_t-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.group">
+<code class="descclassname">let </code><code class="descname">group</code> : gid_t<a class="headerlink" href="#FileInfo.group" title="Permalink to this definition">¶</a></dt>
 <dd><p>group id</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileInfo.groupName-String-var">
-<code class="descclassname">var</code><code class="descname">groupName</code> : String<a class="headerlink" href="#FileInfo.groupName-String-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.groupName">
+<code class="descclassname">var </code><code class="descname">groupName</code> : String<a class="headerlink" href="#FileInfo.groupName" title="Permalink to this definition">¶</a></dt>
 <dd><p>group name, if unresolvable defaults to stringified group id</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.mode-FileMode-let">
-<code class="descclassname">let</code><code class="descname">mode</code> : FileMode<a class="headerlink" href="#FileInfo.mode-FileMode-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.mode">
+<code class="descclassname">let </code><code class="descname">mode</code> : FileMode<a class="headerlink" href="#FileInfo.mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>mode</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.size-UInt64-let">
-<code class="descclassname">let</code><code class="descname">size</code> : UInt64<a class="headerlink" href="#FileInfo.size-UInt64-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.size">
+<code class="descclassname">let </code><code class="descname">size</code> : UInt64<a class="headerlink" href="#FileInfo.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>file size</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.type-FileType-let">
-<code class="descclassname">let</code><code class="descname">type</code> : FileType<a class="headerlink" href="#FileInfo.type-FileType-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.type">
+<code class="descclassname">let </code><code class="descname">type</code> : FileType<a class="headerlink" href="#FileInfo.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>file type</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.linkTarget-Path--let">
-<code class="descclassname">let</code><code class="descname">linkTarget</code> : Path?<a class="headerlink" href="#FileInfo.linkTarget-Path--let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.linkTarget">
+<code class="descclassname">let </code><code class="descname">linkTarget</code> : Path?<a class="headerlink" href="#FileInfo.linkTarget" title="Permalink to this definition">¶</a></dt>
 <dd><p>path to original if this is a symlink</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.mTime-Int-let">
-<code class="descclassname">let</code><code class="descname">mTime</code> : Int<a class="headerlink" href="#FileInfo.mTime-Int-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.mTime">
+<code class="descclassname">let </code><code class="descname">mTime</code> : Int<a class="headerlink" href="#FileInfo.mTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>modification timestamp</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileInfo.modificationDate-Date-var">
-<code class="descclassname">var</code><code class="descname">modificationDate</code> : Date<a class="headerlink" href="#FileInfo.modificationDate-Date-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.modificationDate">
+<code class="descclassname">var </code><code class="descname">modificationDate</code> : Date<a class="headerlink" href="#FileInfo.modificationDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>modification date</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.cTime-Int-let">
-<code class="descclassname">let</code><code class="descname">cTime</code> : Int<a class="headerlink" href="#FileInfo.cTime-Int-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.cTime">
+<code class="descclassname">let </code><code class="descname">cTime</code> : Int<a class="headerlink" href="#FileInfo.cTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>creation timestamp</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileInfo.creationDate-Date-var">
-<code class="descclassname">var</code><code class="descname">creationDate</code> : Date<a class="headerlink" href="#FileInfo.creationDate-Date-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.creationDate">
+<code class="descclassname">var </code><code class="descname">creationDate</code> : Date<a class="headerlink" href="#FileInfo.creationDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>creation date</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="FileInfo.aTime-Int-let">
-<code class="descclassname">let</code><code class="descname">aTime</code> : Int<a class="headerlink" href="#FileInfo.aTime-Int-let" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.aTime">
+<code class="descclassname">let </code><code class="descname">aTime</code> : Int<a class="headerlink" href="#FileInfo.aTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>last access timestamp</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="FileInfo.accessDate-Date-var">
-<code class="descclassname">var</code><code class="descname">accessDate</code> : Date<a class="headerlink" href="#FileInfo.accessDate-Date-var" title="Permalink to this definition">¶</a></dt>
+<dt id="FileInfo.accessDate">
+<code class="descclassname">var </code><code class="descname">accessDate</code> : Date<a class="headerlink" href="#FileInfo.accessDate" title="Permalink to this definition">¶</a></dt>
 <dd><p>last access date</p>
 </dd></dl>
 
@@ -342,7 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="path.html">Path construction and deconstruction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fs.html">File management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file.html">File access</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">File information</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">File information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipe.html">Communication pipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream/stream.html">Stream protocol</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream/inputstream.html">Input (readable) streams</a></li>
@@ -372,15 +372,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="pipe.html" title="Communication pipes">next</a>
+  </li>
+  <li>
+    <a href="file.html" title="File access">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

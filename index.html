@@ -29,7 +29,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -49,7 +49,7 @@
     
   <div class="section" id="atfoundation">
 <h1>atfoundation<a class="headerlink" href="#atfoundation" title="Permalink to this headline">¶</a></h1>
-<a class="reference internal image-reference" href="_images/logo.png"><img alt="AnarchyTools logo" class="align-left" src="_images/logo.png" style="width: 273.0px; height: 350.0px;" /></a>
+<a class="reference internal image-reference" href="_images/logo.png"><img alt="AnarchyTools logo" class="align-left" src="_images/logo.png" /></a>
 <p><em>atfoundation</em> is a relatively small replacement for Apple&#8217;s <em>Foundation</em> extension to the Swift standard library.</p>
 <p>The current problem with Apple&#8217;s <em>Foundation</em> is that they want to follow the OS X APIs that <em>Foundation</em> delivers there. That is wirtten mostly in Objective C which is not available on Linux, so they are in fact re-implementing <em>Foundation</em> in Swift by copying the complete API interface over to Linux.</p>
 <p>As this is an immense task it is not nearly finished yet. In my opinion they made the mistake to stub the complete API interface they want to recreate by defining all of the interfaces and then throwing a fatal &#8220;Not Implemented yet&#8221; error when you call that interface. As you can imagine that is totally unusable when you rely on an API that is working only to see that your program runs fine on OSX and crashes on Linux.</p>
@@ -158,15 +158,33 @@
 
 <ul class="parent">
   <li>
-    <a href="swift-modindex.html">Index</a>
+    <a href="swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="string.html" title="String extensions">next</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

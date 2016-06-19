@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,81 +55,81 @@
   <div class="section" id="communication-pipes">
 <h1>Communication pipes<a class="headerlink" href="#communication-pipes" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="WritePipe">
-<code class="descclassname">class</code><code class="descname">WritePipe</code> : OutputStream<a class="headerlink" href="#WritePipe" title="Permalink to this definition">¶</a></dt>
+<dt id="class WritePipe">
+<code class="descclassname">class </code><code class="descname">WritePipe</code> : OutputStream<a class="headerlink" href="#class WritePipe" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="WritePipe.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#WritePipe.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="WritePipe.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#WritePipe.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>File pointer</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="protocol">
-<dt id="ReadEvents">
-<code class="descclassname">protocol</code><code class="descname">ReadEvents</code> : class, InputStream<a class="headerlink" href="#ReadEvents" title="Permalink to this definition">¶</a></dt>
+<dt id="protocol ReadEvents">
+<code class="descclassname">protocol </code><code class="descname">ReadEvents</code> : class, InputStream<a class="headerlink" href="#protocol ReadEvents" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="ReadEvents.readThread-Thread--var">
-<code class="descclassname">var</code><code class="descname">readThread</code> : Thread?<a class="headerlink" href="#ReadEvents.readThread-Thread--var" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadEvents.readThread">
+<code class="descclassname">var </code><code class="descname">readThread</code> : Thread?<a class="headerlink" href="#ReadEvents.readThread" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="ReadEvents.onReadData-cb---protocol">
-<code class="descclassname">func</code><code class="descname">onReadData</code><span class="sig-paren">(</span><em>cb: ([UInt8]) -&gt; Void</em><span class="sig-paren">)</span><a class="headerlink" href="#ReadEvents.onReadData-cb---protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadEvents.onReadData(cb:)">
+<code class="descclassname">func </code><code class="descname">onReadData</code><span class="sig-paren">(</span><em>cb: ([UInt8]) -&gt; Void</em><span class="sig-paren">)</span><a class="headerlink" href="#ReadEvents.onReadData(cb:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="ReadEvents.onReadLine-cb---protocol">
-<code class="descclassname">func</code><code class="descname">onReadLine</code><span class="sig-paren">(</span><em>cb: (String) -&gt; Void</em><span class="sig-paren">)</span><a class="headerlink" href="#ReadEvents.onReadLine-cb---protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadEvents.onReadLine(cb:)">
+<code class="descclassname">func </code><code class="descname">onReadLine</code><span class="sig-paren">(</span><em>cb: (String) -&gt; Void</em><span class="sig-paren">)</span><a class="headerlink" href="#ReadEvents.onReadLine(cb:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
 <dt>
-<code class="descclassname">extension</code><code class="descname">ReadEvents</code></dt>
+<code class="descclassname">extension </code><code class="descname">ReadEvents</code></dt>
 <dd><dl class="method">
-<dt id="ReadEvents.onReadData-cb--">
-<code class="descclassname">func</code><code class="descname">onReadData</code><span class="sig-paren">(</span><em>cb: ([UInt8]) -&gt; Void</em><span class="sig-paren">)</span><a class="headerlink" href="#ReadEvents.onReadData-cb--" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">onReadData</code><span class="sig-paren">(</span><em>cb: ([UInt8]) -&gt; Void</em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="ReadEvents.onReadLine-cb--">
-<code class="descclassname">func</code><code class="descname">onReadLine</code><span class="sig-paren">(</span><em>cb: (String) -&gt; Void</em><span class="sig-paren">)</span><a class="headerlink" href="#ReadEvents.onReadLine-cb--" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">onReadLine</code><span class="sig-paren">(</span><em>cb: (String) -&gt; Void</em><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="ReadPipe">
-<code class="descclassname">class</code><code class="descname">ReadPipe</code> : InputStream<a class="headerlink" href="#ReadPipe" title="Permalink to this definition">¶</a></dt>
+<dt id="class ReadPipe">
+<code class="descclassname">class </code><code class="descname">ReadPipe</code> : InputStream<a class="headerlink" href="#class ReadPipe" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="ReadPipe.readThread-Thread--var">
-<code class="descclassname">var</code><code class="descname">readThread</code> : Thread?<code class="descclassname"> = nil</code><a class="headerlink" href="#ReadPipe.readThread-Thread--var" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadPipe.readThread">
+<code class="descclassname">var </code><code class="descname">readThread</code> : Thread?<code class="descclassname"> = nil</code><a class="headerlink" href="#ReadPipe.readThread" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="ReadPipe.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#ReadPipe.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadPipe.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#ReadPipe.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>File pointer</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
-<dt id="ReadPipe">
-<code class="descclassname">extension</code><code class="descname">ReadPipe</code> : ReadEvents<a class="headerlink" href="#ReadPipe" title="Permalink to this definition">¶</a></dt>
+<dt id="extension ReadPipe">
+<code class="descclassname">extension </code><code class="descname">ReadPipe</code> : ReadEvents<a class="headerlink" href="#extension ReadPipe" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="class">
-<dt id="ReadPipe.RWPipe">
-<code class="descclassname">class</code><code class="descname">RWPipe</code> : InputStream, OutputStream<a class="headerlink" href="#ReadPipe.RWPipe" title="Permalink to this definition">¶</a></dt>
+<dt id="class ReadPipe.RWPipe">
+<code class="descclassname">class </code><code class="descname">RWPipe</code> : InputStream, OutputStream<a class="headerlink" href="#class ReadPipe.RWPipe" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="ReadPipe.RWPipe.readThread-Thread--var">
-<code class="descclassname">var</code><code class="descname">readThread</code> : Thread?<code class="descclassname"> = nil</code><a class="headerlink" href="#ReadPipe.RWPipe.readThread-Thread--var" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadPipe.RWPipe.readThread">
+<code class="descclassname">var </code><code class="descname">readThread</code> : Thread?<code class="descclassname"> = nil</code><a class="headerlink" href="#ReadPipe.RWPipe.readThread" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="ReadPipe.RWPipe.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#ReadPipe.RWPipe.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="ReadPipe.RWPipe.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#ReadPipe.RWPipe.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>File pointer</p>
 </dd></dl>
 
@@ -138,8 +138,8 @@
 </dd></dl>
 
 <dl class="extension">
-<dt id="RWPipe">
-<code class="descclassname">extension</code><code class="descname">RWPipe</code> : ReadEvents<a class="headerlink" href="#RWPipe" title="Permalink to this definition">¶</a></dt>
+<dt id="extension RWPipe">
+<code class="descclassname">extension </code><code class="descname">RWPipe</code> : ReadEvents<a class="headerlink" href="#extension RWPipe" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -171,7 +171,7 @@
 <li class="toctree-l2"><a class="reference internal" href="fs.html">File management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file.html">File access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fileinfo.html">File information</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Communication pipes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Communication pipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream/stream.html">Stream protocol</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream/inputstream.html">Input (readable) streams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream/outputstream.html">Output streams (writable)</a></li>
@@ -200,15 +200,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="stream/stream.html" title="Stream protocol">next</a>
+  </li>
+  <li>
+    <a href="fileinfo.html" title="File information">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

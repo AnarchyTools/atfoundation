@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,78 +55,78 @@
   <div class="section" id="url-parsing-and-construction">
 <h1>URL parsing and construction<a class="headerlink" href="#url-parsing-and-construction" title="Permalink to this headline">¶</a></h1>
 <dl class="struct">
-<dt id="URL">
-<code class="descclassname">struct</code><code class="descname">URL</code><a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dt id="struct URL">
+<code class="descclassname">struct </code><code class="descname">URL</code><a class="headerlink" href="#struct URL" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="URL.schema-String--var">
-<code class="descclassname">var</code><code class="descname">schema</code> : String?<a class="headerlink" href="#URL.schema-String--var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.schema">
+<code class="descclassname">var </code><code class="descname">schema</code> : String?<a class="headerlink" href="#URL.schema" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.domain-String-var">
-<code class="descclassname">var</code><code class="descname">domain</code> : String<a class="headerlink" href="#URL.domain-String-var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.domain">
+<code class="descclassname">var </code><code class="descname">domain</code> : String<a class="headerlink" href="#URL.domain" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.path-Path-var">
-<code class="descclassname">var</code><code class="descname">path</code> : Path<a class="headerlink" href="#URL.path-Path-var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.path">
+<code class="descclassname">var </code><code class="descname">path</code> : Path<a class="headerlink" href="#URL.path" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.port-Int-var">
-<code class="descclassname">var</code><code class="descname">port</code> : Int<a class="headerlink" href="#URL.port-Int-var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.port">
+<code class="descclassname">var </code><code class="descname">port</code> : Int<a class="headerlink" href="#URL.port" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.parameters-var">
-<code class="descclassname">var</code><code class="descname">parameters</code><code class="descclassname"> = [(name: String, value: String?)]()</code><a class="headerlink" href="#URL.parameters-var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.parameters">
+<code class="descclassname">var </code><code class="descname">parameters</code><code class="descclassname"> = [(name: String, value: String?)]()</code><a class="headerlink" href="#URL.parameters" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.fragment-String--var">
-<code class="descclassname">var</code><code class="descname">fragment</code> : String?<a class="headerlink" href="#URL.fragment-String--var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.fragment">
+<code class="descclassname">var </code><code class="descname">fragment</code> : String?<a class="headerlink" href="#URL.fragment" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.user-String--var">
-<code class="descclassname">var</code><code class="descname">user</code> : String?<a class="headerlink" href="#URL.user-String--var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.user">
+<code class="descclassname">var </code><code class="descname">user</code> : String?<a class="headerlink" href="#URL.user" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="URL.password-String--var">
-<code class="descclassname">var</code><code class="descname">password</code> : String?<a class="headerlink" href="#URL.password-String--var" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.password">
+<code class="descclassname">var </code><code class="descname">password</code> : String?<a class="headerlink" href="#URL.password" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="init">
-<dt id="URL.init-string--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><a class="headerlink" href="#URL.init-string--" title="Permalink to this definition">¶</a></dt>
+<dt id="URL.init(string:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><a class="headerlink" href="#URL.init(string:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
 <dt>
-<code class="descclassname">extension</code><code class="descname">String</code></dt>
+<code class="descclassname">extension </code><code class="descname">String</code></dt>
 <dd><dl class="var">
-<dt id="String.urlEncoded-String-var">
-<code class="descclassname">var</code><code class="descname">urlEncoded</code> : String<a class="headerlink" href="#String.urlEncoded-String-var" title="Permalink to this definition">¶</a></dt>
+<dt id="String.urlEncoded">
+<code class="descclassname">var </code><code class="descname">urlEncoded</code> : String<a class="headerlink" href="#String.urlEncoded" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="var">
-<dt id="String.urlDecoded-String--var">
-<code class="descclassname">var</code><code class="descname">urlDecoded</code> : String?<a class="headerlink" href="#String.urlDecoded-String--var" title="Permalink to this definition">¶</a></dt>
+<dt id="String.urlDecoded">
+<code class="descclassname">var </code><code class="descname">urlDecoded</code> : String?<a class="headerlink" href="#String.urlDecoded" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
-<dt id="URL">
-<code class="descclassname">extension</code><code class="descname">URL</code> : CustomStringConvertible<a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dt id="extension URL">
+<code class="descclassname">extension </code><code class="descname">URL</code> : CustomStringConvertible<a class="headerlink" href="#extension URL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="extension">
-<dt id="URL">
-<code class="descclassname">extension</code><code class="descname">URL</code> : Hashable<a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">extension </code><code class="descname">URL</code> : Hashable</dt>
 <dd></dd></dl>
 
 </div>
@@ -173,7 +173,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../logger.html">Customizable logger</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../net.html">Networking</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">URL parsing and construction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">URL parsing and construction</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../process.html">Sub-Processes</a></li>
@@ -187,15 +187,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="../process.html" title="Sub-Processes">next</a>
+  </li>
+  <li>
+    <a href="../net.html" title="Networking">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

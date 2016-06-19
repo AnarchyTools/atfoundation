@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,56 +55,56 @@
   <div class="section" id="input-readable-streams">
 <h1>Input (readable) streams<a class="headerlink" href="#input-readable-streams" title="Permalink to this headline">¶</a></h1>
 <dl class="protocol">
-<dt id="InputStream">
-<code class="descclassname">protocol</code><code class="descname">InputStream</code> : class, Stream<a class="headerlink" href="#InputStream" title="Permalink to this definition">¶</a></dt>
+<dt id="protocol InputStream">
+<code class="descclassname">protocol </code><code class="descname">InputStream</code> : class, Stream<a class="headerlink" href="#protocol InputStream" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
-<dt id="InputStream.read-size--throws-String--protocol">
-<code class="descclassname">func</code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.read-size--throws-String--protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="InputStream.read(size:)">
+<code class="descclassname">func </code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.read(size:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.read-size--throws--UInt8--protocol">
-<code class="descclassname">func</code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]<a class="headerlink" href="#InputStream.read-size--throws--UInt8--protocol" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]</dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.readAll--throws-String--protocol">
-<code class="descclassname">func</code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.readAll--throws-String--protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="InputStream.readAll()">
+<code class="descclassname">func </code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.readAll()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.readAll--throws--UInt8--protocol">
-<code class="descclassname">func</code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]<a class="headerlink" href="#InputStream.readAll--throws--UInt8--protocol" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]</dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.readLine--throws-String--protocol">
-<code class="descclassname">func</code><code class="descname">readLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.readLine--throws-String--protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="InputStream.readLine()">
+<code class="descclassname">func </code><code class="descname">readLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.readLine()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.iterate-chunkSize---AnyIterator--UInt8---protocol">
-<code class="descclassname">func</code><code class="descname">iterate</code><span class="sig-paren">(</span><em>chunkSize: Int</em><span class="sig-paren">)</span> &rarr; AnyIterator&lt;[UInt8]&gt;<a class="headerlink" href="#InputStream.iterate-chunkSize---AnyIterator--UInt8---protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="InputStream.iterate(chunkSize:)">
+<code class="descclassname">func </code><code class="descname">iterate</code><span class="sig-paren">(</span><em>chunkSize: Int</em><span class="sig-paren">)</span> &rarr; AnyIterator&lt;[UInt8]&gt;<a class="headerlink" href="#InputStream.iterate(chunkSize:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.iterateLines---AnyIterator-String--protocol">
-<code class="descclassname">func</code><code class="descname">iterateLines</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; AnyIterator&lt;String&gt;<a class="headerlink" href="#InputStream.iterateLines---AnyIterator-String--protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="InputStream.iterateLines()">
+<code class="descclassname">func </code><code class="descname">iterateLines</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; AnyIterator&lt;String&gt;<a class="headerlink" href="#InputStream.iterateLines()" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="InputStream.pipe-to--throws-protocol">
-<code class="descclassname">func</code><code class="descname">pipe</code><span class="sig-paren">(</span><em>to: OutputStream</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#InputStream.pipe-to--throws-protocol" title="Permalink to this definition">¶</a></dt>
+<dt id="InputStream.pipe(to:)">
+<code class="descclassname">func </code><code class="descname">pipe</code><span class="sig-paren">(</span><em>to: OutputStream</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#InputStream.pipe(to:)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="extension">
 <dt>
-<code class="descclassname">extension</code><code class="descname">InputStream</code></dt>
+<code class="descclassname">extension </code><code class="descname">InputStream</code></dt>
 <dd><dl class="method">
-<dt id="InputStream.read-size--throws-String-">
-<code class="descclassname">func</code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int = 4096</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.read-size--throws-String-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int = 4096</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?</dt>
 <dd><p>Read bytes into a string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -123,8 +123,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.read-size--throws--UInt8-">
-<code class="descclassname">func</code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int = 4096</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]<a class="headerlink" href="#InputStream.read-size--throws--UInt8-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">read</code><span class="sig-paren">(</span><em>size: Int = 4096</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]</dt>
 <dd><p>Read bytes from file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -143,8 +143,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.readAll--throws-String-">
-<code class="descclassname">func</code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.readAll--throws-String-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?</dt>
 <dd><p>Read complete file into a string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -157,8 +157,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.readAll--throws--UInt8-">
-<code class="descclassname">func</code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]<a class="headerlink" href="#InputStream.readAll--throws--UInt8-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">readAll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; [UInt8]</dt>
 <dd><p>Read complete file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -171,8 +171,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.readLine--throws-String-">
-<code class="descclassname">func</code><code class="descname">readLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?<a class="headerlink" href="#InputStream.readLine--throws-String-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">readLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; String?</dt>
 <dd><p>Read a single line from a file, max 64 KiB</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -185,8 +185,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.iterate-chunkSize---AnyIterator--UInt8--">
-<code class="descclassname">func</code><code class="descname">iterate</code><span class="sig-paren">(</span><em>chunkSize: Int</em><span class="sig-paren">)</span> &rarr; AnyIterator&lt;[UInt8]&gt;<a class="headerlink" href="#InputStream.iterate-chunkSize---AnyIterator--UInt8--" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">iterate</code><span class="sig-paren">(</span><em>chunkSize: Int</em><span class="sig-paren">)</span> &rarr; AnyIterator&lt;[UInt8]&gt;</dt>
 <dd><p>Iterate over chunks of data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -202,14 +202,14 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.iterateLines---AnyIterator-String-">
-<code class="descclassname">func</code><code class="descname">iterateLines</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; AnyIterator&lt;String&gt;<a class="headerlink" href="#InputStream.iterateLines---AnyIterator-String-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">iterateLines</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; AnyIterator&lt;String&gt;</dt>
 <dd><p>Iterate over lines of the file</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="InputStream.pipe-to--throws">
-<code class="descclassname">func</code><code class="descname">pipe</code><span class="sig-paren">(</span><em>to: OutputStream</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#InputStream.pipe-to--throws" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">pipe</code><span class="sig-paren">(</span><em>to: OutputStream</em><span class="sig-paren">)</span><em class="property">throws</em></dt>
 <dd><p>Pipe data from current position to output stream until end of current stream</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -257,7 +257,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../fileinfo.html">File information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pipe.html">Communication pipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream.html">Stream protocol</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Input (readable) streams</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Input (readable) streams</a></li>
 <li class="toctree-l2"><a class="reference internal" href="outputstream.html">Output streams (writable)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="seekablestream.html">Seekable stream protocol</a></li>
 <li class="toctree-l2"><a class="reference internal" href="memorystream.html">In-memory stream (R/W)</a></li>
@@ -284,15 +284,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../../swift-modindex.html">Index</a>
+    <a href="../../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="outputstream.html" title="Output streams (writable)">next</a>
+  </li>
+  <li>
+    <a href="stream.html" title="Stream protocol">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

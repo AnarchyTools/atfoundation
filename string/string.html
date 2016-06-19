@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -56,10 +56,10 @@
 <h1>Misc string extensions<a class="headerlink" href="#misc-string-extensions" title="Permalink to this headline">¶</a></h1>
 <dl class="extension">
 <dt>
-<code class="descclassname">extension</code><code class="descname">String</code></dt>
+<code class="descclassname">extension </code><code class="descname">String</code></dt>
 <dd><dl class="init">
-<dt id="String.init-path--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><a class="headerlink" href="#String.init-path--" title="Permalink to this definition">¶</a></dt>
+<dt id="String.init(path:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><a class="headerlink" href="#String.init(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create string from path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -75,8 +75,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="String.init-loadFromFile--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>loadFromFile: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#String.init-loadFromFile--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="String.init(loadFromFile:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>loadFromFile: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#String.init(loadFromFile:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a string from a file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -92,8 +92,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="String.write-to--throws">
-<code class="descclassname">func</code><code class="descname">write</code><span class="sig-paren">(</span><em>to: File</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#String.write-to--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="String.write(to:)">
+<code class="descclassname">func </code><code class="descname">write</code><span class="sig-paren">(</span><em>to: File</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#String.write(to:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write a string to a file</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -131,7 +131,7 @@
 <li class="toctree-l2"><a class="reference internal" href="replace.html">Replacing sub-strings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="split.html">Splitting strings into parts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="whitespace.html">Trimming whitespace</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Misc string extensions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Misc string extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul>
@@ -168,15 +168,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="../filesystem.html" title="Filesystem abstraction">next</a>
+  </li>
+  <li>
+    <a href="whitespace.html" title="Trimming whitespace">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

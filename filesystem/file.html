@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,23 +55,23 @@
   <div class="section" id="file-access">
 <h1>File access<a class="headerlink" href="#file-access" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="ROFile">
-<code class="descclassname">class</code><code class="descname">ROFile</code> : SeekableStream, InputStream<a class="headerlink" href="#ROFile" title="Permalink to this definition">¶</a></dt>
+<dt id="class ROFile">
+<code class="descclassname">class </code><code class="descname">ROFile</code> : SeekableStream, InputStream<a class="headerlink" href="#class ROFile" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="ROFile.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#ROFile.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="ROFile.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#ROFile.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>FILE pointer</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="ROFile.path-Path--var">
-<code class="descclassname">var</code><code class="descname">path</code> : Path?<a class="headerlink" href="#ROFile.path-Path--var" title="Permalink to this definition">¶</a></dt>
+<dt id="ROFile.path">
+<code class="descclassname">var </code><code class="descname">path</code> : Path?<a class="headerlink" href="#ROFile.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>file path (may be nil if created from file descriptor or file pointer)</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="ROFile.init-path-binary--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#ROFile.init-path-binary--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="ROFile.init(path:binary:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#ROFile.init(path:binary:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -89,8 +89,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="ROFile.init-fd-binary-takeOwnership--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#ROFile.init-fd-binary-takeOwnership--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="ROFile.init(fd:binary:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#ROFile.init(fd:binary:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file descriptor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -109,8 +109,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="ROFile.init-file-takeOwnership--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#ROFile.init-file-takeOwnership--" title="Permalink to this definition">¶</a></dt>
+<dt id="ROFile.init(file:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#ROFile.init(file:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file pointer</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -129,23 +129,23 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="WOFile">
-<code class="descclassname">class</code><code class="descname">WOFile</code> : SeekableStream, OutputStream<a class="headerlink" href="#WOFile" title="Permalink to this definition">¶</a></dt>
+<dt id="class WOFile">
+<code class="descclassname">class </code><code class="descname">WOFile</code> : SeekableStream, OutputStream<a class="headerlink" href="#class WOFile" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="WOFile.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#WOFile.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="WOFile.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#WOFile.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>FILE pointer</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="WOFile.path-Path--var">
-<code class="descclassname">var</code><code class="descname">path</code> : Path?<a class="headerlink" href="#WOFile.path-Path--var" title="Permalink to this definition">¶</a></dt>
+<dt id="WOFile.path">
+<code class="descclassname">var </code><code class="descname">path</code> : Path?<a class="headerlink" href="#WOFile.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>file path (may be nil if created from file descriptor or file pointer)</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="WOFile.init-path-binary--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#WOFile.init-path-binary--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="WOFile.init(path:binary:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#WOFile.init(path:binary:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -163,8 +163,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="WOFile.init-fd-binary-takeOwnership--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#WOFile.init-fd-binary-takeOwnership--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="WOFile.init(fd:binary:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#WOFile.init(fd:binary:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file descriptor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -183,8 +183,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="WOFile.init-file-takeOwnership--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#WOFile.init-file-takeOwnership--" title="Permalink to this definition">¶</a></dt>
+<dt id="WOFile.init(file:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#WOFile.init(file:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file pointer</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -203,23 +203,23 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="RWFile">
-<code class="descclassname">class</code><code class="descname">RWFile</code> : SeekableStream, InputStream, OutputStream<a class="headerlink" href="#RWFile" title="Permalink to this definition">¶</a></dt>
+<dt id="class RWFile">
+<code class="descclassname">class </code><code class="descname">RWFile</code> : SeekableStream, InputStream, OutputStream<a class="headerlink" href="#class RWFile" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="RWFile.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#RWFile.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="RWFile.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#RWFile.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>FILE pointer</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="RWFile.path-Path--var">
-<code class="descclassname">var</code><code class="descname">path</code> : Path?<a class="headerlink" href="#RWFile.path-Path--var" title="Permalink to this definition">¶</a></dt>
+<dt id="RWFile.path">
+<code class="descclassname">var </code><code class="descname">path</code> : Path?<a class="headerlink" href="#RWFile.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>file path (may be nil if created from file descriptor or file pointer)</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="RWFile.init-path-binary--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#RWFile.init-path-binary--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="RWFile.init(path:binary:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#RWFile.init(path:binary:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -237,8 +237,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="RWFile.init-fd-binary-takeOwnership--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#RWFile.init-fd-binary-takeOwnership--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="RWFile.init(fd:binary:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#RWFile.init(fd:binary:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file descriptor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -257,8 +257,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="RWFile.init-file-takeOwnership--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#RWFile.init-file-takeOwnership--" title="Permalink to this definition">¶</a></dt>
+<dt id="RWFile.init(file:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#RWFile.init(file:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file pointer</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -277,23 +277,23 @@
 </dd></dl>
 
 <dl class="class">
-<dt id="File">
-<code class="descclassname">class</code><code class="descname">File</code> : SeekableStream, InputStream, OutputStream<a class="headerlink" href="#File" title="Permalink to this definition">¶</a></dt>
+<dt id="class File">
+<code class="descclassname">class </code><code class="descname">File</code> : SeekableStream, InputStream, OutputStream<a class="headerlink" href="#class File" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="var">
-<dt id="File.fp-UnsafeMutablePointer-FILE---var">
-<code class="descclassname">var</code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#File.fp-UnsafeMutablePointer-FILE---var" title="Permalink to this definition">¶</a></dt>
+<dt id="File.fp">
+<code class="descclassname">var </code><code class="descname">fp</code> : UnsafeMutablePointer&lt;FILE&gt;?<a class="headerlink" href="#File.fp" title="Permalink to this definition">¶</a></dt>
 <dd><p>FILE pointer</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="File.path-Path--var">
-<code class="descclassname">var</code><code class="descname">path</code> : Path?<a class="headerlink" href="#File.path-Path--var" title="Permalink to this definition">¶</a></dt>
+<dt id="File.path">
+<code class="descclassname">var </code><code class="descname">path</code> : Path?<a class="headerlink" href="#File.path" title="Permalink to this definition">¶</a></dt>
 <dd><p>file path (may be <code class="docutils literal"><span class="pre">nil</span></code> if created from file descriptor or file pointer)</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="File.init-path-mode-binary--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>mode: Mode</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.init-path-mode-binary--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="File.init(path:mode:binary:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>path: Path</em>, <em>mode: Mode</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.init(path:mode:binary:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -311,8 +311,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="File.init-fd-mode-binary-takeOwnership--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>mode: Mode</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.init-fd-mode-binary-takeOwnership--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="File.init(fd:mode:binary:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>fd: Int32</em>, <em>mode: Mode</em>, <em>binary: Bool = false</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.init(fd:mode:binary:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file descriptor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -331,8 +331,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="File.init-file-takeOwnership--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#File.init-file-takeOwnership--" title="Permalink to this definition">¶</a></dt>
+<dt id="File.init(file:takeOwnership:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>file: UnsafeMutablePointer&lt;FILE&gt;</em>, <em>takeOwnership: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#File.init(file:takeOwnership:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a file pointer</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -349,8 +349,8 @@
 </dd></dl>
 
 <dl class="init">
-<dt id="File.init-tempFileAtPath-prefix-binary--throws">
-<code class="descname">init</code><span class="sig-paren">(</span><em>tempFileAtPath: Path</em>, <em>prefix: String</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.init-tempFileAtPath-prefix-binary--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="File.init(tempFileAtPath:prefix:binary:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>tempFileAtPath: Path</em>, <em>prefix: String</em>, <em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.init(tempFileAtPath:prefix:binary:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a temporary file name</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -368,8 +368,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="File.tempFile-binary--throws-File-class">
-<code class="descclassname">class func</code><code class="descname">tempFile</code><span class="sig-paren">(</span><em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; File<a class="headerlink" href="#File.tempFile-binary--throws-File-class" title="Permalink to this definition">¶</a></dt>
+<dt id="File.tempFile(binary:)">
+<code class="descclassname">class func </code><code class="descname">tempFile</code><span class="sig-paren">(</span><em>binary: Bool = false</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; File<a class="headerlink" href="#File.tempFile(binary:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a completely temporary file in the temp dir</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -388,8 +388,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="File.copyTo-path--throws">
-<code class="descclassname">func</code><code class="descname">copyTo</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.copyTo-path--throws" title="Permalink to this definition">¶</a></dt>
+<dt id="File.copyTo(path:)">
+<code class="descclassname">func </code><code class="descname">copyTo</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span><em class="property">throws</em><a class="headerlink" href="#File.copyTo(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy this file to another path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -405,8 +405,8 @@
 </dd></dl>
 
 <dl class="enum">
-<dt id="File.Mode">
-<code class="descclassname">enum</code><code class="descname">Mode</code> : String<a class="headerlink" href="#File.Mode" title="Permalink to this definition">¶</a></dt>
+<dt id="enum File.Mode">
+<code class="descclassname">enum </code><code class="descname">Mode</code> : String<a class="headerlink" href="#enum File.Mode" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="enum_case">
 <dt id="File.Mode.ReadOnly">
 <code class="descname">ReadOnly</code><code class="descclassname"> = &quot;r&quot;</code><a class="headerlink" href="#File.Mode.ReadOnly" title="Permalink to this definition">¶</a></dt>
@@ -468,7 +468,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="path.html">Path construction and deconstruction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fs.html">File management</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">File access</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">File access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fileinfo.html">File information</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipe.html">Communication pipes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stream/stream.html">Stream protocol</a></li>
@@ -499,15 +499,36 @@
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="fileinfo.html" title="File information">next</a>
+  </li>
+  <li>
+    <a href="fs.html" title="File management">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

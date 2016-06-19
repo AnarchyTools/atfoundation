@@ -31,7 +31,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -55,29 +55,29 @@
   <div class="section" id="path-construction-and-deconstruction">
 <h1>Path construction and deconstruction<a class="headerlink" href="#path-construction-and-deconstruction" title="Permalink to this headline">¶</a></h1>
 <dl class="struct">
-<dt id="Path">
-<code class="descclassname">struct</code><code class="descname">Path</code><a class="headerlink" href="#Path" title="Permalink to this definition">¶</a></dt>
+<dt id="struct Path">
+<code class="descclassname">struct </code><code class="descname">Path</code><a class="headerlink" href="#struct Path" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="let">
-<dt id="Path.components--String--let">
-<code class="descclassname">let</code><code class="descname">components</code> : [String]<a class="headerlink" href="#Path.components--String--let" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.components">
+<code class="descclassname">let </code><code class="descname">components</code> : [String]<a class="headerlink" href="#Path.components" title="Permalink to this definition">¶</a></dt>
 <dd><p>split path components</p>
 </dd></dl>
 
 <dl class="let">
-<dt id="Path.isAbsolute-Bool-let">
-<code class="descclassname">let</code><code class="descname">isAbsolute</code> : Bool<a class="headerlink" href="#Path.isAbsolute-Bool-let" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.isAbsolute">
+<code class="descclassname">let </code><code class="descname">isAbsolute</code> : Bool<a class="headerlink" href="#Path.isAbsolute" title="Permalink to this definition">¶</a></dt>
 <dd><p>is this an absolute or relative path</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="Path.delimiter-Character-var">
-<code class="descclassname">var</code><code class="descname">delimiter</code> : Character<a class="headerlink" href="#Path.delimiter-Character-var" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.delimiter">
+<code class="descclassname">var </code><code class="descname">delimiter</code> : Character<a class="headerlink" href="#Path.delimiter" title="Permalink to this definition">¶</a></dt>
 <dd><p>delimiter between path components</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="Path.init-_-delimiter--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>_: String</em>, <em>delimiter: Character = &quot;/&quot;</em><span class="sig-paren">)</span><a class="headerlink" href="#Path.init-_-delimiter--" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.init(_:delimiter:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>_: String</em>, <em>delimiter: Character = &quot;/&quot;</em><span class="sig-paren">)</span><a class="headerlink" href="#Path.init(_:delimiter:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with a string, the string is split
 into components by the rules of the current platform</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -94,8 +94,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="Path.init-components-absolute--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>components: [String]</em>, <em>absolute: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Path.init-components-absolute--" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.init(components:absolute:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>components: [String]</em>, <em>absolute: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Path.init(components:absolute:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with path components</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -112,8 +112,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="Path.init-absolute--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>absolute: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Path.init-absolute--" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.init(absolute:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>absolute: Bool = false</em><span class="sig-paren">)</span><a class="headerlink" href="#Path.init(absolute:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize empty path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -129,8 +129,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.appending-_---Path">
-<code class="descclassname">func</code><code class="descname">appending</code><span class="sig-paren">(</span><em>_: String</em><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.appending-_---Path" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.appending(_:)">
+<code class="descclassname">func </code><code class="descname">appending</code><span class="sig-paren">(</span><em>_: String</em><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.appending(_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new path instance by appending a component</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -149,8 +149,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.removingLastComponent---Path">
-<code class="descclassname">func</code><code class="descname">removingLastComponent</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.removingLastComponent---Path" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.removingLastComponent()">
+<code class="descclassname">func </code><code class="descname">removingLastComponent</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.removingLastComponent()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new path instance by removing the last path component</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -163,8 +163,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.removingFirstComponent---Path">
-<code class="descclassname">func</code><code class="descname">removingFirstComponent</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.removingFirstComponent---Path" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.removingFirstComponent()">
+<code class="descclassname">func </code><code class="descname">removingFirstComponent</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.removingFirstComponent()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new path instance by removing the first path component</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -177,8 +177,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.join-_---Path">
-<code class="descclassname">func</code><code class="descname">join</code><span class="sig-paren">(</span><em>_: Path</em><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.join-_---Path" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.join(_:)">
+<code class="descclassname">func </code><code class="descname">join</code><span class="sig-paren">(</span><em>_: Path</em><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.join(_:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new path instance by joining two paths</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -194,8 +194,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.relativeTo-path---Path-">
-<code class="descclassname">func</code><code class="descname">relativeTo</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span> &rarr; Path?<a class="headerlink" href="#Path.relativeTo-path---Path-" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.relativeTo(path:)">
+<code class="descclassname">func </code><code class="descname">relativeTo</code><span class="sig-paren">(</span><em>path: Path</em><span class="sig-paren">)</span> &rarr; Path?<a class="headerlink" href="#Path.relativeTo(path:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a path instance that defines a relative path to another path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -214,8 +214,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.dirname---Path">
-<code class="descclassname">func</code><code class="descname">dirname</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.dirname---Path" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.dirname()">
+<code class="descclassname">func </code><code class="descname">dirname</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.dirname()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the dirname of a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -228,8 +228,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.basename---String">
-<code class="descclassname">func</code><code class="descname">basename</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#Path.basename---String" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.basename()">
+<code class="descclassname">func </code><code class="descname">basename</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#Path.basename()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the file name of a path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -242,8 +242,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.homeDirectory---Path-">
-<code class="descclassname">func</code><code class="descname">homeDirectory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path?<a class="headerlink" href="#Path.homeDirectory---Path-" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.homeDirectory()">
+<code class="descclassname">func </code><code class="descname">homeDirectory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path?<a class="headerlink" href="#Path.homeDirectory()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return absolute path to the user&#8217;s home directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -256,8 +256,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="Path.tempDirectory---Path">
-<code class="descclassname">func</code><code class="descname">tempDirectory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.tempDirectory---Path" title="Permalink to this definition">¶</a></dt>
+<dt id="Path.tempDirectory()">
+<code class="descclassname">func </code><code class="descname">tempDirectory</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Path<a class="headerlink" href="#Path.tempDirectory()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return path to the temp directory</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -272,8 +272,8 @@ into components by the rules of the current platform</p>
 </dd></dl>
 
 <dl class="extension">
-<dt id="Path">
-<code class="descclassname">extension</code><code class="descname">Path</code> : CustomStringConvertible<a class="headerlink" href="#Path" title="Permalink to this definition">¶</a></dt>
+<dt id="extension Path">
+<code class="descclassname">extension </code><code class="descname">Path</code> : CustomStringConvertible<a class="headerlink" href="#extension Path" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -301,7 +301,7 @@ into components by the rules of the current platform</p>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Path construction and deconstruction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Path construction and deconstruction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fs.html">File management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file.html">File access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fileinfo.html">File information</a></li>
@@ -334,15 +334,36 @@ into components by the rules of the current platform</p>
 
 <ul class="parent">
   <li>
-    <a href="../swift-modindex.html">Index</a>
+    <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="fs.html" title="File management">next</a>
+  </li>
+  <li>
+    <a href="../filesystem.html" title="Filesystem abstraction">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>

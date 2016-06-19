@@ -30,7 +30,7 @@
 
 
 <div class="main_content">
-<main>
+<main class="sidebars">
     <nav>
       <h3>Navigation</h3>
       <ul class="parent">
@@ -54,49 +54,49 @@
   <div class="section" id="sub-processes">
 <h1>Sub-Processes<a class="headerlink" href="#sub-processes" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="SubProcess">
-<code class="descclassname">class</code><code class="descname">SubProcess</code><a class="headerlink" href="#SubProcess" title="Permalink to this definition">¶</a></dt>
+<dt id="class SubProcess">
+<code class="descclassname">class </code><code class="descname">SubProcess</code><a class="headerlink" href="#class SubProcess" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="static_var">
-<dt id="SubProcess.defaultEnvironmentVariables-static_var">
-<code class="descclassname">static var</code><code class="descname">defaultEnvironmentVariables</code><code class="descclassname"> = [</code><a class="headerlink" href="#SubProcess.defaultEnvironmentVariables-static_var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.defaultEnvironmentVariables">
+<code class="descclassname">static var </code><code class="descname">defaultEnvironmentVariables</code><code class="descclassname"> = [</code><a class="headerlink" href="#SubProcess.defaultEnvironmentVariables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Definition which environment variables should be copied by default to
 the environment of child processes.</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="SubProcess.executable-Path-var">
-<code class="descclassname">var</code><code class="descname">executable</code> : Path<a class="headerlink" href="#SubProcess.executable-Path-var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.executable">
+<code class="descclassname">var </code><code class="descname">executable</code> : Path<a class="headerlink" href="#SubProcess.executable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executable path</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="SubProcess.arguments--String--var">
-<code class="descclassname">var</code><code class="descname">arguments</code> : [String]<a class="headerlink" href="#SubProcess.arguments--String--var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.arguments">
+<code class="descclassname">var </code><code class="descname">arguments</code> : [String]<a class="headerlink" href="#SubProcess.arguments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Command line arguments to the program</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="SubProcess.environment-var">
-<code class="descclassname">var</code><code class="descname">environment</code><code class="descclassname"> = [String:String]()</code><a class="headerlink" href="#SubProcess.environment-var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.environment">
+<code class="descclassname">var </code><code class="descname">environment</code><code class="descclassname"> = [String:String]()</code><a class="headerlink" href="#SubProcess.environment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Environment setup for the program, if not defined at init
 time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="SubProcess.workingDirectory-var">
-<code class="descclassname">var</code><code class="descname">workingDirectory</code><code class="descclassname"> = Path(&quot;.&quot;)</code><a class="headerlink" href="#SubProcess.workingDirectory-var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.workingDirectory">
+<code class="descclassname">var </code><code class="descname">workingDirectory</code><code class="descclassname"> = Path(&quot;.&quot;)</code><a class="headerlink" href="#SubProcess.workingDirectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Working directory to start the program in, defaults to current dir</p>
 </dd></dl>
 
 <dl class="var">
-<dt id="SubProcess.pid-pid_t--var">
-<code class="descclassname">var</code><code class="descname">pid</code> : pid_t?<code class="descclassname"> = nil</code><a class="headerlink" href="#SubProcess.pid-pid_t--var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.pid">
+<code class="descclassname">var </code><code class="descname">pid</code> : pid_t?<code class="descclassname"> = nil</code><a class="headerlink" href="#SubProcess.pid" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the process is running stores the pid</p>
 </dd></dl>
 
 <dl class="init">
-<dt id="SubProcess.init-executable-environment-arguments--">
-<code class="descname">init</code><span class="sig-paren">(</span><em>executable: Path</em>, <em>environment: [String:String]? = nil</em>, <em>arguments: String...</em><span class="sig-paren">)</span><a class="headerlink" href="#SubProcess.init-executable-environment-arguments--" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.init(executable:environment:arguments:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>executable: Path</em>, <em>environment: [String:String]? = nil</em>, <em>arguments: String...</em><span class="sig-paren">)</span><a class="headerlink" href="#SubProcess.init(executable:environment:arguments:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize a new sub process</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -114,8 +114,8 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="SubProcess.run-stdin--throws-Int32">
-<code class="descclassname">func</code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Int32<a class="headerlink" href="#SubProcess.run-stdin--throws-Int32" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.run(stdin:)">
+<code class="descclassname">func </code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; Int32<a class="headerlink" href="#SubProcess.run(stdin:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the sub process, blocking until finished, returning the exit value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -134,8 +134,8 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="SubProcess.run-stdin--throws-InputStream">
-<code class="descclassname">func</code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; InputStream<a class="headerlink" href="#SubProcess.run-stdin--throws-InputStream" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; InputStream</dt>
 <dd><p>Run the sub process asynchronously, returning a stream for stdout</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -154,8 +154,8 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="SubProcess.run--throws-protocol-InputStream--OutputStream-">
-<code class="descclassname">func</code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; protocol&lt;InputStream, OutputStream&gt;<a class="headerlink" href="#SubProcess.run--throws-protocol-InputStream--OutputStream-" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.run()">
+<code class="descclassname">func </code><code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><em class="property">throws</em> &rarr; protocol&lt;InputStream, OutputStream&gt;<a class="headerlink" href="#SubProcess.run()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the sub process asynchronously, returning a bidirectional stream for stdin/out</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -168,8 +168,8 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="SubProcess.run-stdin--throws--exitCode--Int32--output---String--">
-<code class="descclassname">func</code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; (exitCode: Int32, output: [String])<a class="headerlink" href="#SubProcess.run-stdin--throws--exitCode--Int32--output---String--" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; (exitCode: Int32, output: [String])</dt>
 <dd><p>Run the sub process, blocking until finished, returning stdout as string array</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -188,8 +188,8 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="SubProcess.run-stdin--throws--stdout--InputStream--stderr--InputStream-">
-<code class="descclassname">func</code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; (stdout: InputStream, stderr: InputStream)<a class="headerlink" href="#SubProcess.run-stdin--throws--stdout--InputStream--stderr--InputStream-" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="descclassname">func </code><code class="descname">run</code><span class="sig-paren">(</span><em>stdin: InputStream? = nil</em><span class="sig-paren">)</span><em class="property">throws</em> &rarr; (stdout: InputStream, stderr: InputStream)</dt>
 <dd><p>Run the sub process asynchronously, returning streams for stdout and stderr</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -208,8 +208,8 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="SubProcess.waitForExit---Int32">
-<code class="descclassname">func</code><code class="descname">waitForExit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Int32<a class="headerlink" href="#SubProcess.waitForExit---Int32" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.waitForExit()">
+<code class="descclassname">func </code><code class="descname">waitForExit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; Int32<a class="headerlink" href="#SubProcess.waitForExit()" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wait for a sub process to exit</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -222,14 +222,14 @@ time it defaults to a copy of values from the local environment</p>
 </dd></dl>
 
 <dl class="static_var">
-<dt id="SubProcess.defaultEnvironment--String-String--static_var">
-<code class="descclassname">static var</code><code class="descname">defaultEnvironment</code> : [String:String]<a class="headerlink" href="#SubProcess.defaultEnvironment--String-String--static_var" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.defaultEnvironment">
+<code class="descclassname">static var </code><code class="descname">defaultEnvironment</code> : [String:String]<a class="headerlink" href="#SubProcess.defaultEnvironment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a copy of the environment only containing variables defined as default</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt id="SubProcess.shellEscape-argument---String-class">
-<code class="descclassname">class func</code><code class="descname">shellEscape</code><span class="sig-paren">(</span><em>argument: String</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#SubProcess.shellEscape-argument---String-class" title="Permalink to this definition">¶</a></dt>
+<dt id="SubProcess.shellEscape(argument:)">
+<code class="descclassname">class func </code><code class="descname">shellEscape</code><span class="sig-paren">(</span><em>argument: String</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#SubProcess.shellEscape(argument:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shell escape a argument, not needed if the API takes argument lists</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -296,7 +296,7 @@ time it defaults to a copy of values from the local environment</p>
 <li class="toctree-l2"><a class="reference internal" href="net/url.html">URL parsing and construction</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Sub-Processes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Sub-Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="thread.html">Threading primitives</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adler32.html">Adler32 Checksum</a></li>
 <li class="toctree-l1"><a class="reference internal" href="charset.html">Charset</a></li>
@@ -307,15 +307,36 @@ time it defaults to a copy of values from the local environment</p>
 
 <ul class="parent">
   <li>
-    <a href="swift-modindex.html">Index</a>
+    <a href="swift-modindex.html" title="Swift Module Index">Index</a>
+  </li>
+  <li>
+    <a href="thread.html" title="Threading primitives">next</a>
+  </li>
+  <li>
+    <a href="net/url.html" title="URL parsing and construction">previous</a>
   </li>
 </ul>
+          </section>
+          <section>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
           </section>
       </aside>
 </div>
     <footer>
         &copy; Copyright 2016, Johannes Schriewer.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.2 with the AnarchyTools Template.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5 with the AnarchyTools Template.
     </footer>
   </body>
 </html>
