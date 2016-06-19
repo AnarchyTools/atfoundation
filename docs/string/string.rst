@@ -23,3 +23,27 @@ Misc string extensions
 
     :parameter to: file to write to
 
+
+.. swift:extension:: UInt16
+
+Extension to UInt16 to convert to hex String
+
+   .. swift:method:: hexString(padded: Bool = true) -> String
+
+    Create Hexadecimal representation of a UInt16
+
+    :parameter padded: set to ``true`` if the result should be zero padded
+    :returns: hex representation as String
+
+
+.. swift:extension:: UInt8
+
+Extension to UInt8 to convert to hex String
+
+   .. swift:method:: hexString(padded: Bool = true) -> String
+
+    Create Hexadecimal representation of a UInt8
+
+    :parameter padded: set to ``true`` if the result should be zero padded
+    :returns: hex representation as String
+

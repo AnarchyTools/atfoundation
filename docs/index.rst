@@ -79,7 +79,9 @@ just remove that as *atfoundation* implicitly imports that for you.
     net
     process
     thread
-    adler32
+    data
+    uuid4
+    random
     charset
     syserror
     tools

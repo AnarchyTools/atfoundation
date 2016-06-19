@@ -15,5 +15,6 @@ but socket support and a HTTP client are planned.
      :maxdepth: 2
      :name: nettoc
 
-     net/url.rst
+     net/url
+     net/ipaddress
 
