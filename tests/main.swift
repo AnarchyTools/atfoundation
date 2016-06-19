@@ -34,4 +34,5 @@ XCTMain([
     testCase(Base64Tests.allTests),
     testCase(QuotedPrintableTests.allTests),
     testCase(IPAddressTests.allTests),
+    testCase(UUID4Tests.allTests),
 ])
