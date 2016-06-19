@@ -26,7 +26,7 @@ Misc string extensions
 
 .. swift:extension:: UInt16
 
-Extension to UInt16 to convert to hex String
+   Extension to UInt16 to convert to hex String
 
    .. swift:method:: hexString(padded: Bool = true) -> String
 
@@ -38,7 +38,7 @@ Extension to UInt16 to convert to hex String
 
 .. swift:extension:: UInt8
 
-Extension to UInt8 to convert to hex String
+   Extension to UInt8 to convert to hex String
 
    .. swift:method:: hexString(padded: Bool = true) -> String
 

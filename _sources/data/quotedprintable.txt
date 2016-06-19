@@ -5,7 +5,7 @@ Quoted printable encoding
 
 .. swift:class:: QuotedPrintable
 
-Quoted printable encoder and decoder
+   Quoted printable encoder and decoder
 
    .. swift:class_method:: encode(string: String) -> String
    

@@ -56,13 +56,10 @@
 <dl class="protocol">
 <dt id="protocol RandomNumberGenerator">
 <code class="descclassname">protocol </code><code class="descname">RandomNumberGenerator</code><a class="headerlink" href="#protocol RandomNumberGenerator" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Random number generators</p>
-<blockquote>
-<div><dl class="method">
-<dt id="bytes(count:)">
-<code class="descclassname">func </code><code class="descname">bytes</code><span class="sig-paren">(</span><em>count: Int</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#bytes(count:)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random number generators</p>
+<dl class="method">
+<dt id="RandomNumberGenerator.bytes(count:)">
+<code class="descclassname">func </code><code class="descname">bytes</code><span class="sig-paren">(</span><em>count: Int</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#RandomNumberGenerator.bytes(count:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns byte buffer of random bytes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -81,8 +78,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="unsignedNumber(range:)">
-<code class="descclassname">func </code><code class="descname">unsignedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;UInt32&gt;</em><span class="sig-paren">)</span> &rarr; UInt32<a class="headerlink" href="#unsignedNumber(range:)" title="Permalink to this definition">¶</a></dt>
+<dt id="RandomNumberGenerator.unsignedNumber(range:)">
+<code class="descclassname">func </code><code class="descname">unsignedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;UInt32&gt;</em><span class="sig-paren">)</span> &rarr; UInt32<a class="headerlink" href="#RandomNumberGenerator.unsignedNumber(range:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a UInt32 random number</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -101,8 +98,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="signedNumber(range:)">
-<code class="descclassname">func </code><code class="descname">signedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;Int32&gt;</em><span class="sig-paren">)</span> &rarr; Int32<a class="headerlink" href="#signedNumber(range:)" title="Permalink to this definition">¶</a></dt>
+<dt id="RandomNumberGenerator.signedNumber(range:)">
+<code class="descclassname">func </code><code class="descname">signedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;Int32&gt;</em><span class="sig-paren">)</span> &rarr; Int32<a class="headerlink" href="#RandomNumberGenerator.signedNumber(range:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a Int32 random number</p>
 <p>This may be a bit slower than the unsigned version as we have
 to upcast through a 64 bit type to avoid overflows.</p>
@@ -122,20 +119,16 @@ to upcast through a 64 bit type to avoid overflows.</p>
 </table>
 </dd></dl>
 
-</div></blockquote>
+</dd></dl>
+
 <dl class="class">
 <dt id="class Random">
 <code class="descclassname">class </code><code class="descname">Random</code> : RandomNumberGenerator<a class="headerlink" href="#class Random" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<ul>
-<li><p class="first">Default CSPRNG for linux uses /dev/urandom, so it needs a file descriptor</p>
-</li>
-<li><p class="first">Default CSPRNG for OSX uses arc4random</p>
-<blockquote>
-<div><dl class="class_method">
-<dt>
-<code class="descclassname">class func </code><code class="descname">bytes</code><span class="sig-paren">(</span><em>count: Int</em><span class="sig-paren">)</span> &rarr; [UInt8]</dt>
+<dd><p>CSPRNG for linux uses /dev/urandom, so it needs a file descriptor,
+CSPRNG for OSX uses arc4random</p>
+<dl class="class_method">
+<dt id="Random.bytes(count:)">
+<code class="descclassname">class func </code><code class="descname">bytes</code><span class="sig-paren">(</span><em>count: Int</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#Random.bytes(count:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns byte buffer of random bytes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -154,8 +147,8 @@ to upcast through a 64 bit type to avoid overflows.</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt>
-<code class="descclassname">class func </code><code class="descname">unsignedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;UInt32&gt;</em><span class="sig-paren">)</span> &rarr; UInt32</dt>
+<dt id="Random.unsignedNumber(range:)">
+<code class="descclassname">class func </code><code class="descname">unsignedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;UInt32&gt;</em><span class="sig-paren">)</span> &rarr; UInt32<a class="headerlink" href="#Random.unsignedNumber(range:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a UInt32 random number</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -174,8 +167,8 @@ to upcast through a 64 bit type to avoid overflows.</p>
 </dd></dl>
 
 <dl class="class_method">
-<dt>
-<code class="descclassname">class func </code><code class="descname">signedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;Int32&gt;</em><span class="sig-paren">)</span> &rarr; Int32</dt>
+<dt id="Random.signedNumber(range:)">
+<code class="descclassname">class func </code><code class="descname">signedNumber</code><span class="sig-paren">(</span><em>range: CountableRange&lt;Int32&gt;</em><span class="sig-paren">)</span> &rarr; Int32<a class="headerlink" href="#Random.signedNumber(range:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a Int32 random number</p>
 <p>This may be a bit slower than the unsigned version as we have
 to upcast through a 64 bit type to avoid overflows.</p>
@@ -195,9 +188,8 @@ to upcast through a 64 bit type to avoid overflows.</p>
 </table>
 </dd></dl>
 
-</div></blockquote>
-</li>
-</ul>
+</dd></dl>
+
 </div>
 
 

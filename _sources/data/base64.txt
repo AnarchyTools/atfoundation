@@ -5,7 +5,7 @@ Base64 encoding
 
 .. swift:enum:: Base64Alphabet : String
 
-Base64 alphabet
+   Base64 alphabet
 
    .. swift:enum_case:: Default = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
    
@@ -34,7 +34,7 @@ Base64 alphabet
 
 .. swift:class:: Base64
 
-Base64 decoding and encoding
+   Base64 decoding and encoding
 
    .. swift:class_method:: encode(data: [UInt8], linebreak: Int? = nil, alphabet: Base64Alphabet = .Default) -> String
    

@@ -57,57 +57,52 @@
 <dl class="enum">
 <dt id="enum Base64Alphabet">
 <code class="descclassname">enum </code><code class="descname">Base64Alphabet</code> : String<a class="headerlink" href="#enum Base64Alphabet" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Base64 alphabet</p>
-<blockquote>
-<div><dl class="enum_case">
-<dt id="Default">
-<code class="descname">Default</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</code><a class="headerlink" href="#Default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base64 alphabet</p>
+<dl class="enum_case">
+<dt id="Base64Alphabet.Default">
+<code class="descname">Default</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;</code><a class="headerlink" href="#Base64Alphabet.Default" title="Permalink to this definition">¶</a></dt>
 <dd><p>default alphabet</p>
 </dd></dl>
 
 <dl class="enum_case">
-<dt id="URL">
-<code class="descname">URL</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_&quot;</code><a class="headerlink" href="#URL" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64Alphabet.URL">
+<code class="descname">URL</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_&quot;</code><a class="headerlink" href="#Base64Alphabet.URL" title="Permalink to this definition">¶</a></dt>
 <dd><p>URL type alphabet</p>
 </dd></dl>
 
 <dl class="enum_case">
-<dt id="XMLName">
-<code class="descname">XMLName</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-&quot;</code><a class="headerlink" href="#XMLName" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64Alphabet.XMLName">
+<code class="descname">XMLName</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.-&quot;</code><a class="headerlink" href="#Base64Alphabet.XMLName" title="Permalink to this definition">¶</a></dt>
 <dd><p>XML name alphabet</p>
 </dd></dl>
 
 <dl class="enum_case">
-<dt id="XMLIdentifier">
-<code class="descname">XMLIdentifier</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_:&quot;</code><a class="headerlink" href="#XMLIdentifier" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64Alphabet.XMLIdentifier">
+<code class="descname">XMLIdentifier</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_:&quot;</code><a class="headerlink" href="#Base64Alphabet.XMLIdentifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>XML identifier alphabet</p>
 </dd></dl>
 
 <dl class="enum_case">
-<dt id="Filename">
-<code class="descname">Filename</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-&quot;</code><a class="headerlink" href="#Filename" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64Alphabet.Filename">
+<code class="descname">Filename</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-&quot;</code><a class="headerlink" href="#Base64Alphabet.Filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>alphabet for file names</p>
 </dd></dl>
 
 <dl class="enum_case">
-<dt id="RegEx">
-<code class="descname">RegEx</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!-&quot;</code><a class="headerlink" href="#RegEx" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64Alphabet.RegEx">
+<code class="descname">RegEx</code><code class="descclassname"> = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!-&quot;</code><a class="headerlink" href="#Base64Alphabet.RegEx" title="Permalink to this definition">¶</a></dt>
 <dd><p>alphabet for regular expressions</p>
 </dd></dl>
 
-</div></blockquote>
+</dd></dl>
+
 <dl class="class">
 <dt id="class Base64">
 <code class="descclassname">class </code><code class="descname">Base64</code><a class="headerlink" href="#class Base64" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<p>Base64 decoding and encoding</p>
-<blockquote>
-<div><dl class="class_method">
-<dt id="encode(data:linebreak:alphabet:)">
-<code class="descclassname">class func </code><code class="descname">encode</code><span class="sig-paren">(</span><em>data: [UInt8]</em>, <em>linebreak: Int? = nil</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#encode(data:linebreak:alphabet:)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base64 decoding and encoding</p>
+<dl class="class_method">
+<dt id="Base64.encode(data:linebreak:alphabet:)">
+<code class="descclassname">class func </code><code class="descname">encode</code><span class="sig-paren">(</span><em>data: [UInt8]</em>, <em>linebreak: Int? = nil</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#Base64.encode(data:linebreak:alphabet:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode data with Base64 encoding</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -128,8 +123,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="decode(data:alphabet:)">
-<code class="descclassname">class func </code><code class="descname">decode</code><span class="sig-paren">(</span><em>data: [UInt8]</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#decode(data:alphabet:)" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64.decode(data:alphabet:)">
+<code class="descclassname">class func </code><code class="descname">decode</code><span class="sig-paren">(</span><em>data: [UInt8]</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#Base64.decode(data:alphabet:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decode Base64 encoded data</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -149,8 +144,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="encode(string:linebreak:alphabet:)">
-<code class="descclassname">class func </code><code class="descname">encode</code><span class="sig-paren">(</span><em>string: String</em>, <em>linebreak: Int? = nil</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#encode(string:linebreak:alphabet:)" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64.encode(string:linebreak:alphabet:)">
+<code class="descclassname">class func </code><code class="descname">encode</code><span class="sig-paren">(</span><em>string: String</em>, <em>linebreak: Int? = nil</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#Base64.encode(string:linebreak:alphabet:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode string with Base64 encoding</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -171,8 +166,8 @@
 </dd></dl>
 
 <dl class="class_method">
-<dt id="decode(string:alphabet:)">
-<code class="descclassname">class func </code><code class="descname">decode</code><span class="sig-paren">(</span><em>string: String</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#decode(string:alphabet:)" title="Permalink to this definition">¶</a></dt>
+<dt id="Base64.decode(string:alphabet:)">
+<code class="descclassname">class func </code><code class="descname">decode</code><span class="sig-paren">(</span><em>string: String</em>, <em>alphabet: Base64Alphabet = .Default</em><span class="sig-paren">)</span> &rarr; [UInt8]<a class="headerlink" href="#Base64.decode(string:alphabet:)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decode Base64 encoded string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -191,7 +186,8 @@
 </table>
 </dd></dl>
 
-</div></blockquote>
+</dd></dl>
+
 </div>
 
 
