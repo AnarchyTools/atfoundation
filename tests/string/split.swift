@@ -128,7 +128,7 @@ class SplitTests: XCTestCase {
 }
 
 extension SplitTests {
-    static var allTests : [(String, SplitTests -> () throws -> Void)] {
+    static var allTests : [(String, (SplitTests) -> () throws -> Void)] {
         return [
             ("testJoinWithString", testJoinWithString),
             ("testJoinWithStringAndEmptyArray", testJoinWithStringAndEmptyArray),

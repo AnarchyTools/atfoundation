@@ -217,7 +217,7 @@ class FSTests: XCTestCase {
 }
 
 extension FSTests {
-    static var allTests : [(String, FSTests -> () throws -> Void)] {
+    static var allTests : [(String, (FSTests) -> () throws -> Void)] {
         return [
             ("testFileExists", testFileExists),
             ("testFileDoesNotExist", testFileDoesNotExist),

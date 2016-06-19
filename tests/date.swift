@@ -84,7 +84,7 @@ class DateTests: XCTestCase {
 }
 
 extension DateTests {
-    static var allTests : [(String, DateTests -> () throws -> Void)] {
+    static var allTests : [(String, (DateTests) -> () throws -> Void)] {
         return [
             ("testISODateParsing", testISODateParsing),
             ("testTimeStampToISODate", testTimeStampToISODate),

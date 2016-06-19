@@ -91,7 +91,7 @@ class ReplaceTests: XCTestCase {
 }
 
 extension ReplaceTests {
-    static var allTests : [(String, ReplaceTests -> () throws -> Void)] {
+    static var allTests : [(String, (ReplaceTests) -> () throws -> Void)] {
         return [
             ("testNewStringSubstring", testNewStringSubstring),
             ("testNewStringSubstringWithEmpty", testNewStringSubstringWithEmpty),

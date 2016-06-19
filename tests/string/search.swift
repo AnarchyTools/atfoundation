@@ -240,7 +240,7 @@ class SearchTests: XCTestCase {
 }
 
 extension SearchTests {
-    static var allTests : [(String, SearchTests -> () throws -> Void)] {
+    static var allTests : [(String, (SearchTests) -> () throws -> Void)] {
         return [
             ("testPositionOfChar", testPositionOfChar),
             ("testPositionOfCharNotFound", testPositionOfCharNotFound),

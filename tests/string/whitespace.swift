@@ -40,7 +40,7 @@ class WhitespaceTests: XCTestCase {
 }
 
 extension WhitespaceTests {
-    static var allTests : [(String, WhitespaceTests -> () throws -> Void)] {
+    static var allTests : [(String, (WhitespaceTests) -> () throws -> Void)] {
         return [
             ("testWhitespaceAtBeginning", testWhitespaceAtBeginning),
             ("testWhitespaceAtEnd", testWhitespaceAtEnd),

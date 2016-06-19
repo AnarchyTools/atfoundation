@@ -35,7 +35,7 @@ public enum SysError: ErrorProtocol {
     case NoSuchDevice(Path?)
     case NotADirectory(Path?)
     case IsDirectory(Path?)
-    case InvalidArgument
+    case InvalidArgument(file: String, line: Int, function: String)
     case SystemFileDescriptorsExhausted
     case FileDescriptorsExhausted
     case NotATTY // TODO: Parameters
@@ -51,7 +51,7 @@ public enum SysError: ErrorProtocol {
     case Deadlock
     case NameTooLong(Path?)
     case NoLockAvailable
-    case InvalidSystemCall
+    case InvalidSystemCall(file: String, line: Int, function: String)
     case DirectoryNotEmpty(Path?)
     case SymlinkLoop
 
@@ -77,9 +77,9 @@ public enum SysError: ErrorProtocol {
 
     // Not actually system errors
     case EndOfFile
-    case UnknownError
+    case UnknownError(file: String, line: Int, function: String)
 
-    public init(errno: Int32, _ info: Any...) {
+    public init(errno: Int32, _ info: Any..., file: String = #file, line: Int = #line, function: String = #function) {
 #if os(Linux)
         switch errno {
             case 1: self = .OperationNotPermitted
@@ -103,7 +103,7 @@ public enum SysError: ErrorProtocol {
             case 19: self = .NoSuchDevice(info.first as? Path)
             case 20: self = .NotADirectory(info.first as? Path)
             case 21: self = .IsDirectory(info.first as? Path)
-            case 22: self = .InvalidArgument
+            case 22: self = .InvalidArgument(file: file, line: line, function: function)
             case 23: self = .SystemFileDescriptorsExhausted
             case 24: self = .FileDescriptorsExhausted
             case 25: self = .NotATTY
@@ -119,7 +119,7 @@ public enum SysError: ErrorProtocol {
             case 35: self = .Deadlock
             case 36: self = .NameTooLong(info.first as? Path)
             case 37: self = .NoLockAvailable
-            case 38: self = .InvalidSystemCall
+            case 38: self = .InvalidSystemCall(file: file, line: line, function: function)
             case 39: self = .DirectoryNotEmpty(info.first as? Path)
             case 40: self = .SymlinkLoop
             // Network
@@ -141,7 +141,7 @@ public enum SysError: ErrorProtocol {
             // Quota
             case 122: self = .QuotaExceeded
             // Default
-            default: self = .UnknownError
+            default: self = .UnknownError(file: file, line: line, function: function)
         }
 #else
         switch errno {
@@ -167,7 +167,7 @@ public enum SysError: ErrorProtocol {
             case 19: self = .NoSuchDevice(info.first as? Path)
             case 20: self = .NotADirectory(info.first as? Path)
             case 21: self = .IsDirectory(info.first as? Path)
-            case 22: self = .InvalidArgument
+            case 22: self = .InvalidArgument(file: file, line: line, function: function)
             case 23: self = .SystemFileDescriptorsExhausted
             case 24: self = .FileDescriptorsExhausted
             case 25: self = .NotATTY
@@ -183,7 +183,7 @@ public enum SysError: ErrorProtocol {
             case 11: self = .Deadlock
             case 63: self = .NameTooLong(info.first as? Path)
             case 77: self = .NoLockAvailable
-            case 78: self = .InvalidSystemCall
+            case 78: self = .InvalidSystemCall(file: file, line: line, function: function)
             case 66: self = .DirectoryNotEmpty(info.first as? Path)
             case 62: self = .SymlinkLoop
             // Network
@@ -205,7 +205,7 @@ public enum SysError: ErrorProtocol {
             // Quota
             case 69: self = .QuotaExceeded
             // Default
-            default: self = .UnknownError
+            default: self = .UnknownError(file: file, line: line, function: function)
         }
 #endif
     }

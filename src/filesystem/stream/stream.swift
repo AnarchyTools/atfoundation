@@ -12,23 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import XCTest
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin
+#endif
 
-print("Starting tests...")
+public protocol Stream: class {
+    var fp: UnsafeMutablePointer<FILE>? { get set }
+    var fd: Int32 { get }
+}
 
-XCTMain([
-	testCase(SearchTests.allTests),
-	testCase(SplitTests.allTests),
-	testCase(SubstringTests.allTests),
-	testCase(WhitespaceTests.allTests),
-	testCase(ReplaceTests.allTests),
-    testCase(PathTests.allTests),
-    testCase(DateTests.allTests),
-    testCase(LoggerTests.allTests),
-    testCase(FSTests.allTests),
-    testCase(URLTests.allTests),
-    testCase(MemoryStreamTests.allTests),
-    testCase(ThreadTests.allTests),
-    testCase(PipeTests.allTests),
-    testCase(SubProcessTests.allTests)
-])
+public extension Stream {
+
+    /// fetch a file descriptor for this file
+    var fd: Int32 {
+        return fileno(self.fp)
+    }
+
+    public func closeStream() {
+        if let fp = self.fp {
+            fclose(fp)
+            self.fp = nil
+        }
+    }
+}
