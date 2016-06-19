@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Sub-string extraction &mdash; atfoundation 1.0.0 documentation</title>
+    <title>IP Addresses &mdash; atfoundation 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="atfoundation 1.0.0 documentation" href="../index.html" />
-    <link rel="up" title="String extensions" href="../string.html" />
-    <link rel="next" title="Searching for sub-strings and characters" href="search.html" />
-    <link rel="prev" title="String extensions" href="../string.html" /> 
+    <link rel="up" title="Networking" href="../net.html" />
+    <link rel="next" title="Sub-Processes" href="../process.html" />
+    <link rel="prev" title="URL parsing and construction" href="url.html" /> 
   </head>
   <body>
 
@@ -36,7 +36,7 @@
       <h3>Navigation</h3>
       <ul class="parent">
           <li>
-            <a href="../string.html">String extensions</a>
+            <a href="../net.html">Networking</a>
           </li>
       </ul>
       <ul class="rel">
@@ -44,80 +44,87 @@
           <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
         </li>
         <li>
-          <a href="search.html" title="Searching for sub-strings and characters">next</a>
+          <a href="../process.html" title="Sub-Processes">next</a>
         </li>
         <li>
-          <a href="../string.html" title="String extensions">previous</a>
+          <a href="url.html" title="URL parsing and construction">previous</a>
         </li>
       </ul>
     </nav>  
     
-  <div class="section" id="sub-string-extraction">
-<h1>Sub-string extraction<a class="headerlink" href="#sub-string-extraction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ip-addresses">
+<h1>IP Addresses<a class="headerlink" href="#ip-addresses" title="Permalink to this headline">¶</a></h1>
+<dl class="enum">
+<dt id="enum IPAddress">
+<code class="descclassname">enum </code><code class="descname">IPAddress</code><a class="headerlink" href="#enum IPAddress" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="enum_case">
+<dt id="IPAddress.IPv4">
+<code class="descname">IPv4</code>(_: UInt8, _: UInt8, _: UInt8, _: UInt8)<a class="headerlink" href="#IPAddress.IPv4" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPv4 Address</p>
+</dd></dl>
+
+<dl class="enum_case">
+<dt id="IPAddress.IPv6">
+<code class="descname">IPv6</code>(_: UInt16, _: UInt16, _: UInt16, _: UInt16, _: UInt16, _: UInt16, _: UInt16, _: UInt16)<a class="headerlink" href="#IPAddress.IPv6" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPv6 Address</p>
+</dd></dl>
+
+<dl class="enum_case">
+<dt id="IPAddress.Wildcard">
+<code class="descname">Wildcard</code><a class="headerlink" href="#IPAddress.Wildcard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wildcard Address</p>
+</dd></dl>
+
+<dl class="init">
+<dt id="IPAddress.init(fromString:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>fromString: String</em><span class="sig-paren">)</span><a class="headerlink" href="#IPAddress.init(fromString:)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Init from a string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fromString</strong> &#8211; String with IP address</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="IPAddress.sin_addr()">
+<code class="descclassname">func </code><code class="descname">sin_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; in_addr?<a class="headerlink" href="#IPAddress.sin_addr()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <code class="docutils literal"><span class="pre">in_addr</span></code> from the address, may return <code class="docutils literal"><span class="pre">nil</span></code> if it was a IPv6 address</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="IPAddress.sin6_addr()">
+<code class="descclassname">func </code><code class="descname">sin6_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; in6_addr?<a class="headerlink" href="#IPAddress.sin6_addr()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a <code class="docutils literal"><span class="pre">in6_addr</span></code> from the address, may return <code class="docutils literal"><span class="pre">nil</span></code> if it was a IPv4 address</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="extension">
-<dt>
-<code class="descclassname">extension </code><code class="descname">String</code></dt>
-<dd><dl class="method">
-<dt id="String.subString(range:)">
-<code class="descclassname">func </code><code class="descname">subString</code><span class="sig-paren">(</span><em>range: Range&lt;String.Index&gt;</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#String.subString(range:)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create substring from string</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>range</strong> &#8211; range of the substring, will be clamped to <code class="docutils literal"><span class="pre">self.endIndex</span></code></li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">substring or <code class="docutils literal"><span class="pre">nil</span></code> if start index out of range</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dt id="extension IPAddress">
+<code class="descclassname">extension </code><code class="descname">IPAddress</code> : CustomStringConvertible<a class="headerlink" href="#extension IPAddress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-<dl class="method">
-<dt id="String.subString(toIndex:)">
-<code class="descclassname">func </code><code class="descname">subString</code><span class="sig-paren">(</span><em>toIndex: String.Index</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#String.subString(toIndex:)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create substring from start to index</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> &#8211; end index, excluded</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">substring</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dl class="extension">
+<dt id="extension in_addr">
+<code class="descclassname">extension </code><code class="descname">in_addr</code> : CustomStringConvertible<a class="headerlink" href="#extension in_addr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-<dl class="method">
-<dt id="String.subString(fromIndex:)">
-<code class="descclassname">func </code><code class="descname">subString</code><span class="sig-paren">(</span><em>fromIndex: String.Index</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#String.subString(fromIndex:)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create substring from index to end</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>index</strong> &#8211; start index, included</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">substring or <code class="docutils literal"><span class="pre">nil</span></code> if start index out of range</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+<dl class="extension">
+<dt id="extension in6_addr">
+<code class="descclassname">extension </code><code class="descname">in6_addr</code> : CustomStringConvertible<a class="headerlink" href="#extension in6_addr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-</dd></dl>
+<dl class="extension">
+<dt id="extension sockaddr_storage">
+<code class="descclassname">extension </code><code class="descname">sockaddr_storage</code> : CustomStringConvertible<a class="headerlink" href="#extension sockaddr_storage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 
@@ -134,13 +141,13 @@
 </ul>
 
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../string.html">String extensions</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="">Sub-string extraction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="search.html">Searching for sub-strings and characters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="replace.html">Replacing sub-strings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="split.html">Splitting strings into parts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="whitespace.html">Trimming whitespace</a></li>
-<li class="toctree-l2"><a class="reference internal" href="string.html">Misc string extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../string.html">String extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../string/substring.html">Sub-string extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/search.html">Searching for sub-strings and characters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/replace.html">Replacing sub-strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/split.html">Splitting strings into parts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/whitespace.html">Trimming whitespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../string/string.html">Misc string extensions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../filesystem.html">Filesystem abstraction</a><ul>
@@ -162,9 +169,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../logger.html">Customizable logger</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../net.html">Networking</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../net/url.html">URL parsing and construction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../net/ipaddress.html">IP Addresses</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../net.html">Networking</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="url.html">URL parsing and construction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">IP Addresses</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../process.html">Sub-Processes</a></li>
@@ -188,10 +195,10 @@
     <a href="../swift-modindex.html" title="Swift Module Index">Index</a>
   </li>
   <li>
-    <a href="search.html" title="Searching for sub-strings and characters">next</a>
+    <a href="../process.html" title="Sub-Processes">next</a>
   </li>
   <li>
-    <a href="../string.html" title="String extensions">previous</a>
+    <a href="url.html" title="URL parsing and construction">previous</a>
   </li>
 </ul>
           </section>

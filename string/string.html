@@ -110,6 +110,62 @@
 
 </dd></dl>
 
+<dl class="extension">
+<dt>
+<code class="descclassname">extension </code><code class="descname">UInt16</code></dt>
+<dd></dd></dl>
+
+<p>Extension to UInt16 to convert to hex String</p>
+<blockquote>
+<div><dl class="method">
+<dt id="hexString(padded:)">
+<code class="descclassname">func </code><code class="descname">hexString</code><span class="sig-paren">(</span><em>padded: Bool = true</em><span class="sig-paren">)</span> &rarr; String<a class="headerlink" href="#hexString(padded:)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create Hexadecimal representation of a UInt16</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>padded</strong> &#8211; set to <code class="docutils literal"><span class="pre">true</span></code> if the result should be zero padded</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">hex representation as String</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<dl class="extension">
+<dt>
+<code class="descclassname">extension </code><code class="descname">UInt8</code></dt>
+<dd></dd></dl>
+
+<p>Extension to UInt8 to convert to hex String</p>
+<blockquote>
+<div><dl class="method">
+<dt>
+<code class="descclassname">func </code><code class="descname">hexString</code><span class="sig-paren">(</span><em>padded: Bool = true</em><span class="sig-paren">)</span> &rarr; String</dt>
+<dd><p>Create Hexadecimal representation of a UInt8</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>padded</strong> &#8211; set to <code class="docutils literal"><span class="pre">true</span></code> if the result should be zero padded</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">hex representation as String</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
 </div>
 
 
@@ -155,11 +211,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../logger.html">Customizable logger</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../net.html">Networking</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../net/url.html">URL parsing and construction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../net/ipaddress.html">IP Addresses</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../process.html">Sub-Processes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../thread.html">Threading primitives</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../adler32.html">Adler32 Checksum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">Data handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data/adler32.html">Adler32 Checksum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/base64.html">Base64 encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data/quotedprintable.html">Quoted printable encoding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uuid4.html">UUID values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../random.html">Random number generators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../charset.html">Charset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../syserror.html">POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools.html">Misc. Tools</a></li>

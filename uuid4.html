@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>String extensions &mdash; atfoundation 1.0.0 documentation</title>
+    <title>UUID values &mdash; atfoundation 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -22,8 +22,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="atfoundation 1.0.0 documentation" href="index.html" />
-    <link rel="next" title="Sub-string extraction" href="string/substring.html" />
-    <link rel="prev" title="atfoundation" href="index.html" /> 
+    <link rel="next" title="Random number generators" href="random.html" />
+    <link rel="prev" title="Quoted printable encoding" href="data/quotedprintable.html" /> 
   </head>
   <body>
 
@@ -43,30 +43,77 @@
           <a href="swift-modindex.html" title="Swift Module Index">Index</a>
         </li>
         <li>
-          <a href="string/substring.html" title="Sub-string extraction">next</a>
+          <a href="random.html" title="Random number generators">next</a>
         </li>
         <li>
-          <a href="index.html" title="atfoundation">previous</a>
+          <a href="data/quotedprintable.html" title="Quoted printable encoding">previous</a>
         </li>
       </ul>
     </nav>  
     
-  <div class="section" id="string-extensions">
-<h1>String extensions<a class="headerlink" href="#string-extensions" title="Permalink to this headline">¶</a></h1>
-<p>Swift strings are very powerful with their complete unicode support,
-but as they do not appear as <code class="docutils literal"><span class="pre">SequenceType</span></code> anymore we&#8217;re lacking some
-of the simpler manipulation functions. <em>atfoundation</em> tries to supply you
-a solution for that that is done safely and as fast as possible in pure Swift.</p>
-<div class="toctree-wrapper compound" id="stringtoc">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="string/substring.html">Sub-string extraction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="string/search.html">Searching for sub-strings and characters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="string/replace.html">Replacing sub-strings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="string/split.html">Splitting strings into parts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="string/whitespace.html">Trimming whitespace</a></li>
-<li class="toctree-l1"><a class="reference internal" href="string/string.html">Misc string extensions</a></li>
+  <div class="section" id="uuid-values">
+<h1>UUID values<a class="headerlink" href="#uuid-values" title="Permalink to this headline">¶</a></h1>
+<dl class="struct">
+<dt id="struct UUID4">
+<code class="descclassname">struct </code><code class="descname">UUID4</code> : Equatable<a class="headerlink" href="#struct UUID4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>UUID4 (Random class)</p>
+<blockquote>
+<div><dl class="init">
+<dt id="init()">
+<code class="descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#init()" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize random UUID</p>
+</dd></dl>
+
+<dl class="init">
+<dt id="init(bytes:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>bytes: [UInt8]</em><span class="sig-paren">)</span><a class="headerlink" href="#init(bytes:)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize UUID from bytes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>bytes</strong> &#8211; 16 bytes of UUID data</li>
 </ul>
-</div>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">nil if the bytes are no valid UUID</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="init">
+<dt id="init(string:)">
+<code class="descname">init</code><span class="sig-paren">(</span><em>string: String</em><span class="sig-paren">)</span><a class="headerlink" href="#init(string:)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize UUID from string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>string</strong> &#8211; string in default UUID representation</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div></blockquote>
+<dl class="extension">
+<dt id="extension UUID4">
+<code class="descclassname">extension </code><code class="descname">UUID4</code> : CustomStringConvertible<a class="headerlink" href="#extension UUID4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="extension">
+<dt>
+<code class="descclassname">extension </code><code class="descname">UUID4</code> : Hashable</dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -82,7 +129,7 @@ a solution for that that is done safely and as fast as possible in pure Swift.</
 </ul>
 
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">String extensions</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="string.html">String extensions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="string/substring.html">Sub-string extraction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="string/search.html">Searching for sub-strings and characters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="string/replace.html">Replacing sub-strings</a></li>
@@ -123,7 +170,7 @@ a solution for that that is done safely and as fast as possible in pure Swift.</
 <li class="toctree-l2"><a class="reference internal" href="data/quotedprintable.html">Quoted printable encoding</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="uuid4.html">UUID values</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">UUID values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">Random number generators</a></li>
 <li class="toctree-l1"><a class="reference internal" href="charset.html">Charset</a></li>
 <li class="toctree-l1"><a class="reference internal" href="syserror.html">POSIX System errors (<code class="docutils literal"><span class="pre">errno</span></code>)</a></li>
@@ -136,10 +183,10 @@ a solution for that that is done safely and as fast as possible in pure Swift.</
     <a href="swift-modindex.html" title="Swift Module Index">Index</a>
   </li>
   <li>
-    <a href="string/substring.html" title="Sub-string extraction">next</a>
+    <a href="random.html" title="Random number generators">next</a>
   </li>
   <li>
-    <a href="index.html" title="atfoundation">previous</a>
+    <a href="data/quotedprintable.html" title="Quoted printable encoding">previous</a>
   </li>
 </ul>
           </section>
