@@ -14,7 +14,6 @@
 
 #if os(Linux)
     import Glibc
-    import BSD
 #else
     import Darwin.C
 #endif
@@ -25,10 +24,7 @@ public struct UUID4: Equatable {
 
     /// Initialize random UUID
     public init() {
-        self.bytes = [UInt8](repeating: 0, count: 16)
-        for i in 0..<16 {
-            self.bytes[i] = UInt8(arc4random_uniform(256))
-        }
+        self.bytes = Random.bytes(count: 16)
         self.bytes[6] = self.bytes[6] & 0x0f + 0x40
         self.bytes[8] = self.bytes[8] & 0x3f + 0x80
     }
