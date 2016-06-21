@@ -36,4 +36,5 @@ XCTMain([
     testCase(IPAddressTests.allTests),
     testCase(UUID4Tests.allTests),
     testCase(RandomTests.allTests),
+    testCase(SocketTests.allTests),
 ])
