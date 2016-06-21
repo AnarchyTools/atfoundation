@@ -23,7 +23,7 @@
       :name "atfoundation"
       :output-type "static-library"
       :publish-product true
-      :compile-options ["-enable-testing" "-g" "-Xcc" "-D_GNU_SOURCE"]
+      :compile-options ["-enable-testing" "-g" "-Xcc" "-fblocks" "-Xcc" "-D_GNU_SOURCE"]
 
       :overlays {
         :bootstrap-osx {
@@ -45,7 +45,7 @@
       :sources ["tests/**.swift"]
       :name "atfoundationtests"
       :output-type "executable"
-      :compile-options ["-g"]
+      :compile-options ["-g" "-Xcc" "-fblocks"]
 
       :link-with ["atfoundation.a"]
       :xctestify true
