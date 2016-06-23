@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#if false
 #if os(Linux)
     import Glibc
 #else
@@ -386,4 +387,4 @@ public class ConnectedSocket {
         close(self.fd)
     }
 }
-
+#endif
