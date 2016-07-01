@@ -47,7 +47,7 @@
       :output-type "executable"
       :compile-options ["-g"]
 
-      :link-with ["atfoundation.a"]
+      :link-with-product ["atfoundation.a"]
       :xctestify true
       :xctest-strict true
     }

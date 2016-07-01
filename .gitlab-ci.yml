@@ -5,9 +5,9 @@ linux:
     stage: build
     script:
         - apt-get update
-        - apt-get install --no-install-recommends xz-utils curl git ca-certificates -y
-        - curl -L https://github.com/AnarchyTools/atbuild/releases/download/0.10.0/atbuild-0.10.0-linux.tar.xz | tar xJ
-        - cp atbuild-*/atbuild /usr/local/bin/
+        - apt-get install --no-install-recommends xz-utils curl git ca-certificates curl -y
+        - curl -s https://packagecloud.io/install/repositories/anarchytools/AT/script.deb.sh | bash
+        - apt-get install atbuild package-deb -y
         - atbuild check
     tags:
         - autoscale-linux
