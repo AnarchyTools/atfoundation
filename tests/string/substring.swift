@@ -44,7 +44,7 @@ class SubstringTests: XCTestCase {
 }
 
 extension SubstringTests {
-    static var allTests : [(String, SubstringTests -> () throws -> Void)] {
+    static var allTests : [(String, (SubstringTests) -> () throws -> Void)] {
         return [
             ("testSubstring", testSubstring),
             ("testSubstringFullRange", testSubstringFullRange),
