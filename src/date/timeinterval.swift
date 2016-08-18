@@ -14,7 +14,7 @@
 
 /// Time interval
 public struct TimeInterval {
-    private let interval: Int
+    fileprivate let interval: Int
 
     /// Initialize on second scale
     ///

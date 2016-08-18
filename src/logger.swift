@@ -105,15 +105,15 @@ public class StdErrLogger: LoggerProcotol {
 
     public func log(_ level: Log.LogLevel, _ msg: [Any], date: Date?, file: String?, line: Int?, function: String?) {
         self.colorize(stderr, level)
-        if let date = date where self.logDate {
+        if let date = date, self.logDate {
             self._fwrite(stderr, "\(date.isoDateString!) ")
         }
-        if let file = file, line = line where self.logFileAndLine || level == .Fatal {
+        if let file = file, let line = line, self.logFileAndLine || level == .Fatal {
             self._fwrite(stderr, "\(file):\(line): ")
         }
 
         for item in msg {
-            self._fwrite(stderr, String(item) + " ")
+            self._fwrite(stderr, String(describing: item) + " ")
         }
         self.colorize(stderr, nil)
         self._fwrite(stderr, "\n")
@@ -132,15 +132,15 @@ public class StdOutLogger: LoggerProcotol {
 
     public func log(_ level: Log.LogLevel, _ msg: [Any], date: Date?, file: String?, line: Int?, function: String?) {
         self.colorize(stdout, level)
-        if let date = date where self.logDate {
+        if let date = date, self.logDate {
             self._fwrite(stdout, "\(date.isoDateString!) ")
         }
-        if let file = file, line = line where self.logFileAndLine || level == .Fatal {
+        if let file = file, let line = line, self.logFileAndLine || level == .Fatal {
             self._fwrite(stdout, "\(file):\(line): ")
         }
 
         for item in msg {
-            self._fwrite(stdout, String(item) + " ")
+            self._fwrite(stdout, String(describing: item) + " ")
         }
         self.colorize(stdout, nil)
         self._fwrite(stdout, "\n")
@@ -197,16 +197,16 @@ public class FileLogger: LoggerProcotol {
     public func log(_ level: Log.LogLevel, _ msg: [Any], date: Date?, file: String?, line: Int?, function: String?) {
         if let logFile = self.logFile {
             do {
-                if let date = date where self.logDate {
+                if let date = date, self.logDate {
                     try date.isoDateString!.write(to: logFile)
                 }
-                if let file = file, line = line where self.logFileAndLine || level == .Fatal {
+                if let file = file, let line = line, self.logFileAndLine || level == .Fatal {
                     try " [\(level)] \(file):\(line): ".write(to: logFile)
                 } else {
                     try " [\(level)]: ".write(to: logFile)
                 }
                 for item in msg {
-                    try (String(item) + " ").write(to: logFile)
+                    try (String(describing: item) + " ").write(to: logFile)
                 }
                 try "\n".write(to: logFile)
                 logFile.flush()
