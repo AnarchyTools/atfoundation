@@ -447,7 +447,7 @@ public class FS {
         let p = Path.tempDirectory().appending(prefix + ".XXXXXXX")
         var buf = p.description.utf8CString
         let result = buf.withUnsafeMutableBufferPointer {
-            mkdtemp($0.baseAddress)
+            mkdtemp($0.baseAddress!)
         }
         if result == nil {
             throw SysError(errno: errno, p)

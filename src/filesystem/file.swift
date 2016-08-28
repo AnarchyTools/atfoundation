@@ -134,7 +134,7 @@ public class File {
         let p = path.appending(prefix + ".XXXXXXX")
         var buf = p.description.utf8CString
         let fd = buf.withUnsafeMutableBufferPointer {
-            mkstemp($0.baseAddress)
+            mkstemp($0.baseAddress!)
         }
         let filename_ = buf.withUnsafeBufferPointer { (ptr) -> String? in
             if let o = ptr.baseAddress {
