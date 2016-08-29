@@ -132,10 +132,17 @@ public class File {
     /// - Parameter binary: optional, open in binary mode, defaults to text mode
     public convenience init(tempFileAtPath path: Path, prefix: String, binary: Bool = false) throws {
         let p = path.appending(prefix + ".XXXXXXX")
-        var buf = Array(p.description.utf8)
-        buf.append(0)
-        let fd = mkstemp(UnsafeMutablePointer(buf))
-        if let filename = String(validatingUTF8: UnsafeMutablePointer(buf)) {
+        var buf = p.description.utf8CString
+        let fd = buf.withUnsafeMutableBufferPointer {
+            mkstemp($0.baseAddress!)
+        }
+        let filename_ = buf.withUnsafeBufferPointer { (ptr) -> String? in
+            if let o = ptr.baseAddress {
+                    return String(cString: o) 
+            } 
+            return nil
+        }
+        if let filename = filename_ {
             try self.init(fd: fd, mode: .ReadAndWrite, binary: binary, takeOwnership: true)
             self.path = Path(filename)
         } else {
@@ -166,7 +173,9 @@ public class File {
     public func read(size: Int) throws -> String? {
         var buffer:[UInt8] = try self.read(size: size)
         buffer.append(0)
-        return String(validatingUTF8: UnsafePointer<CChar>(buffer))
+        return buffer.withUnsafeBufferPointer {
+            String(cString: $0.baseAddress!)
+        }
     }
 
     /// Read bytes from file
@@ -175,7 +184,7 @@ public class File {
     /// - Returns: UInt8 array with bytes
     public func read(size: Int) throws -> [UInt8] {
         var buffer = [UInt8](repeating: 0, count: size)
-        let read = fread(UnsafeMutablePointer(buffer), 1, size, self.fp)
+        let read = fread(UnsafeMutablePointer(mutating: buffer), 1, size, self.fp)
         if read == 0 {
             if feof(self.fp) == 0 {
                 throw SysError(errno: errno)
@@ -195,7 +204,9 @@ public class File {
     public func readAll() throws -> String? {
         var buffer:[UInt8] = try self.readAll()
         buffer.append(0)
-        return String(validatingUTF8: UnsafePointer<CChar>(buffer))
+        return buffer.withUnsafeBufferPointer {
+            String(cString: $0.baseAddress!)
+        }
     }
 
     /// Read complete file
@@ -217,8 +228,11 @@ public class File {
     ///
     /// - Returns: String read from file (newline included) if valid UTF-8 or nil
     public func readLine() throws -> String? {
-        let buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
-        let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
+        var buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
+        let read = buffer.withUnsafeMutableBufferPointer() { (ptr_) -> UnsafeMutablePointer<Int8>? in
+            let ptr = UnsafeMutableRawPointer(ptr_.baseAddress)!
+            return fgets(ptr.assumingMemoryBound(to: Int8.self), 64 * 1024, self.fp)
+        }
         if read == nil {
             if feof(self.fp) == 0 {
                 throw SysError(errno: errno)
@@ -226,7 +240,9 @@ public class File {
                 throw SysError.EndOfFile
             }
         }
-        return String(validatingUTF8: UnsafePointer<CChar>(buffer))
+        return buffer.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
     }
 
     /// Write a string to the file

@@ -18,7 +18,7 @@ public extension String {
     ///
     /// - Parameter path: a path
     public init(path: Path) {
-        self.init(path.description)
+        self.init(path.description)!
     }
 
     /// Load a string from a file

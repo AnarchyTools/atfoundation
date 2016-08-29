@@ -68,7 +68,7 @@ class LoggerTests: XCTestCase {
 }
 
 extension LoggerTests {
-    static var allTests : [(String, LoggerTests -> () throws -> Void)] {
+    static var allTests : [(String, (LoggerTests) -> () throws -> Void)] {
         return [
             ("testLogStdErr", testLogStdErr),
             ("testLogStdOut", testLogStdOut),

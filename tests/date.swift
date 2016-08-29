@@ -69,9 +69,9 @@ class DateTests: XCTestCase {
     }
 
     func testAddingDates() {
-        let date1 = Date(timestamp: 86400)
-        let date2 = Date(timestamp: 86400)
-        XCTAssert(date1 + date2 == Date(timestamp: 86400 * 2))
+        let date1 = atfoundation.Date(timestamp: 86400)
+        let date2 = atfoundation.Date(timestamp: 86400)
+        XCTAssert(date1 + date2 == atfoundation.Date(timestamp: 86400 * 2))
         XCTAssert(date1 - date2 == Date(timestamp: 0))
     }
 
@@ -84,7 +84,7 @@ class DateTests: XCTestCase {
 }
 
 extension DateTests {
-    static var allTests : [(String, DateTests -> () throws -> Void)] {
+    static var allTests : [(String, (DateTests) -> () throws -> Void)] {
         return [
             ("testISODateParsing", testISODateParsing),
             ("testTimeStampToISODate", testTimeStampToISODate),

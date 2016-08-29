@@ -409,7 +409,7 @@ public class FS {
         let result = rename(from.description, to.description)
         if result < 0 {
             let error = SysError(errno: errno, to, from)
-            if case .CrossDeviceLink = error where !atomic {
+            if case .CrossDeviceLink = error, !atomic {
                 try FS.copyItem(from: from, to: to, recursive: true)
                 try FS.removeItem(path: from, recursive: true)
             } else {
@@ -445,12 +445,20 @@ public class FS {
     /// - Returns: path to the already created directory
     public class func temporaryDirectory(prefix: String = "tempdir") throws -> Path {
         let p = Path.tempDirectory().appending(prefix + ".XXXXXXX")
-        var buf = Array(p.description.utf8)
-        buf.append(0)
-        if mkdtemp(UnsafeMutablePointer(buf)) == nil {
+        var buf = p.description.utf8CString
+        let result = buf.withUnsafeMutableBufferPointer {
+            mkdtemp($0.baseAddress!)
+        }
+        if result == nil {
             throw SysError(errno: errno, p)
         }
-        if let dirname = String(validatingUTF8: UnsafeMutablePointer(buf)) {
+        let dirname_ = buf.withUnsafeBufferPointer { (ptr) -> String? in
+            if let o = ptr.baseAddress {
+                    return String(cString: o) 
+            } 
+            return nil
+        }
+        if let dirname = dirname_ {
             return Path(dirname)
         } else {
             throw SysError.UnknownError
