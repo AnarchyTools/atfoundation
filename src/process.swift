@@ -104,7 +104,7 @@ public class SubProcess {
 	/// Run the sub process asynchronously, returning a bidirectional stream for stdin/out
 	///
 	/// - returns: bi-directional stream for stdin/stdout
-	public func run() throws -> protocol<InputStream, OutputStream> {
+	public func run() throws -> InputStream & OutputStream {
 		let stream = try BidirectionalPipe()
 		try self.spawn(stdin: stream.0, stdout: stream.0)
 		return stream.1
@@ -169,37 +169,37 @@ public class SubProcess {
 
 		let argv: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?> = args.withUnsafeBufferPointer { ptr in
             let array : UnsafeBufferPointer<String> = ptr
-            let buffer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>(allocatingCapacity: array.count + 1)
-            buffer.initializeFrom(array.map { $0.withCString(strdup) })
+            let buffer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: array.count + 1)
+            buffer.initialize(from: array.map { $0.withCString(strdup) })
             buffer[array.count] = nil
             return buffer
         }
 
         defer {
             for arg in argv ..< argv + args.count {
-                free(UnsafeMutablePointer<Void>(arg.pointee))
+                free(UnsafeMutableRawPointer(arg.pointee))
             }
-            argv.deallocateCapacity(args.count + 1)
+            argv.deallocate(capacity: args.count + 1)
         }
 
         // environment
         let env: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>
-        env = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>(allocatingCapacity: 1 + self.environment.count)
-        env.initializeFrom(self.environment.map { strdup("\($0)=\($1)") })
+        env = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: 1 + self.environment.count)
+        env.initialize(from: self.environment.map { strdup("\($0)=\($1)") })
         env[self.environment.count] = nil
 
         defer {
             for pair in env ..< env + self.environment.count {
-                free(UnsafeMutablePointer<Void>(pair.pointee))
+                free(UnsafeMutableRawPointer(pair.pointee))
             }
-            env.deallocateCapacity(self.environment.count + 1)
+            env.deallocate(capacity: self.environment.count + 1)
         }
 
 		// file descriptors
 #if os(Linux)
 		var actions = posix_spawn_file_actions_t()
 #else
-		var actions = posix_spawn_file_actions_t(nil)
+		var actions = posix_spawn_file_actions_t(bitPattern: 0)
 #endif
 		posix_spawn_file_actions_init(&actions)
 		defer { posix_spawn_file_actions_destroy(&actions) }
@@ -219,7 +219,7 @@ public class SubProcess {
 #if os(Linux)
 		var attributes = posix_spawnattr_t()
 #else
-		var attributes = posix_spawnattr_t(nil)
+		var attributes = posix_spawnattr_t(bitPattern: 0)
 #endif
 		posix_spawnattr_init(&attributes)
 		defer { posix_spawnattr_destroy(&attributes) }

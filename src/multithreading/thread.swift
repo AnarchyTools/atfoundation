@@ -26,34 +26,12 @@ final public class Thread {
     private let detached: Bool
     private var threadID = pthread_t(bitPattern: 0)
 
-    typealias ThreadMainFunction = @convention(c) (UnsafeMutablePointer<Void>!) -> UnsafeMutablePointer<Void>!
-
-    /// Initialize and run a thread
-    ///
-    /// - parameter block: block to run in a new thread, the return value of the block can be aquired with `wait()`
-    public init(_ block: ((Void) -> Any?)) {
-        self.threadMain = block
-        self.detached = false
-
-        var attr = pthread_attr_t()
-        pthread_attr_init(&attr)
-        defer { pthread_attr_destroy(&attr) }
-#if os(Linux)
-        pthread_attr_setdetachstate(&attr, Int32(detached ? PTHREAD_CREATE_DETACHED : PTHREAD_CREATE_JOINABLE))
-#else
-        pthread_attr_setdetachstate(&attr, detached ? PTHREAD_CREATE_DETACHED : PTHREAD_CREATE_JOINABLE)
-#endif
-        pthread_create(&self.threadID, &attr, { arg in
-            let thread = unsafeBitCast(arg, to: Thread.self)
-            let result = thread.threadMain()
-            return unsafeBitCast(result, to: UnsafeMutablePointer<Void>.self)
-        }, unsafeBitCast(self, to: UnsafeMutablePointer<Void>.self))
-    }
+    typealias ThreadMainFunction = @convention(c) (UnsafeMutableRawPointer!) -> UnsafeMutableRawPointer!
 
     /// Initialize and run a detached thread that does not return a value
     ///
     /// - parameter block: block to detach to new thread
-    public init(_ block: ((Void) -> Void)) {
+    public init(_ block: @escaping (() -> ())) {
         self.threadMain = {
             block()
             return nil
@@ -73,16 +51,16 @@ final public class Thread {
             let thread = unsafeBitCast(arg, to: Thread.self)
             let _ = thread.threadMain()
             return nil
-        }, unsafeBitCast(self, to: UnsafeMutablePointer<Void>.self))
+        }, unsafeBitCast(self, to: UnsafeMutableRawPointer.self))
     }
 
     /// Wait for the result of a non-detached thread
     ///
     /// - returns: Value that the thread closure returned
     public func wait() -> Any? {
-        if self.detached {
-            var returnValue = UnsafeMutablePointer<Void>(nil)
-            pthread_join(self.threadID, &returnValue)
+        if let threadID = self.threadID, self.detached {
+            var returnValue = UnsafeMutableRawPointer(bitPattern: 0)
+            pthread_join(threadID, &returnValue)
             if let returnValue = returnValue {
                 let result = unsafeBitCast(returnValue, to: Any.self)
                 return result

@@ -34,11 +34,11 @@ class SubProcessTests: XCTestCase {
     }
 
     func testAsyncStdoutStream() {
-        let e = expectation(withDescription: "wait for process to finish")
+        let e = expectation(description: "wait for process to finish")
         let process = SubProcess(executable: Path("cat"))
         do {
             let input = try UnidirectionalPipe()
-            let stdout: InputStream = try process.run(stdin: input.read)
+            let stdout: atfoundation.InputStream = try process.run(stdin: input.read)
             if let p = stdout as? ReadPipe {
                 p.onReadLine { line in
                     XCTAssertEqual(line, "Hello")
@@ -55,14 +55,14 @@ class SubProcessTests: XCTestCase {
             XCTFail("Error thrown: \(error)")
             e.fulfill()
         }
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testAsyncBidirectionalStream() {
-        let e = expectation(withDescription: "wait for process to finish")
+        let e = expectation(description: "wait for process to finish")
         let process = SubProcess(executable: Path("cat"))
         do {
-            let stream: protocol<atfoundation.InputStream, atfoundation.OutputStream> = try process.run()
+            let stream: atfoundation.InputStream & atfoundation.OutputStream = try process.run()
             if let p = stream as? RWPipe {
                 p.onReadLine { line in
                     XCTAssertEqual(line, "Hello")
@@ -79,7 +79,7 @@ class SubProcessTests: XCTestCase {
             XCTFail("Error thrown: \(error)")
             e.fulfill()
         }
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testBlockingStringList() {
@@ -94,10 +94,10 @@ class SubProcessTests: XCTestCase {
     }
 
     func testAsyncTwoStreams() {
-        let e = expectation(withDescription: "wait for process to finish")
+        let e = expectation(description: "wait for process to finish")
         let process = SubProcess(executable: Path("ls"), arguments: "--invalid-parameter")
         do {
-            let streams: (stdout: InputStream, stderr: InputStream) = try process.run()
+            let streams: (stdout: atfoundation.InputStream, stderr: atfoundation.InputStream) = try process.run()
             if let p = streams.stdout as? ReadPipe {
                 p.onReadLine { line in
                     Log.debug(line)
@@ -128,7 +128,7 @@ class SubProcessTests: XCTestCase {
             XCTFail("Error thrown: \(error)")
             e.fulfill()
         }
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 }
 

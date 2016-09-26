@@ -116,7 +116,7 @@ public class Runloop {
 	///                       block to be executed before everything that
 	///                       is already queued
 	/// - parameter block: the block to execute
-	public func queueBlock(priority: Bool = false, _ block: (Void) -> Void) {
+	public func queueBlock(priority: Bool = false, _ block: @escaping (Void) -> Void) {
 		try! self.queueLock.whileLocking {
 			if priority {
 				self.blockQueue.insert(block, at:0)
@@ -132,7 +132,7 @@ public class Runloop {
 	/// - parameter stream: Stream to watch for readable file descriptor
 	/// - parameter callback: the callback to queue in this runloop when the
 	///                       file descriptor becomes readable
-	public func watchForRead(stream: InputStream, callback: (InputStream) -> Void) {
+	public func watchForRead(stream: InputStream, callback: @escaping (InputStream) -> Void) {
 		try! self.watchLock.whileLocking {
 			self.watchQueue.append(stream)
 		}		
@@ -143,7 +143,7 @@ public class Runloop {
 	/// - parameter stream: Stream to watch for writable file descriptor
 	/// - parameter callback: the callback to queue in this runloop when the
 	///                       file descriptor becomes writable
-	public func watchForWrite(stream: OutputStream, callback: (OutputStream) -> Void) {
+	public func watchForWrite(stream: OutputStream, callback: @escaping (OutputStream) -> Void) {
 		try! self.watchLock.whileLocking {
 			self.watchQueue.append(stream)
 		}		

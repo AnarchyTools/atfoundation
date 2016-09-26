@@ -83,7 +83,7 @@ public struct URL {
             case .Schema(let data):
                 var schema: String? = nil
                 (newState, schema) = self._parseSchema(character, data)
-                if let schema = schema where schema.characters.count > 0 {
+                if let schema = schema, schema.characters.count > 0 {
                     self.schema = schema
                 }
             case .AfterSchema:

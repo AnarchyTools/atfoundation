@@ -20,7 +20,7 @@
 
 /// UUID4 (Random class)
 public struct UUID4: Equatable {
-    private var bytes:[UInt8]!
+    fileprivate var bytes:[UInt8]!
 
     /// Initialize random UUID
     public init() {

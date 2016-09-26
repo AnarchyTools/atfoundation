@@ -40,7 +40,7 @@ public class WritePipe: OutputStream {
     /// Initialize with a file descriptor
     ///
     /// - parameter fd: a file descriptor
-    private init(fd: Int32) throws {
+    fileprivate init(fd: Int32) throws {
         self.fp = fdopen(fd, "wb")
 
         if self.fp == nil {
@@ -58,12 +58,12 @@ public class WritePipe: OutputStream {
 public protocol ReadEvents: class, InputStream {
     var readThread: Thread? { get set }
 
-    func onReadData(cb: ([UInt8]) -> Void)
-    func onReadLine(cb: (String) -> Void)
+    func onReadData(cb: @escaping ([UInt8]) -> Void)
+    func onReadLine(cb: @escaping (String) -> Void)
 }
 
 public extension ReadEvents {
-    public func onReadData(cb: ([UInt8]) -> Void) {
+    public func onReadData(cb: @escaping ([UInt8]) -> Void) {
         self.readThread = Thread() {
             while true {
                 var fds = pollfd()
@@ -89,7 +89,7 @@ public extension ReadEvents {
         }
     }
 
-    public func onReadLine(cb: (String) -> Void) {
+    public func onReadLine(cb: @escaping (String) -> Void) {
         self.readThread = Thread() {
             while true {
                 guard let fp = self.fp else {
@@ -130,7 +130,7 @@ public class ReadPipe: InputStream {
     /// Initialize with a file descriptor
     ///
     /// - parameter fd: a file descriptor
-    private init(fd: Int32) throws {
+    fileprivate init(fd: Int32) throws {
         self.fp = fdopen(fd, "rb")
 
         if self.fp == nil {
@@ -157,7 +157,7 @@ public class RWPipe: InputStream, OutputStream {
     /// Initialize with a file descriptor
     ///
     /// - parameter fd: a file descriptor
-    private init(fd: Int32) throws {
+    fileprivate init(fd: Int32) throws {
         self.fp = fdopen(fd, "r+b")
 
         if self.fp == nil {

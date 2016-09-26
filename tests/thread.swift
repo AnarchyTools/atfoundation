@@ -22,13 +22,13 @@ class ThreadTests: XCTestCase {
     }
 
     func testThreadIDOfSubThread() {
-        let e = expectation(withDescription: "wait for subthread to finish")
-        let t = Thread() {
+        let e = expectation(description: "wait for subthread to finish")
+        let t = atfoundation.Thread() {
             XCTAssertNotEqual(Thread.threadID, 0)
             e.fulfill()
         }
         let _ = t.wait()
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
 }

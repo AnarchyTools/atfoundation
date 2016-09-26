@@ -45,8 +45,8 @@ public class Base64 {
     public class func encode(data: [UInt8], linebreak: Int? = nil, alphabet: Base64Alphabet = .Default) -> String {
 
         // Build lookup table from alphabet
-        let lookup = alphabet.rawValue.utf8.map { c -> UnicodeScalar in
-            return UnicodeScalar(c)
+        let lookup = alphabet.rawValue.characters.map { c -> Character in
+            return c
         }
         
         // round linebreak value to quads
@@ -95,8 +95,8 @@ public class Base64 {
 
             outData.append(lookup[Int(o1)])
             outData.append(lookup[Int(o2)])
-            outData.append(UnicodeScalar(61)) // =
-            outData.append(UnicodeScalar(61)) // =
+            outData.append(Character(UnicodeScalar(61))) // =
+            outData.append(Character(UnicodeScalar(61))) // =
         } else if overhang == 2 {
             // two bytes left, pad with one equal sign
             let d1 = data[data.count - 2]
@@ -109,7 +109,7 @@ public class Base64 {
             outData.append(lookup[Int(o1)])
             outData.append(lookup[Int(o2)])
             outData.append(lookup[Int(o3)])
-            outData.append(UnicodeScalar(61)) // =
+            outData.append(Character(UnicodeScalar(61))) // =
         }
         
         return outData

@@ -33,22 +33,30 @@ class Base64Tests: XCTestCase {
     func testBase64Decode() {
         var result = Base64.decode(string: "SGVsbG8gV29ybGQh")
         result.append(0)
-        var string = String(validatingUTF8: UnsafePointer<CChar>(result))
+        var string = result.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
         XCTAssert(string == "Hello World!")
         
         result = Base64.decode(string: "SGVsbG8gV29ybGQ=")
         result.append(0)
-        string = String(validatingUTF8: UnsafePointer<CChar>(result))
+        string = result.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
         XCTAssert(string == "Hello World")
 
         result = Base64.decode(string: "SGVsbG8gWW91IQ==")
         result.append(0)
-        string = String(validatingUTF8: UnsafePointer<CChar>(result))
+        string = result.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
         XCTAssert(string == "Hello You!")
 
         result = Base64.decode(string: "TnVsbGFtIGlkIGRvbG9yIGlkIG5pYmggdWx0cmljaWVzIHZlaGljdWxhIHV0IGlkIGVsaXQuIERv\r\nbmVjIGlkIGVsaXQgbm9uIG1pIHBvcnRhIGdyYXZpZGEgYXQgZWdldCBtZXR1cy4gTG9yZW0gaXBz\r\ndW0gZG9sb3Igc2l0IGFtZXQsIGNvbnNlY3RldHVyIGFkaXBpc2NpbmcgZWxpdC4gQ3JhcyBqdXN0\r\nbyBvZGlvLCBkYXBpYnVzIGFjIGZhY2lsaXNpcyBpbiwgZWdlc3RhcyBlZ2V0IHF1YW0u")
         result.append(0)
-        string = String(validatingUTF8: UnsafePointer<CChar>(result))
+        string = result.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
         XCTAssert(string == "Nullam id dolor id nibh ultricies vehicula ut id elit. Donec id elit non mi porta gravida at eget metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.")
     }
 }

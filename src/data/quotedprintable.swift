@@ -30,7 +30,7 @@ public class QuotedPrintable {
             switch c {
             case 32...60, 62...126:
                 charCount += 1
-                result.append(UnicodeScalar(c))
+                result.append(Character(UnicodeScalar(c)))
             case 13:
                 continue
             case 10:
@@ -46,7 +46,7 @@ public class QuotedPrintable {
                     result.append("=\r\n")
                     charCount = 0
                 }
-                result.append(UnicodeScalar(61))
+                result.append(Character(UnicodeScalar(61)))
                 result.append(c.hexString().uppercased())
                 charCount+=3
             }
@@ -87,7 +87,7 @@ public class QuotedPrintable {
             
             state = result.state
             if let cOut = result.c {
-                decodedString.append(cOut)
+                decodedString.append(Character(cOut))
             }
         }
         

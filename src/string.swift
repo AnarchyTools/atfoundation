@@ -17,7 +17,7 @@ public extension String {
     /// Create string from path
     ///
     /// - Parameter path: a path
-    public init(path: Path) {
+    public init?(path: Path) {
         self.init(path.description)
     }
 

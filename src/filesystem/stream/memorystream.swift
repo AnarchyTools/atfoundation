@@ -68,7 +68,9 @@ public final class MemoryStream: InputStream, OutputStream, SeekableStream {
     public func read(size: Int) throws -> String? {
         var slice: [UInt8] = try self.read(size: size)
         slice.append(0)
-        return String(validatingUTF8: UnsafePointer<CChar>(slice))
+        return slice.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
     }
 
     public func read(size: Int) throws -> [UInt8] {
@@ -85,7 +87,9 @@ public final class MemoryStream: InputStream, OutputStream, SeekableStream {
     public func readAll() throws -> String? {
         var slice: [UInt8] = try self.readAll()
         slice.append(0)
-        return String(validatingUTF8: UnsafePointer<CChar>(slice))
+        return slice.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
     }
 
     public func readAll() throws -> [UInt8] {
@@ -109,13 +113,17 @@ public final class MemoryStream: InputStream, OutputStream, SeekableStream {
             if char == 0x0a {
                 self.position += slice.count
                 slice.append(0)
-                return String(validatingUTF8: UnsafePointer<CChar>(slice))
+                return slice.withUnsafeBufferPointer {
+                    return String(cString: $0.baseAddress!)
+                }
             }
         }
         if slice.count > 0 {
             self.position += slice.count
             slice.append(0)
-            return String(validatingUTF8: UnsafePointer<CChar>(slice))
+            return slice.withUnsafeBufferPointer {
+                return String(cString: $0.baseAddress!)
+            }
         } else {
             return nil
         }

@@ -22,7 +22,7 @@ class PipeTests: XCTestCase {
         do {
             let p = try UnidirectionalPipe()
             XCTAssertNotNil(p)
-            let t = Thread() {
+            let t = atfoundation.Thread() {
                 do {
                     try p.write.writeLine(string: "Test")
                 } catch {
@@ -39,7 +39,7 @@ class PipeTests: XCTestCase {
 
     func testUnidirectionalPipeReadEvent() {
         do {
-            let e = expectation(withDescription: "wait for read to finish")
+            let e = expectation(description: "wait for read to finish")
 
             let p = try UnidirectionalPipe()
             XCTAssertNotNil(p)
@@ -49,7 +49,7 @@ class PipeTests: XCTestCase {
             }
             try p.write.writeLine(string: "Test")
             p.write.closeStream()
-            waitForExpectations(withTimeout: 5, handler: nil)
+            waitForExpectations(timeout: 5, handler: nil)
         } catch {
             XCTFail("Error thrown: \(error)")
         }
@@ -57,8 +57,8 @@ class PipeTests: XCTestCase {
 
     func testBidirectionalPipeReadEvent() {
         do {
-            let e0 = expectation(withDescription: "wait for read to finish first direction")
-            let e1 = expectation(withDescription: "wait for read to finish second direction")
+            let e0 = expectation(description: "wait for read to finish first direction")
+            let e1 = expectation(description: "wait for read to finish second direction")
 
             let p = try BidirectionalPipe()
             XCTAssertNotNil(p)
@@ -74,7 +74,7 @@ class PipeTests: XCTestCase {
             }
             try p.0.writeLine(string: "Test to 1")
             try p.1.writeLine(string: "Test to 0")
-            waitForExpectations(withTimeout: 5, handler: nil)
+            waitForExpectations(timeout: 5, handler: nil)
         } catch {
             XCTFail("Error thrown: \(error)")
         }

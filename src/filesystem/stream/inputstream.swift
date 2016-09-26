@@ -41,7 +41,9 @@ public extension InputStream {
     public func read(size: Int = 4096) throws -> String? {
         var buffer:[UInt8] = try self.read(size: size)
         buffer.append(0)
-        return String(validatingUTF8: UnsafePointer<CChar>(buffer))
+        return buffer.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
     }
 
     /// Read bytes from file
@@ -51,7 +53,7 @@ public extension InputStream {
     public func read(size: Int = 4096) throws -> [UInt8] {
         var buffer = [UInt8](repeating: 0, count: size)
         while true {
-            let read = fread(UnsafeMutablePointer(buffer), 1, size, self.fp)
+            let read = fread(UnsafeMutablePointer(mutating: buffer), 1, size, self.fp)
             if read == 0 {
                 if feof(self.fp) == 0 {
                     let err = SysError(errno: errno)
@@ -79,7 +81,9 @@ public extension InputStream {
     public func readAll() throws -> String? {
         var buffer:[UInt8] = try self.readAll()
         buffer.append(0)
-        return String(validatingUTF8: UnsafePointer<CChar>(buffer))
+        return buffer.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
     }
 
     /// Read complete file
@@ -101,9 +105,11 @@ public extension InputStream {
     ///
     /// - Returns: String read from file (newline excluded) if valid UTF-8 or nil
     public func readLine() throws -> String? {
-        var buffer = [UInt8](repeating: 0, count: 64 * 1024 + 1)
+        var buffer = [Int8](repeating: 0, count: 64 * 1024 + 1)
         while true {
-            let read = fgets(UnsafeMutablePointer(buffer), 64 * 1024, self.fp)
+            let read = buffer.withUnsafeMutableBufferPointer() {
+                return fgets($0.baseAddress!, 64 * 1024, self.fp)
+            }
             if read == nil {
                 if feof(self.fp) == 0 {
                     let err = SysError(errno: errno)
@@ -123,7 +129,9 @@ public extension InputStream {
         if buffer[Int(len) - 1] == 0x0a {
             buffer[Int(len) - 1] = 0
         }
-        return String(validatingUTF8: UnsafePointer<CChar>(buffer))
+        return buffer.withUnsafeBufferPointer {
+            return String(cString: $0.baseAddress!)
+        }
     }
 
     /// Iterate over chunks of data

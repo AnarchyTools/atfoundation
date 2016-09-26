@@ -77,7 +77,7 @@ public extension InputStream where Self: SeekableStream {
     /// Copy this file to another file
     ///
     /// - Parameter file: the file to copy the file content to
-    public func copyTo(stream: protocol<OutputStream, SeekableStream>) throws {
+    public func copyTo(stream: OutputStream & SeekableStream) throws {
         try stream.truncate(size: 0)
         stream.position = 0
 

@@ -178,19 +178,21 @@ extension in6_addr: CustomStringConvertible {
 extension sockaddr_storage: CustomStringConvertible {
     public var description: String {
         var copy = self
-        let result:String = withUnsafePointer(&copy) { ptr in
-            var host = [CChar](repeating: 0, count: 1000)
-            #if os(Linux)
-                let len = socklen_t(_SS_SIZE)
-            #else
-                let len = socklen_t(copy.ss_len)
-            #endif
-            if getnameinfo(UnsafeMutablePointer(ptr), len, &host, 1000, nil, 0, NI_NUMERICHOST) == 0 {
-                return String(validatingUTF8: host)!
-            } else {
-                return "<sockaddr: invalid>"
+        var host = [CChar](repeating: 0, count: 1000)
+        #if os(Linux)
+            let len = socklen_t(_SS_SIZE)
+        #else
+            let len = socklen_t(copy.ss_len)
+        #endif
+
+        return withUnsafeMutablePointer(to: &copy) {
+            return $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                if getnameinfo($0, len, &host, 1000, nil, 0, NI_NUMERICHOST) == 0 {
+                    return String(validatingUTF8: host)!
+                } else {
+                    return "<sockaddr: invalid>"
+                }
             }
         }
-        return result
     }
 }

@@ -312,10 +312,17 @@ public class File: SeekableStream, InputStream, OutputStream {
     /// - Parameter binary: optional, open in binary mode, defaults to text mode
     public convenience init(tempFileAtPath path: Path, prefix: String, binary: Bool = false) throws {
         let p = path.appending(prefix + ".XXXXXXX")
-        var buf = Array(p.description.utf8)
-        buf.append(0)
-        let fd = mkstemp(UnsafeMutablePointer(buf))
-        if let filename = String(validatingUTF8: UnsafeMutablePointer(buf)) {
+        var buf = p.description.utf8CString
+        let fd = buf.withUnsafeMutableBufferPointer {
+            mkstemp($0.baseAddress)
+        }
+        let filename_ = buf.withUnsafeBufferPointer { (ptr) -> String? in
+            if let o = ptr.baseAddress {
+                    return String(cString: o) 
+            } 
+            return nil
+        }
+        if let filename = filename_ {
             try self.init(fd: fd, mode: .ReadAndWrite, binary: binary, takeOwnership: true)
             self.path = Path(filename)
         } else {

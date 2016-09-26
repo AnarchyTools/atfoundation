@@ -101,7 +101,7 @@ public enum FileType: Mode_t {
     case Socket = 12
     case Whiteout = 14
 
-    private init?(statMode: Mode_t) {
+    fileprivate init?(statMode: Mode_t) {
         self.init(rawValue: (statMode & 0xf000) >> 12)
     }
 }

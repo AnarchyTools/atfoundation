@@ -21,9 +21,9 @@
 
 import Dispatch
 
-public typealias ReceiveCallback = ((socket: ConnectedSocket, char: UInt8) -> Bool)
-public typealias CloseCallback = ((socket: ConnectedSocket) -> Void)
-public typealias SendCallback = ((socket: ConnectedSocket, stream: protocol<InputStream, SeekableStream>) -> Void)  
+public typealias ReceiveCallback = ((_ socket: ConnectedSocket, _ char: UInt8) -> Bool)
+public typealias CloseCallback = ((_ socket: ConnectedSocket) -> Void)
+public typealias SendCallback = ((_ socket: ConnectedSocket, _ stream: InputStream & SeekableStream) -> Void)  
 
 /// Sockets
 public class Socket {
@@ -88,7 +88,7 @@ private func handleConnection(fd: Int32, remote: IPAddress, queue: dispatch_queu
     dispatch_source_set_cancel_handler(readSrc) { [weak desc] in
         // if no one uses the socket anymore close it and remove the open connection from the list
         // close(desc.fd)
-        if let closeCallback = closeCallback, desc = desc {
+        if let closeCallback = closeCallback, let desc = desc {
             closeCallback(socket: desc)
         }
     }   
@@ -135,7 +135,7 @@ public class ListeningSocket {
         } else {
             result = getaddrinfo(address!, "\(port)", &hints, &tmpAddrInfo)
         }
-        guard let addrInfo = tmpAddrInfo where result == 0 else {
+        guard let addrInfo = tmpAddrInfo, result == 0 else {
             Log.error("Socket listen(): getaddrinfo error: \(gai_strerror(result))")
             return nil
         }
@@ -223,7 +223,7 @@ public class ListeningSocket {
 /// Connected socket, use to send data
 public class ConnectedSocket {
     struct QueuedData {
-        let stream: protocol<InputStream, SeekableStream>
+        let stream: InputStream & SeekableStream
         let callback: SendCallback?
     }
 
@@ -253,7 +253,7 @@ public class ConnectedSocket {
         var tmpAddrInfo = UnsafeMutablePointer<addrinfo>(nil)
         let result = getaddrinfo(addr, "\(port)", &hints, &tmpAddrInfo)
         
-        guard let addrInfo = tmpAddrInfo where result == 0 else {
+        guard let addrInfo = tmpAddrInfo, result == 0 else {
             Log.error("Socket connect(): getaddrinfo error: \(gai_strerror(result))")
             return nil
         }
@@ -324,7 +324,7 @@ public class ConnectedSocket {
     ///
     /// - parameter stream: Stream to read data from, will begin sending data from current positon
     /// - parameter successCallback: callback to call when sending of this data block has been finished
-    public func send(stream: protocol<InputStream, SeekableStream>, successCallback:SendCallback?) -> Bool {
+    public func send(stream: InputStream & SeekableStream, successCallback:SendCallback?) -> Bool {
         self.sendQueue.append(QueuedData(stream: stream, callback: successCallback))
 
         if self.writeSource == nil {
